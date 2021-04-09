@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Scineticle</string>
+    <string name="name">name</string>
+    <string name="phone_380">phone +380</string>
+    <string name="e_mail">e-mail</string>
+    <string name="save">save</string>
 </resources>
