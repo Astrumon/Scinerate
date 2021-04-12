@@ -75,7 +75,24 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditUserActivity.EXTRA_ID, user.getId());
                 startActivityForResult(intent, EDIT_USER_REQUEST);
             }
+
         });
+
+
+
+        RecyclerView recyclerView = mBinding.recyclerUser;
+        mBinding.recyclerUser.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+                Toast.makeText(MainActivity.this, "DOUBLE CLICK ", Toast.LENGTH_SHORT).show();
+            }
+        }));
+
     }
 
     private void initDataBinding() {
@@ -93,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 mUserAdapter.setUsers(users);
             }
         });
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mUserAdapter);
