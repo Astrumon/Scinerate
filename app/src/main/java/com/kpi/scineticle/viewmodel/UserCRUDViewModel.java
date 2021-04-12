@@ -1,18 +1,13 @@
 package com.kpi.scineticle.viewmodel;
 
 import android.app.Application;
-import android.content.Intent;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.kpi.scineticle.model.User;
 import com.kpi.scineticle.model.UserRepository;
-import com.kpi.scineticle.view.AddUserActivity;
-import com.kpi.scineticle.view.MainActivity;
 
 import java.util.List;
 

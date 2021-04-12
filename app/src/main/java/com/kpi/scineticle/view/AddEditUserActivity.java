@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.kpi.scineticle.R;
@@ -18,8 +19,9 @@ import com.kpi.scineticle.model.User;
 import com.kpi.scineticle.viewmodel.UserViewModel;
 import com.kpi.scineticle.viewmodel.UserViewModelFactory;
 
-public class AddUserActivity extends AppCompatActivity {
+public class AddEditUserActivity extends AppCompatActivity {
 
+    public static final String EXTRA_ID = "com.kpi.scineticle.EXTRA_ID";
     public static final String EXTRA_NAME = "com.kpi.scineticle.EXTRA_NAME";
     public static final String EXTRA_PHONE = "com.kpi.scineticle.EXTRA_PHONE";
     public static final String EXTRA_MAIL = "com.kpi.scineticle.EXTRA_MAIL";
@@ -33,9 +35,23 @@ public class AddUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
 
-        initBinding();
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_close_24);
-        setTitle("Add user");
+        initBinding();
+        userInfoFromClick();
+    }
+
+    private void userInfoFromClick() {
+        Intent intent = getIntent();
+        if (intent.hasExtra(EXTRA_ID)) {
+
+            Toast.makeText(this, "TEST" + intent.getStringExtra(EXTRA_PHONE), Toast.LENGTH_SHORT).show();
+            setTitle("Edit user");
+            mBinding.getUserViewModel().name.setValue(intent.getStringExtra(EXTRA_NAME));
+            mBinding.getUserViewModel().email.setValue(intent.getStringExtra(EXTRA_MAIL));
+            mBinding.getUserViewModel().phone.setValue(intent.getStringExtra(EXTRA_PHONE));
+        } else {
+            setTitle("Add user");
+        }
     }
 
     private void initBinding() {
@@ -79,6 +95,12 @@ public class AddUserActivity extends AppCompatActivity {
         data.putExtra(EXTRA_PHONE, phone);
         data.putExtra(EXTRA_MAIL, email);
 
+        int id = getIntent().getIntExtra(EXTRA_ID, -1);
+        if (id != -1) {
+            data.putExtra(EXTRA_ID, id);
+        }
+
+        Toast.makeText(this, phone, Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK, data);
         finish();
     }

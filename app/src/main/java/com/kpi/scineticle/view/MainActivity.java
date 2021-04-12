@@ -29,6 +29,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static final int ADD_USER_REQUEST = 1;
+    public static final int EDIT_USER_REQUEST = 2;
     private UserCRUDViewModel mUserCRUDViewModel;
     private ActivityMainBinding mBinding;
     private UserAdapter mUserAdapter;
@@ -42,27 +43,39 @@ public class MainActivity extends AppCompatActivity {
 
         initDataBinding();
         setupListUserView(mBinding.recyclerUser);
-        
+
         mBinding.buttonAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddUserActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddEditUserActivity.class);
                 startActivityForResult(intent, ADD_USER_REQUEST);
             }
         });
 
-       new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-           @Override
-           public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-               return false;
-           }
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
 
-           @Override
-           public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 mUserCRUDViewModel.delete(mUserAdapter.getUserAt(viewHolder.getAdapterPosition()));
-               Toast.makeText(MainActivity.this, "User deleted", Toast.LENGTH_SHORT).show();
-           }
-       }).attachToRecyclerView(mBinding.recyclerUser);
+                Toast.makeText(MainActivity.this, "User deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(mBinding.recyclerUser);
+
+        mUserAdapter.setOnItemClickListener(new UserAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(User user) {
+                Intent intent = new Intent(MainActivity.this, AddEditUserActivity.class);
+                intent.putExtra(AddEditUserActivity.EXTRA_NAME, user.getName());
+                intent.putExtra(AddEditUserActivity.EXTRA_PHONE, user.getPhoneNumber());
+                intent.putExtra(AddEditUserActivity.EXTRA_MAIL, user.getEmail());
+                intent.putExtra(AddEditUserActivity.EXTRA_ID, user.getId());
+                startActivityForResult(intent, EDIT_USER_REQUEST);
+            }
+        });
     }
 
     private void initDataBinding() {
@@ -90,17 +103,39 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_USER_REQUEST && resultCode == RESULT_OK) {
-            String name = data.getStringExtra(AddUserActivity.EXTRA_NAME);
-            String phone = data.getStringExtra(AddUserActivity.EXTRA_PHONE);
-            String email = data.getStringExtra(AddUserActivity.EXTRA_MAIL);
-
-            User user = new User(name, email, phone);
-            mUserCRUDViewModel.insert(user);
-
-            Toast.makeText(this, "User saved", Toast.LENGTH_SHORT).show();
+           insertUser(data);
+        } else if (requestCode == EDIT_USER_REQUEST && resultCode == RESULT_OK) {
+            updateUser(data);
         } else {
             Toast.makeText(this, "User not saved", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void insertUser(Intent data) {
+        String name = data.getStringExtra(AddEditUserActivity.EXTRA_NAME);
+        String phone = data.getStringExtra(AddEditUserActivity.EXTRA_PHONE);
+        String email = data.getStringExtra(AddEditUserActivity.EXTRA_MAIL);
+
+        User user = new User(name, email, phone);
+        mUserCRUDViewModel.insert(user);
+    }
+
+    private void updateUser(Intent data) {
+        int id = data.getIntExtra(AddEditUserActivity.EXTRA_ID, -1);
+        if (id == -1) {
+            Toast.makeText(this, "User can't be updated", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        String name = data.getStringExtra(AddEditUserActivity.EXTRA_NAME);
+        String phone = data.getStringExtra(AddEditUserActivity.EXTRA_PHONE);
+        String email = data.getStringExtra(AddEditUserActivity.EXTRA_MAIL);
+
+        User user = new User(name, email, phone);
+        user.setId(id);
+        mUserCRUDViewModel.update(user);
+
+        Toast.makeText(this, "User updated", Toast.LENGTH_SHORT).show();
     }
 
     @Override
