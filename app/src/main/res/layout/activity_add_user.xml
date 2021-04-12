@@ -2,8 +2,8 @@
 <layout>
     <data>
         <variable
-            name="user"
-            type="com.kpi.scineticle.model.User" />
+            name="userViewModel"
+            type="com.kpi.scineticle.viewmodel.UserViewModel" />
     </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,21 +19,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
-        android:text="@{user.name}"
+        android:text="@={userViewModel.name}"
         android:inputType="text"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/edit_text_phone"
-        android:text="@{user.phoneNumber}"
+        android:text="@={userViewModel.phone}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/phone_380"
-        android:inputType="number"
         tools:ignore="MissingConstraints" />
     <EditText
         android:id="@+id/edit_text_mail"
-        android:text="@{user.mail}"
+        android:text="@={userViewModel.email}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/e_mail"

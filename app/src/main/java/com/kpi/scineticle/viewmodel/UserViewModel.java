@@ -1,46 +1,43 @@
 package com.kpi.scineticle.viewmodel;
 
-import android.app.Application;
+import android.content.Context;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kpi.scineticle.model.User;
-import com.kpi.scineticle.model.UserRepository;
 
-import java.util.List;
+public class UserViewModel extends ViewModel {
+    private Context mContext;
 
-public class UserViewModel extends AndroidViewModel {
-    private UserRepository mUserRepository;
-    private LiveData<List<User>> allUsers;
+    public MutableLiveData<String> name = new MutableLiveData<>();
+    public MutableLiveData<String> phone = new MutableLiveData<>();
+    public MutableLiveData<String> email = new MutableLiveData<>();
 
+    private User mUser;
 
-    public UserViewModel(@NonNull Application application) {
-        super(application);
-        mUserRepository = new UserRepository(application);
-        allUsers = mUserRepository.getAllUsers();
+    public UserViewModel(User user, Context context){
+        mContext = context;
+        mUser = user;
     }
 
-    public void insert(User user) {
-        mUserRepository.insert(user);
-    }
+    public boolean fillUser() {
+        mUser.setName(name.getValue());
+        mUser.setPhoneNumber(phone.getValue());
+        mUser.setEmail(email.getValue());
 
-    public void update(User user) {
-        mUserRepository.update(user);
-    }
+        if (!mUser.isValidName()) {
+            Toast.makeText(mContext, "Невірно ведено ім'я", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!mUser.isValidPhone()) {
+            Toast.makeText(mContext, "Невірно ведений телефон", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if (!mUser.isValidEmail()) {
+            Toast.makeText(mContext, "Невірно ведена пошта", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
-    public void delete(User user) {
-        mUserRepository.delete(user);
+        return true;
     }
-
-    public void deleteAllUsers() {
-        mUserRepository.deleteAllUsers();
-    }
-
-    public LiveData<List<User>> getAllUsers() {
-        return allUsers;
-    }
-
 }

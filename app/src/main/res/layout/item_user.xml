@@ -72,7 +72,7 @@
          android:textSize="@dimen/text_size"
          android:textStyle="bold"
 
-        android:text="@{user.mail}"
+        android:text="@{user.email}"
          android:layout_toRightOf="@+id/label_phone"
          android:layout_alignLeft="@id/label_phone"
 

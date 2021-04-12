@@ -47,6 +47,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         notifyDataSetChanged();
     }
 
+    public User getUserAt(int pos) {
+        return mUsers.get(pos);
+    }
+
     class UserHolder extends RecyclerView.ViewHolder {
        ItemUserBinding mItemUserBinding;
 
