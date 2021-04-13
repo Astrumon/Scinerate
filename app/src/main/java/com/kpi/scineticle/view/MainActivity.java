@@ -68,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
         mUserAdapter.setOnItemClickListener(new UserAdapter.onItemClickListener() {
             @Override
             public void onItemClick(User user) {
+                Toast.makeText(MainActivity.this, "CLICK " + user, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongItemClick(User user) {
                 Intent intent = new Intent(MainActivity.this, AddEditUserActivity.class);
                 intent.putExtra(AddEditUserActivity.EXTRA_NAME, user.getName());
                 intent.putExtra(AddEditUserActivity.EXTRA_PHONE, user.getPhoneNumber());
@@ -77,21 +82,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-
-
-        RecyclerView recyclerView = mBinding.recyclerUser;
-        mBinding.recyclerUser.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-            }
-
-            @Override
-            public void onLongItemClick(View view, int position) {
-                Toast.makeText(MainActivity.this, "DOUBLE CLICK ", Toast.LENGTH_SHORT).show();
-            }
-        }));
 
     }
 

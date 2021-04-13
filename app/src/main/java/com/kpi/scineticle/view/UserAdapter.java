@@ -1,11 +1,16 @@
 package com.kpi.scineticle.view;
 
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -18,6 +23,7 @@ import com.kpi.scineticle.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     private List<User> mUsers = new ArrayList<>();
@@ -58,19 +64,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         public UserHolder(@NonNull View itemView) {
             super(itemView);
             mItemUserBinding = DataBindingUtil.bind(itemView);
-
-            final int[] i = {0};
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = getAdapterPosition();
+                    if (mListener != null && position != RecyclerView.NO_POSITION) {
+                        mListener.onLongItemClick(mUsers.get(position));
+                    }
+                    return false;
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ++i[0];
-                    if (i[0] == 1) {
-                        i[0] = 0;
-                        int position = getAdapterPosition();
-                        if (mListener != null && position != RecyclerView.NO_POSITION) {
-                            mListener.onItemClick(mUsers.get(position));
-                        }
-
+                    int position = getAdapterPosition();
+                    if (mListener != null && position != RecyclerView.NO_POSITION) {
+                        mListener.onItemClick(mUsers.get(position));
                     }
                 }
             });
@@ -79,6 +88,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     public interface onItemClickListener {
         void onItemClick(User user);
+        void onLongItemClick(User user);
     }
 
     public void setOnItemClickListener(onItemClickListener listener) {
