@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditUserActivity.EXTRA_ID, user.getId());
                 startActivityForResult(intent, EDIT_USER_REQUEST);
             }
-
         });
 
     }
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         mUserCRUDViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
-                mUserAdapter.setUsers(users);
+                mUserAdapter.submitList(users);
             }
         });
 

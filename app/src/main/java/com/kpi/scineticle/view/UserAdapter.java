@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kpi.scineticle.R;
@@ -25,9 +27,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
-    private List<User> mUsers = new ArrayList<>();
+public class UserAdapter extends ListAdapter<User, UserAdapter.UserHolder> {
     private onItemClickListener mListener;
+
+    public UserAdapter() {
+        super(DIFF_CALLBACK);
+    }
+
+    private static final DiffUtil.ItemCallback<User> DIFF_CALLBACK = new DiffUtil.ItemCallback<User>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull User oldItem, @NonNull User newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull User oldItem, @NonNull User newItem) {
+            return oldItem.getName().equals(newItem.getName()) &&
+                    oldItem.getPhoneNumber().equals(newItem.getPhoneNumber()) &&
+                    oldItem.getEmail().equals(newItem.getEmail());
+        }
+    };
 
     @NonNull
     @Override
@@ -39,23 +58,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        User currentUser = mUsers.get(position);
-
+        User currentUser = getItem(position);
         holder.mItemUserBinding.setUser(currentUser);
     }
 
-    @Override
-    public int getItemCount() {
-        return mUsers.size();
-    }
-
-    public void setUsers(List<User> users) {
-        mUsers = users;
-        notifyDataSetChanged();
-    }
-
     public User getUserAt(int pos) {
-        return mUsers.get(pos);
+        return getItem(pos);
     }
 
     class UserHolder extends RecyclerView.ViewHolder {
@@ -69,7 +77,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
                 public boolean onLongClick(View v) {
                     int position = getAdapterPosition();
                     if (mListener != null && position != RecyclerView.NO_POSITION) {
-                        mListener.onLongItemClick(mUsers.get(position));
+                        mListener.onLongItemClick(getItem(position));
                     }
                     return false;
                 }
@@ -79,7 +87,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (mListener != null && position != RecyclerView.NO_POSITION) {
-                        mListener.onItemClick(mUsers.get(position));
+                        mListener.onItemClick(getItem(position));
                     }
                 }
             });
