@@ -10,4 +10,6 @@
     <color name="card_user">#00a170</color>
     <color name="text">#FBFBFB</color>
     <color name="title_color">#807676</color>
+    <color name="article_color">#B3D5B8</color>
+    <color name="background_color">#B3D5B8</color>
 </resources>

@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,17 +30,19 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-
     public static final int ADD_USER_REQUEST = 1;
     public static final int EDIT_USER_REQUEST = 2;
+    public static final int ARTICLE_REQUEST = 3;
     private UserCRUDViewModel mUserCRUDViewModel;
     private ActivityMainBinding mBinding;
     private UserAdapter mUserAdapter;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext = this;
 
         mUserAdapter = new UserAdapter();
 
@@ -60,14 +65,28 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                mUserCRUDViewModel.delete(mUserAdapter.getUserAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "User deleted", Toast.LENGTH_SHORT).show();
+                String textAlert = "Ви впевнені, що хочете видалити користувача?";
+                Alert.createAlert(mContext, textAlert)
+                       .setPositiveButton("Так", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               deleteUser(viewHolder.getAdapterPosition());
+                           }
+                       })
+                       .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               setupListUserView(mBinding.recyclerUser);
+                           }
+                       }).create().show();
             }
         }).attachToRecyclerView(mBinding.recyclerUser);
 
         mUserAdapter.setOnItemClickListener(new UserAdapter.onItemClickListener() {
             @Override
             public void onItemClick(User user) {
+                Intent intent = new Intent(MainActivity.this, ScientificWorkMainActivity.class);
+                startActivityForResult(intent, ARTICLE_REQUEST);
                 Toast.makeText(MainActivity.this, "CLICK " + user, Toast.LENGTH_SHORT).show();
             }
 
@@ -81,7 +100,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, EDIT_USER_REQUEST);
             }
         });
+    }
 
+    private void deleteUser(int position) {
+        mUserCRUDViewModel.delete(mUserAdapter.getUserAt(position));
+        Toast.makeText(MainActivity.this, "User deleted", Toast.LENGTH_SHORT).show();
     }
 
     private void initDataBinding() {
@@ -110,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_USER_REQUEST && resultCode == RESULT_OK) {
-           insertUser(data);
+            insertUser(data);
         } else if (requestCode == EDIT_USER_REQUEST && resultCode == RESULT_OK) {
             updateUser(data);
         } else {
@@ -133,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "User can't be updated", Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
         String name = data.getStringExtra(AddEditUserActivity.EXTRA_NAME);
         String phone = data.getStringExtra(AddEditUserActivity.EXTRA_PHONE);
         String email = data.getStringExtra(AddEditUserActivity.EXTRA_MAIL);
@@ -152,15 +175,34 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.deleteAllUsers:
-                mUserCRUDViewModel.deleteAllUsers();
-                Toast.makeText(this, "All users deleted", Toast.LENGTH_SHORT).show();
+                String textAlert = "Ви впевнені, що хочете видалити всіх користувачів?";
+                Alert.createAlert(mContext, textAlert)
+                        .setPositiveButton("Так", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteAllUsers();
+                            }
+                        })
+                        .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).create().show();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void deleteAllUsers() {
+        mUserCRUDViewModel.deleteAllUsers();
+        Toast.makeText(this, "All users deleted", Toast.LENGTH_SHORT).show();
     }
 }

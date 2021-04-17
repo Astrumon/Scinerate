@@ -20,7 +20,6 @@ import com.kpi.scineticle.viewmodel.UserViewModel;
 import com.kpi.scineticle.viewmodel.UserViewModelFactory;
 
 public class AddEditUserActivity extends AppCompatActivity {
-
     public static final String EXTRA_ID = "com.kpi.scineticle.EXTRA_ID";
     public static final String EXTRA_NAME = "com.kpi.scineticle.EXTRA_NAME";
     public static final String EXTRA_PHONE = "com.kpi.scineticle.EXTRA_PHONE";
@@ -28,7 +27,6 @@ public class AddEditUserActivity extends AppCompatActivity {
 
     private ActivityAddUserBinding mBinding;
     private UserViewModel mUserViewModel;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -16,8 +16,6 @@ public class UserCRUDViewModel extends AndroidViewModel {
     private UserRepository mUserRepository;
     private LiveData<List<User>> allUsers;
 
-
-
     public UserCRUDViewModel(@NonNull Application application) {
         super(application);
         mUserRepository = new UserRepository(application);
@@ -39,8 +37,6 @@ public class UserCRUDViewModel extends AndroidViewModel {
     public void deleteAllUsers() {
         mUserRepository.deleteAllUsers();
     }
-
-
 
     public LiveData<List<User>> getAllUsers() {
         return allUsers;

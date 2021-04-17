@@ -4,4 +4,10 @@
     <string name="phone_380">phone +380</string>
     <string name="e_mail">e-mail</string>
     <string name="save">save</string>
+    <string name="new_type">new type</string>
+    <string-array name="articles">
+        <item>Test1</item>
+        <item>Test2</item>
+        <item>Test3</item>
+    </string-array>
 </resources>

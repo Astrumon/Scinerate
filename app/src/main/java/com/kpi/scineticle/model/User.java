@@ -11,8 +11,6 @@ import java.util.regex.Pattern;
 
 @Entity(tableName = "user_table")
 public class User {
-    //TODO isValid mail, phoneNumber
-
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -90,8 +88,4 @@ public class User {
     public String toString() {
         return "User[name= " + name + ", phone= " + phoneNumber + ", mail= " + email + "]";
     }
-
-
-
-
 }
