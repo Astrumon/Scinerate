@@ -5,6 +5,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,10 +30,16 @@ public class AddEditUserActivity extends AppCompatActivity {
     private ActivityAddUserBinding mBinding;
     private UserViewModel mUserViewModel;
 
+    private String name, phone, email;
+
+    private Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
+
+        mContext = this;
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_close_24);
         initBinding();
@@ -52,6 +60,8 @@ public class AddEditUserActivity extends AppCompatActivity {
         }
     }
 
+
+
     private void initBinding() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_user);
         mUserViewModel = new ViewModelProvider(this, new UserViewModelFactory(new User(), this))
@@ -71,7 +81,27 @@ public class AddEditUserActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save_user:
-                if (mUserViewModel.fillUser()) saveUser();
+                if (mUserViewModel.fillUser()) {
+                    String textAlert = "Зберегти дані?";
+                    Alert.createAlert(mContext, textAlert)
+                            .setPositiveButton("Так", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    saveUser();
+                                }
+                            })
+                            .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = getIntent();
+                                    if (intent.hasExtra(EXTRA_ID)) {
+                                        initBinding();
+                                        userInfoFromClick();
+                                    }
+                                }
+                            }).create().show();
+
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

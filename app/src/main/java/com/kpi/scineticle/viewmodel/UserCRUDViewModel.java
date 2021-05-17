@@ -7,11 +7,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.kpi.scineticle.model.User;
-import com.kpi.scineticle.model.UserRepository;
+import com.kpi.scineticle.model.subsystemOfDataBase.UserRepository;
 
 import java.util.List;
 
-//TODO validation com.gueei.android.binding.validation.validators;
+//TODO удалить
 public class UserCRUDViewModel extends AndroidViewModel {
     private UserRepository mUserRepository;
     private LiveData<List<User>> allUsers;

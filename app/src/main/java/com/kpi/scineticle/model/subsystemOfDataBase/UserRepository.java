@@ -1,11 +1,16 @@
-package com.kpi.scineticle.model;
+package com.kpi.scineticle.model.subsystemOfDataBase;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.loader.content.AsyncTaskLoader;
+
+import com.kpi.scineticle.model.User;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class UserRepository {
     private UserDao mUserDao;
@@ -35,6 +40,20 @@ public class UserRepository {
 
     public LiveData<List<User>> getAllUsers() {
         return allUsers;
+    }
+
+    public User getUser(String email, String password) {
+        User user = new User();
+        AsyncTask task = new GetUserAsyncTask(mUserDao, email, password).execute();
+        try {
+            user = (User)task.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+
+        return user;
     }
 
     private static class InsertUserAsyncTask extends AsyncTask<User, Void, Void> {
@@ -91,6 +110,30 @@ public class UserRepository {
         protected Void doInBackground(Void... voids) {
             mUserDao.deleteAll();
             return null;
+        }
+    }
+
+    private static class GetUserAsyncTask extends AsyncTask<Void, Void, User> {
+        private UserDao mUserDao;
+        private String email;
+        private String password;
+
+
+        public GetUserAsyncTask(UserDao userDao, String email, String password) {
+            this.email = email;
+            this.password = password;
+            mUserDao = userDao;
+
+        }
+
+        @Override
+        protected User doInBackground(Void... voids) {
+            return mUserDao.getUser(email, password);
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            super.onPostExecute(user);
         }
     }
 }

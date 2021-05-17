@@ -9,12 +9,17 @@ import androidx.room.util.StringUtil;
 
 import java.util.regex.Pattern;
 
+
 @Entity(tableName = "user_table")
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String name;
+
+    private String lastName;
+
+    private String password;
 
     private String email;
 
@@ -23,10 +28,28 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String phoneNumber) {
+    public User(String name, String email, String phoneNumber, String lastName, String password) {
         this.name = name;
         this.email = email;
+        this.lastName = lastName;
+        this.password = password;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -69,6 +92,14 @@ public class User {
         }
     }
 
+    public boolean isValidLastName() {
+        if (this.lastName != null && !TextUtils.isEmpty(lastName) && Pattern.compile("[\\p{L}| a-zA-Z]+").matcher(lastName).matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public boolean isValidEmail() {
         if (this.email != null && !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             return true;
@@ -84,6 +115,14 @@ public class User {
             return false;
         }
     }
+
+
+    public boolean isValidPassword() throws InvalidPasswordException {
+        PasswordValidator.isValid(password);
+        return PasswordValidator.isIsValid();
+    }
+
+
 
     public String toString() {
         return "User[name= " + name + ", phone= " + phoneNumber + ", mail= " + email + "]";

@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">Scineticle</string>
     <string name="name">name</string>
-    <string name="phone_380">phone +380</string>
+    <string name="phone_380">phone +380 (необов\'язково)</string>
     <string name="e_mail">e-mail</string>
     <string name="save">save</string>
     <string name="new_type">new type</string>
+    <string name="new_user">Новий користувач</string>
+    <string name="existing_user">Існуючий користувач</string>
+    <string name="save_new_user">Зберегти</string>
+    <string name="nameUser">Ім\'я</string>
+    <string name="lastNameUser">Прізвище</string>
+    <string name="passwordUser">Пароль</string>
+    <string name="repeatPassword">Повторити пароль</string>
+    <string name="enterToAccount">Увійти</string>
     <string-array name="articles">
         <item>Test1</item>
         <item>Test2</item>

@@ -1,4 +1,4 @@
-package com.kpi.scineticle.model;
+package com.kpi.scineticle.model.subsystemOfDataBase;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,7 +9,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {User.class}, version = 2)
+import com.kpi.scineticle.model.User;
+
+@Database(entities = {User.class}, version = 5)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
@@ -43,9 +45,9 @@ public abstract class UserDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            mUserDao.insert(new User("Name 1", "Mail 1", "Phone 1"));
-            mUserDao.insert(new User("Name 2", "Mail 2", "Phone 2"));
-            mUserDao.insert(new User("Name 3", "Mail 3", "Phone 3"));
+            mUserDao.insert(new User("Name 1", "Mail 1", "Phone 1", "LastName 1", "test123"));
+            mUserDao.insert(new User("Name 2", "Mail 2", "Phone 2", "LastName 1", "test123"));
+            mUserDao.insert(new User("Name 3", "Mail 3", "Phone 3", "LastName 1", "test123"));
             return null;
         }
     }

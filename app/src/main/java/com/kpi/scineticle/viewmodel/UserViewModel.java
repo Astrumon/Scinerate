@@ -27,6 +27,7 @@ public class UserViewModel extends ViewModel {
         mUser.setPhoneNumber(phone.getValue());
         mUser.setEmail(email.getValue());
 
+
         if (!mUser.isValidName()) {
             Toast.makeText(mContext, "Невірно ведено ім'я", Toast.LENGTH_SHORT).show();
             return false;
@@ -34,12 +35,15 @@ public class UserViewModel extends ViewModel {
             Toast.makeText(mContext, "Невірно ведений телефон", Toast.LENGTH_SHORT).show();
             return false;
         }else if (!mUser.isValidEmail()) {
+
             Toast.makeText(mContext, "Невірно ведена пошта", Toast.LENGTH_SHORT).show();
             return false;
         }
+        //TODO уведомление об ограничении функционала из за принятого решения
 
         return true;
     }
+
 
 
 

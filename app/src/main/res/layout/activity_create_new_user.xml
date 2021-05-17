@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <variable
+            name="newUserViewModel"
+            type="com.kpi.scineticle.viewmodel.subsystemUser.newUser.NewUserViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".view.AddEditUserActivity">
+
+        <EditText
+            android:id="@+id/edit_text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nameUser"
+            android:text="@={newUserViewModel.name}"
+            android:inputType="text"
+            tools:ignore="MissingConstraints" />
+
+         <EditText
+             android:id="@+id/edit_text_lastName"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:hint="@string/lastNameUser"
+             android:text="@={newUserViewModel.lastName}"
+             android:inputType="text"
+             tools:ignore="MissingConstraints" />
+
+
+        <EditText
+            android:id="@+id/edit_text_phone"
+            android:text="@={newUserViewModel.phone}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/phone_380"
+            tools:ignore="MissingConstraints" />
+        <EditText
+            android:id="@+id/edit_text_mail"
+            android:text="@={newUserViewModel.email}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/e_mail"
+            android:inputType="text"
+            tools:ignore="MissingConstraints" />
+        <EditText
+            android:id="@+id/edit_text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/passwordUser"
+            android:text="@={newUserViewModel.password}"
+            android:inputType="textPassword"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/edit_text_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/repeatPassword"
+            android:text="@={newUserViewModel.password}"
+            android:inputType="textPassword"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btnSaveNewUser"
+            android:layout_width="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/save_new_user"
+            />
+
+
+
+    </LinearLayout>
+</layout>

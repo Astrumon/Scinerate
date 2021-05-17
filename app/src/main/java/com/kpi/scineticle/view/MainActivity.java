@@ -30,6 +30,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
+
     public static final int ADD_USER_REQUEST = 1;
     public static final int EDIT_USER_REQUEST = 2;
     public static final int ARTICLE_REQUEST = 3;
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         mUserCRUDViewModel = new ViewModelProvider(this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication()))
                 .get(UserCRUDViewModel.class);
+
     }
 
     private void setupListUserView(RecyclerView recyclerView) {
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         String phone = data.getStringExtra(AddEditUserActivity.EXTRA_PHONE);
         String email = data.getStringExtra(AddEditUserActivity.EXTRA_MAIL);
 
-        User user = new User(name, email, phone);
+        User user = new User(name, email, phone, "", "");
         mUserCRUDViewModel.insert(user);
     }
 
@@ -161,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         String phone = data.getStringExtra(AddEditUserActivity.EXTRA_PHONE);
         String email = data.getStringExtra(AddEditUserActivity.EXTRA_MAIL);
 
-        User user = new User(name, email, phone);
+        User user = new User(name, email, phone, "", "");
         user.setId(id);
         mUserCRUDViewModel.update(user);
 
@@ -205,4 +207,5 @@ public class MainActivity extends AppCompatActivity {
         mUserCRUDViewModel.deleteAllUsers();
         Toast.makeText(this, "All users deleted", Toast.LENGTH_SHORT).show();
     }
+
 }
