@@ -17,12 +17,14 @@ import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.Dissertation;
 import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.DissertationDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.patents.Patent;
 import com.kpi.scineticle.model.subsystemOfDataBase.patents.PatentDao;
+import com.kpi.scineticle.model.subsystemOfDataBase.thesis.Thesis;
+import com.kpi.scineticle.model.subsystemOfDataBase.thesis.ThesisDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.UserDao;
 
 @Database(entities = {User.class, Book.class,
                       Dissertation.class, Article.class,
-                        Patent.class}, version = 7)
+                        Patent.class, Thesis.class}, version = 7)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
@@ -36,6 +38,8 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract ArticleDao articleDao();
 
     public abstract PatentDao patentDao();
+
+    public abstract ThesisDao thesisDao();
 
     public static synchronized UserDatabase getInstance(Context context) {
         if (instance == null) {
@@ -61,6 +65,7 @@ public abstract class UserDatabase extends RoomDatabase {
         private DissertationDao mDissertationDao;
         private ArticleDao mArticleDao;
         private PatentDao mPatentDao;
+        private ThesisDao mThesisDao;
 
         private PopulateDbAsyncTask(UserDatabase database) {
             mUserDao = database.userDao();
@@ -68,6 +73,7 @@ public abstract class UserDatabase extends RoomDatabase {
             mDissertationDao = database.dissertationDao();
             mArticleDao = database.articleDao();
             mPatentDao = database.patentDao();
+            mThesisDao = database.thesisDao();
         }
 
         @Override
