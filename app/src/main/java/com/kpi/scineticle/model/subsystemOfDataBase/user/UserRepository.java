@@ -1,13 +1,11 @@
-package com.kpi.scineticle.model.subsystemOfDataBase;
+package com.kpi.scineticle.model.subsystemOfDataBase.user;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
-import androidx.loader.content.AsyncTaskLoader;
 
-import com.kpi.scineticle.model.User;
+import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;

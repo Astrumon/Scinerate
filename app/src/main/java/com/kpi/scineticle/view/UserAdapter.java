@@ -1,16 +1,9 @@
 package com.kpi.scineticle.view;
 
 
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -18,14 +11,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kpi.scineticle.R;
-import com.kpi.scineticle.databinding.ActivityMainBindingImpl;
 import com.kpi.scineticle.databinding.ItemUserBinding;
-import com.kpi.scineticle.model.User;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
 
 public class UserAdapter extends ListAdapter<User, UserAdapter.UserHolder> {
     private onItemClickListener mListener;

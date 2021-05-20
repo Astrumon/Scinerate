@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.kpi.scineticle.model.User;
 import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.deleteData.DeleteViewModel;
 import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.deleteData.UserDeleteViewModel;
 import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.editData.EditViewModel;

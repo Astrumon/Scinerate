@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.kpi.scineticle.model.User;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
 import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.InputViewModel;
 import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.UserInputViewModel;
 

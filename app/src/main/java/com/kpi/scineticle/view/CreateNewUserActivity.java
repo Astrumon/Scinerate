@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ActivityCreateNewUserBinding;
+import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.Alert;
 import com.kpi.scineticle.viewmodel.subsystemUser.newUser.NewUserViewModel;
 
 public class CreateNewUserActivity extends AppCompatActivity {

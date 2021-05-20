@@ -1,4 +1,4 @@
-package com.kpi.scineticle.view;
+package com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions;
 
 import android.app.AlertDialog;
 import android.content.Context;

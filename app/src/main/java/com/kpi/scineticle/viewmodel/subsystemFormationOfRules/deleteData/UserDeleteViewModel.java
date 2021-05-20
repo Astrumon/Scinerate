@@ -4,8 +4,8 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-import com.kpi.scineticle.model.User;
-import com.kpi.scineticle.model.subsystemOfDataBase.UserRepository;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.UserRepository;
 
 
 public class UserDeleteViewModel extends DeleteViewModel<User> {

@@ -1,27 +1,14 @@
 package com.kpi.scineticle.view;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ActivityAuthenticationBinding;
-import com.kpi.scineticle.model.User;
-import com.kpi.scineticle.viewmodel.UserCRUDViewModel;
-import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.UserInputViewModel;
-import com.kpi.scineticle.viewmodel.subsystemUser.newUser.NewUserViewModel;
-
-import java.util.List;
 
 public class AuthenticationActivity extends AppCompatActivity {
 

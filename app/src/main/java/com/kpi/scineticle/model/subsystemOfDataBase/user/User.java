@@ -1,16 +1,22 @@
-package com.kpi.scineticle.model;
+package com.kpi.scineticle.model.subsystemOfDataBase.user;
 
 import android.text.TextUtils;
 import android.util.Patterns;
 
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.util.StringUtil;
+
+import com.kpi.scineticle.model.InvalidPasswordException;
+import com.kpi.scineticle.model.PasswordValidator;
 
 import java.util.regex.Pattern;
 
 
-@Entity(tableName = "user_table")
+@Entity(tableName = "user_table", indices = {
+        @Index(value = {"email"}, unique = true)
+})
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;

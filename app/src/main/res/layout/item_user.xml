@@ -4,7 +4,7 @@
     <data>
         <variable
             name="user"
-            type="com.kpi.scineticle.model.User" />
+            type="com.kpi.scineticle.model.subsystemOfDataBase.user.User" />
     </data>
     <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"

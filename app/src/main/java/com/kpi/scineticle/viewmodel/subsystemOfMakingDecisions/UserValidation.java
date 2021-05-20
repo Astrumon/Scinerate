@@ -1,12 +1,10 @@
 package com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions;
 
-import android.app.Application;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.kpi.scineticle.model.InvalidPasswordException;
-import com.kpi.scineticle.model.User;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
 import com.kpi.scineticle.viewmodel.subsystemOutputData.UserOutputInfo;
 
 public class UserValidation {

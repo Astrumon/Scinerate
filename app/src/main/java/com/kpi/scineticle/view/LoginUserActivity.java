@@ -4,18 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ActivityLoginUserBinding;
-import com.kpi.scineticle.viewmodel.UserCRUDViewModel;
-import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.InputViewModel;
-import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.UserInputViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ExistingUserViewModel;
 
 public class LoginUserActivity extends AppCompatActivity {

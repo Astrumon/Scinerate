@@ -5,12 +5,10 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.kpi.scineticle.model.User;
-import com.kpi.scineticle.model.subsystemOfDataBase.UserRepository;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.UserRepository;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserFinder;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserValidation;
-
-import static android.content.ContentValues.TAG;
 
 public class UserInputViewModel extends InputViewModel<User> {
 

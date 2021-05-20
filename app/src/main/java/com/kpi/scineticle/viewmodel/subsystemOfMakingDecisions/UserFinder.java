@@ -1,17 +1,11 @@
 package com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-
-import com.kpi.scineticle.model.User;
-import com.kpi.scineticle.model.subsystemOfDataBase.UserRepository;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.UserRepository;
 import com.kpi.scineticle.viewmodel.subsystemOutputData.UserOutputInfo;
-
-import java.util.List;
 
 public class UserFinder {
     private Context mContext;

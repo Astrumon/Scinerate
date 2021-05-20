@@ -8,10 +8,8 @@ public class PasswordValidator {
     }
 
     public static void isValid(String password)
-            throws InvalidPasswordException
-    {
-        // for checking if password length
-        // is between 8 and 15
+            throws InvalidPasswordException {
+
         if (password == null) {
             isValid = false;
             return;
@@ -23,7 +21,6 @@ public class PasswordValidator {
             throw new InvalidPasswordException(1);
         }
 
-        // to check space
         if (password.contains(" ")) {
             isValid = false;
             throw new InvalidPasswordException(2);
@@ -31,10 +28,8 @@ public class PasswordValidator {
         if (true) {
             int count = 0;
 
-            // check digits from 0 to 9
             for (int i = 0; i <= 9; i++) {
 
-                // to convert int to string
                 String str1 = Integer.toString(i);
 
                 if (password.contains(str1)) {
@@ -47,7 +42,6 @@ public class PasswordValidator {
             }
         }
 
-        // for special characters
         if (!(password.contains("@") || password.contains("#")
                 || password.contains("!") || password.contains("~")
                 || password.contains("$") || password.contains("%")
@@ -66,11 +60,9 @@ public class PasswordValidator {
         if (true) {
             int count = 0;
 
-            // checking capital letters
             for (int i = 65; i <= 90; i++) {
 
-                // type casting
-                char c = (char)i;
+                char c = (char) i;
 
                 String str1 = Character.toString(c);
                 if (password.contains(str1)) {
@@ -86,11 +78,9 @@ public class PasswordValidator {
         if (true) {
             int count = 0;
 
-            // checking small letters
             for (int i = 90; i <= 122; i++) {
 
-                // type casting
-                char c = (char)i;
+                char c = (char) i;
                 String str1 = Character.toString(c);
 
                 if (password.contains(str1)) {
@@ -103,7 +93,6 @@ public class PasswordValidator {
             }
         }
 
-        // The password is valid
     }
 
 

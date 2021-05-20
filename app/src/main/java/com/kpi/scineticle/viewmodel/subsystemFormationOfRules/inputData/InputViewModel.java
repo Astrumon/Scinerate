@@ -1,11 +1,6 @@
 package com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-
-import com.kpi.scineticle.model.User;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
 
 public abstract class InputViewModel<T> {
 

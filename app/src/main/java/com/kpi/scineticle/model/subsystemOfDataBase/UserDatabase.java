@@ -9,14 +9,23 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.kpi.scineticle.model.User;
+import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
+import com.kpi.scineticle.model.subsystemOfDataBase.book.BookDao;
+import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.Dissertation;
+import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.DissertationDao;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
+import com.kpi.scineticle.model.subsystemOfDataBase.user.UserDao;
 
-@Database(entities = {User.class}, version = 5)
+@Database(entities = {User.class, Book.class, Dissertation.class}, version = 7)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
 
     public abstract UserDao userDao();
+
+    public abstract BookDao bookDao();
+
+    public abstract DissertationDao dissertationDao();
 
     public static synchronized UserDatabase getInstance(Context context) {
         if (instance == null) {
@@ -38,9 +47,13 @@ public abstract class UserDatabase extends RoomDatabase {
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private UserDao mUserDao;
+        private BookDao mBookDao;
+        private DissertationDao mDissertationDao;
 
         private PopulateDbAsyncTask(UserDatabase database) {
             mUserDao = database.userDao();
+            mBookDao = database.bookDao();
+            mDissertationDao = database.dissertationDao();
         }
 
         @Override
@@ -51,4 +64,5 @@ public abstract class UserDatabase extends RoomDatabase {
             return null;
         }
     }
+
 }
