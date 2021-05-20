@@ -10,24 +10,20 @@ import com.kpi.scineticle.model.User;
 import com.kpi.scineticle.viewmodel.subsystemOutputData.UserOutputInfo;
 
 public class UserValidation {
-    private Context mContext;
+
     private UserOutputInfo mUserOutputInfo;
-    private InvalidPasswordException mInvalidPasswordException;
+
 
     public UserValidation(Context context) {
-        mContext = context;
         mUserOutputInfo = new UserOutputInfo(context);
 
     }
 
-    public void setContext(Context context) {
-        mContext = context;
-    }
 
-    public boolean UserDataValid(User userData)  {
+    public boolean UserDataValid(User userData) {
 
         if (!isValidName(userData)) {
-            Log.d("UserDataValid", "n " +userData.getName());
+            Log.d("UserDataValid", "n " + userData.getName());
             return false;
         }
 
@@ -36,15 +32,14 @@ public class UserValidation {
         }
 
         if (!isValidPhone(userData)) {
-            Log.d("UserDataValid", "p " +userData.getPhoneNumber());
+            Log.d("UserDataValid", "p " + userData.getPhoneNumber());
             return false;
         }
 
         if (!isValidEmail(userData)) {
-            Log.d("UserDataValid","m " + userData.getEmail());
+            Log.d("UserDataValid", "m " + userData.getEmail());
             return false;
         }
-
 
 
         if (!isValidPassword(userData)) {

@@ -36,14 +36,13 @@ public class UserFinder {
             return true;
         }
 
-       return false;
+        return false;
     }
 
     public boolean isExistUserForRegistration(User user) {
         if (user.getEmail() == null) {
             return false;
         }
-
 
         User dbUser = mUserRepository.getUser(user.getEmail(), user.getPassword());
         Toast.makeText(mContext, dbUser + "", Toast.LENGTH_SHORT).show();

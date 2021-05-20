@@ -12,7 +12,6 @@ public class UserEditViewModel extends EditViewModel<User> {
     private UserRepository mUserRepository;
 
     public UserEditViewModel(@NonNull Application application) {
-        super(application);
         mUserRepository = new UserRepository(application);
     }
 

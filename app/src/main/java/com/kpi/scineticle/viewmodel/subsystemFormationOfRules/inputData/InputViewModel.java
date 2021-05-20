@@ -7,11 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.kpi.scineticle.model.User;
 
-public abstract class InputViewModel<T> extends AndroidViewModel {
-
-    public InputViewModel(@NonNull Application application) {
-        super(application);
-    }
+public abstract class InputViewModel<T> {
 
     public abstract boolean insert(T t);
     public abstract boolean inputDataForCheck(String email, String password);

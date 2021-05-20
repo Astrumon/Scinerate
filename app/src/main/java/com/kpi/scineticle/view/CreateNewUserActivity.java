@@ -8,22 +8,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import com.kpi.scineticle.R;
-import com.kpi.scineticle.databinding.ActivityAddUserBinding;
 import com.kpi.scineticle.databinding.ActivityCreateNewUserBinding;
-import com.kpi.scineticle.model.User;
-import com.kpi.scineticle.viewmodel.UserCRUDViewModel;
-import com.kpi.scineticle.viewmodel.UserViewModel;
-import com.kpi.scineticle.viewmodel.UserViewModelFactory;
-import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.UserInputViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.newUser.NewUserViewModel;
-
-import java.util.Objects;
 
 public class CreateNewUserActivity extends AppCompatActivity {
     public static final String EXTRA_ID = "com.kpi.scineticle.EXTRA_ID";
@@ -33,7 +23,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
     public static final String EXTRA_LAST_NAME = "com.kpi.scineticle.EXTRA_LAST_NAME";
 
     private ActivityCreateNewUserBinding mBinding;
-    private NewUserViewModel mNewUserViewModel;
+    private NewUserViewModel.NewUser mNewUser;
     private Context mContext;
 
 
@@ -45,7 +35,6 @@ public class CreateNewUserActivity extends AppCompatActivity {
         mContext = this;
 
         initBinding();
-
         mBinding.btnSaveNewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,17 +44,18 @@ public class CreateNewUserActivity extends AppCompatActivity {
     }
 
     private void initBinding() {
-        UserInputViewModel userInputViewModel = new ViewModelProvider(this,
+        NewUserViewModel newUserViewModel = new ViewModelProvider(this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication()))
-                .get(UserInputViewModel.class);
-        mNewUserViewModel = new NewUserViewModel(userInputViewModel);
-
+                .get(NewUserViewModel.class);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_new_user);
-        mBinding.setNewUserViewModel(mNewUserViewModel);
+        mBinding.setNewUserViewModel(newUserViewModel);
+
+        mNewUser = newUserViewModel.new NewUser();
+
     }
 
     private void createUser() {
-        String password = mBinding.editTextPassword.getText().toString();
+        String password = mBinding.getNewUserViewModel().password.getValue();
         String confirmPassword = mBinding.editTextConfirmPassword.getText().toString();
         if ((password.equals(confirmPassword))) {
 
@@ -74,7 +64,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                     .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if (mNewUserViewModel.createNewUser()) {
+                            if (mNewUser.createNewUser()) {
                                 Toast.makeText(mContext, "Новий користувач успішно створений", Toast.LENGTH_SHORT).show();
                                 saveUser();
                             }
@@ -92,11 +82,11 @@ public class CreateNewUserActivity extends AppCompatActivity {
     }
 
     private void saveUser() {
-        String name = mBinding.editTextName.getText().toString();
-        String lastName = mBinding.editTextLastName.getText().toString();
-        String phone = mBinding.editTextPhone.getText().toString();
-        String email = mBinding.editTextMail.getText().toString();
-        String password = mBinding.editTextPassword.getText().toString();
+        String name = mBinding.getNewUserViewModel().name.getValue();
+        String lastName = mBinding.getNewUserViewModel().lastName.getValue();
+        String phone = mBinding.getNewUserViewModel().phone.getValue();
+        String email = mBinding.getNewUserViewModel().email.getValue();
+        String password = mBinding.getNewUserViewModel().password.getValue();
         String confirmPassword = mBinding.editTextConfirmPassword.getText().toString();
 
         if (name.trim().isEmpty() || phone.trim().isEmpty() || email.trim().isEmpty()

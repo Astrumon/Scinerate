@@ -12,7 +12,6 @@ public class UserDeleteViewModel extends DeleteViewModel<User> {
     private UserRepository mUserRepository;
 
     public UserDeleteViewModel(@NonNull Application application) {
-        super(application);
         mUserRepository = new UserRepository(application);
     }
 

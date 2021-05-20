@@ -19,7 +19,6 @@ public class UserInputViewModel extends InputViewModel<User> {
     private UserFinder mUserFinder;
 
     public UserInputViewModel(@NonNull Application application) {
-        super(application);
         mUserRepository = new UserRepository(application);
         mUserValidation = new UserValidation(application.getApplicationContext());
         mUserFinder = new UserFinder(application.getApplicationContext(), mUserRepository);

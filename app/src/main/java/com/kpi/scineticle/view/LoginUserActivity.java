@@ -19,9 +19,8 @@ import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.UserInpu
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ExistingUserViewModel;
 
 public class LoginUserActivity extends AppCompatActivity {
-    private Context mContext;
     private ActivityLoginUserBinding mBinding;
-    private ExistingUserViewModel mExistingUserViewModel;
+    private ExistingUserViewModel.ExistingUser mExistingUser;
     private static final int SCIENTIFIC_WORK_REQUEST = 5;
 
     @Override
@@ -29,13 +28,12 @@ public class LoginUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
 
-        mContext = this;
         initDataBinding();
 
         mBinding.btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mExistingUserViewModel.loginUser()) {
+                if (mExistingUser.loginUser()) {
                     Intent intent = new Intent(LoginUserActivity.this, ScientificWorkMainActivity.class);
                     startActivityForResult(intent, SCIENTIFIC_WORK_REQUEST);
                 }
@@ -44,13 +42,12 @@ public class LoginUserActivity extends AppCompatActivity {
     }
 
     private void initDataBinding() {
-        UserInputViewModel inputViewModel = new ViewModelProvider(this,
+        ExistingUserViewModel mExistingUserViewModel = new ViewModelProvider(this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication()))
-                .get(UserInputViewModel.class);
-        mExistingUserViewModel = new ExistingUserViewModel(inputViewModel);
+                .get(ExistingUserViewModel.class);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login_user);
         mBinding.setExistingUser(mExistingUserViewModel);
 
-
+        mExistingUser = mExistingUserViewModel.new ExistingUser();
     }
 }

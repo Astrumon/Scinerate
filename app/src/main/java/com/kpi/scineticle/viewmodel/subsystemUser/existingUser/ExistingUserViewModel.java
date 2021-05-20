@@ -9,44 +9,38 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.kpi.scineticle.model.User;
 import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.deleteData.DeleteViewModel;
+import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.deleteData.UserDeleteViewModel;
 import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.editData.EditViewModel;
+import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.editData.UserEditViewModel;
 import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.InputViewModel;
 import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.UserInputViewModel;
 
 public class ExistingUserViewModel extends AndroidViewModel {
 
-    private InputViewModel mInputViewModel;
-    private EditViewModel mEditViewModel;
-    private DeleteViewModel mDeleteViewModel;
-
     public MutableLiveData<String> email = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
+    private Application mApplication;
 
     public ExistingUserViewModel(@NonNull Application application) {
         super(application);
+        mApplication = application;
     }
 
-    public ExistingUserViewModel(InputViewModel inputViewModel) {
-        super(inputViewModel.getApplication());
-        Log.d("EXISTINGUSER", "test");
-        mInputViewModel = inputViewModel;
+    public class ExistingUser {
+        private InputViewModel mInputViewModel;
+        private EditViewModel mEditViewModel;
+        private DeleteViewModel mDeleteViewModel;
+
+        public ExistingUser() {
+            mInputViewModel = new UserInputViewModel(mApplication);
+            mEditViewModel = new UserEditViewModel(mApplication);
+            mDeleteViewModel = new UserDeleteViewModel(mApplication);
+        }
+
+        public boolean loginUser() {
+            Log.d("EXISTINGUSER", "email: " + email.getValue() + ", pass: " + password.getValue());
+            return mInputViewModel.inputDataForCheck(email.getValue(), password.getValue());
+        }
     }
-
-    public ExistingUserViewModel(EditViewModel editViewModel) {
-        super(editViewModel.getApplication());
-        mEditViewModel = editViewModel;
-    }
-
-    public ExistingUserViewModel(DeleteViewModel deleteViewModel) {
-        super(deleteViewModel.getApplication());
-        mDeleteViewModel = deleteViewModel;
-    }
-
-    public boolean loginUser() {
-        Log.d("EXISTINGUSER", "email: " + email.getValue() + ", pass: " + password.getValue());
-
-        return mInputViewModel.inputDataForCheck(email.getValue(), password.getValue());
-    }
-
 
 }
