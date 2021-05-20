@@ -9,6 +9,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
+import com.kpi.scineticle.model.subsystemOfDataBase.article.ArticleDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.BookDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.Dissertation;
@@ -16,7 +18,7 @@ import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.DissertationDa
 import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.UserDao;
 
-@Database(entities = {User.class, Book.class, Dissertation.class}, version = 7)
+@Database(entities = {User.class, Book.class, Dissertation.class, Article.class}, version = 7)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
@@ -26,6 +28,8 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract BookDao bookDao();
 
     public abstract DissertationDao dissertationDao();
+
+    public abstract ArticleDao articleDao();
 
     public static synchronized UserDatabase getInstance(Context context) {
         if (instance == null) {
@@ -49,11 +53,13 @@ public abstract class UserDatabase extends RoomDatabase {
         private UserDao mUserDao;
         private BookDao mBookDao;
         private DissertationDao mDissertationDao;
+        private ArticleDao mArticleDao;
 
         private PopulateDbAsyncTask(UserDatabase database) {
             mUserDao = database.userDao();
             mBookDao = database.bookDao();
             mDissertationDao = database.dissertationDao();
+            mArticleDao = database.articleDao();
         }
 
         @Override

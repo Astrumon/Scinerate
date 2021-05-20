@@ -49,6 +49,7 @@ public class NewUserViewModel extends AndroidViewModel {
 
         public boolean createNewUser() {
             Log.d("NEWUSER", "user: " + getUserData());
+
             return mInputViewModel.insert(getUserData());
         }
 
