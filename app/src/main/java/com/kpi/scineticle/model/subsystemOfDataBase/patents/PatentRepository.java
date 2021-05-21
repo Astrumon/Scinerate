@@ -33,7 +33,7 @@ public class PatentRepository {
         new DeletePatentAsyncTask(mPatentDao).execute(patent);
     }
 
-    public void deleteAllArticles() {
+    public void deleteAllPatents() {
         new DeleteAllPatentsAsyncTask(mPatentDao).execute();
     }
 
