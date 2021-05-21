@@ -41,7 +41,7 @@ public class PatentRepository {
         return allPatents;
     }
 
-    public Patent getArticleByName(String name) {
+    public Patent getPatentByName(String name) {
         Patent patent = new Patent();
         AsyncTask task = new GetPatentByNamePatentOwner(mPatentDao, name).execute();
         try {

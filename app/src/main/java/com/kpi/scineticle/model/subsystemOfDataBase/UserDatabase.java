@@ -15,6 +15,8 @@ import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.BookDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.Dissertation;
 import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.DissertationDao;
+import com.kpi.scineticle.model.subsystemOfDataBase.electronic_resource.ElectronicResource;
+import com.kpi.scineticle.model.subsystemOfDataBase.electronic_resource.ElectronicResourceDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.patents.Patent;
 import com.kpi.scineticle.model.subsystemOfDataBase.patents.PatentDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.Thesis;
@@ -24,7 +26,8 @@ import com.kpi.scineticle.model.subsystemOfDataBase.user.UserDao;
 
 @Database(entities = {User.class, Book.class,
                       Dissertation.class, Article.class,
-                        Patent.class, Thesis.class}, version = 7)
+                        Patent.class, Thesis.class,
+                            ElectronicResource.class}, version = 7)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
@@ -40,6 +43,8 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract PatentDao patentDao();
 
     public abstract ThesisDao thesisDao();
+
+    public abstract ElectronicResourceDao electronicResourceDao();
 
     public static synchronized UserDatabase getInstance(Context context) {
         if (instance == null) {
@@ -66,6 +71,7 @@ public abstract class UserDatabase extends RoomDatabase {
         private ArticleDao mArticleDao;
         private PatentDao mPatentDao;
         private ThesisDao mThesisDao;
+        private ElectronicResourceDao mElectronicResourceDao;
 
         private PopulateDbAsyncTask(UserDatabase database) {
             mUserDao = database.userDao();
@@ -74,6 +80,7 @@ public abstract class UserDatabase extends RoomDatabase {
             mArticleDao = database.articleDao();
             mPatentDao = database.patentDao();
             mThesisDao = database.thesisDao();
+            mElectronicResourceDao = database.electronicResourceDao();
         }
 
         @Override
