@@ -11,6 +11,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.ArticleDao;
+import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointer;
+import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointersDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.BookDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.catalogs.Catalog;
@@ -34,10 +36,10 @@ import com.kpi.scineticle.model.subsystemOfDataBase.user.UserDao;
 
 @Database(entities = {User.class, Book.class,
                       Dissertation.class, Article.class,
-                        Patent.class, Thesis.class,
-                            ElectronicResource.class, LegisNormDocuments.class,
-                                Standart.class, Preprint.class,
-                                    Catalog.class}, version = 7)
+                      Patent.class, Thesis.class,
+                      ElectronicResource.class, LegisNormDocuments.class,
+                      Standart.class, Preprint.class,
+                      Catalog.class, BibliographicPointer.class}, version = 8)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
@@ -63,6 +65,8 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract PreprintDao preprintDao();
 
     public abstract CatalogDao catalogDao();
+
+    public abstract BibliographicPointersDao bibliographicPointers();
 
     public static synchronized UserDatabase getInstance(Context context) {
         if (instance == null) {
@@ -94,6 +98,7 @@ public abstract class UserDatabase extends RoomDatabase {
         private StandartDao mStandartDao;
         private PreprintDao mPreprintDao;
         private CatalogDao mCatalogDao;
+        private BibliographicPointersDao mBibliographicPointersDao;
 
         private PopulateDbAsyncTask(UserDatabase database) {
             mUserDao = database.userDao();
@@ -107,6 +112,8 @@ public abstract class UserDatabase extends RoomDatabase {
             mStandartDao = database.standartDao();
             mPreprintDao = database.preprintDao();
             mCatalogDao = database.catalogDao();
+            mBibliographicPointersDao = database.bibliographicPointers();
+
         }
 
         @Override

@@ -1,15 +1,8 @@
 package com.kpi.scineticle.model.subsystemOfDataBase.catalogs;
-
 import android.app.Application;
 import android.os.AsyncTask;
-
 import androidx.lifecycle.LiveData;
-
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
-import com.kpi.scineticle.model.subsystemOfDataBase.preprints.Preprint;
-import com.kpi.scineticle.model.subsystemOfDataBase.preprints.PreprintDao;
-import com.kpi.scineticle.model.subsystemOfDataBase.preprints.PreprintRepository;
-
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
