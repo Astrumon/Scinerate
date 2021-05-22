@@ -21,6 +21,8 @@ import com.kpi.scineticle.model.subsystemOfDataBase.legislative_normative_docume
 import com.kpi.scineticle.model.subsystemOfDataBase.legislative_normative_documents.LegisNormDocumentsDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.patents.Patent;
 import com.kpi.scineticle.model.subsystemOfDataBase.patents.PatentDao;
+import com.kpi.scineticle.model.subsystemOfDataBase.preprints.Preprint;
+import com.kpi.scineticle.model.subsystemOfDataBase.preprints.PreprintDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.standarts.Standart;
 import com.kpi.scineticle.model.subsystemOfDataBase.standarts.StandartDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.Thesis;
@@ -32,7 +34,7 @@ import com.kpi.scineticle.model.subsystemOfDataBase.user.UserDao;
                       Dissertation.class, Article.class,
                         Patent.class, Thesis.class,
                             ElectronicResource.class, LegisNormDocuments.class,
-                                Standart.class}, version = 7)
+                                Standart.class, Preprint.class}, version = 7)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
@@ -54,6 +56,8 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract LegisNormDocumentsDao legisNormDocumentsDao();
 
     public abstract StandartDao standartDao();
+
+    public abstract PreprintDao preprintDao();
 
     public static synchronized UserDatabase getInstance(Context context) {
         if (instance == null) {
@@ -83,6 +87,7 @@ public abstract class UserDatabase extends RoomDatabase {
         private ElectronicResourceDao mElectronicResourceDao;
         private LegisNormDocumentsDao mLegisNormDocuments;
         private StandartDao mStandartDao;
+        private PreprintDao mPreprintDao;
 
         private PopulateDbAsyncTask(UserDatabase database) {
             mUserDao = database.userDao();
@@ -94,6 +99,7 @@ public abstract class UserDatabase extends RoomDatabase {
             mElectronicResourceDao = database.electronicResourceDao();
             mLegisNormDocuments = database.legisNormDocumentsDao();
             mStandartDao = database.standartDao();
+            mPreprintDao = database.preprintDao();
         }
 
         @Override
