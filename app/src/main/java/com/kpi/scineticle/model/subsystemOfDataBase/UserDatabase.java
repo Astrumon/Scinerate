@@ -13,6 +13,8 @@ import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.ArticleDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.BookDao;
+import com.kpi.scineticle.model.subsystemOfDataBase.catalogs.Catalog;
+import com.kpi.scineticle.model.subsystemOfDataBase.catalogs.CatalogDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.Dissertation;
 import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.DissertationDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.electronic_resource.ElectronicResource;
@@ -34,7 +36,8 @@ import com.kpi.scineticle.model.subsystemOfDataBase.user.UserDao;
                       Dissertation.class, Article.class,
                         Patent.class, Thesis.class,
                             ElectronicResource.class, LegisNormDocuments.class,
-                                Standart.class, Preprint.class}, version = 7)
+                                Standart.class, Preprint.class,
+                                    Catalog.class}, version = 7)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
@@ -58,6 +61,8 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract StandartDao standartDao();
 
     public abstract PreprintDao preprintDao();
+
+    public abstract CatalogDao catalogDao();
 
     public static synchronized UserDatabase getInstance(Context context) {
         if (instance == null) {
@@ -88,6 +93,7 @@ public abstract class UserDatabase extends RoomDatabase {
         private LegisNormDocumentsDao mLegisNormDocuments;
         private StandartDao mStandartDao;
         private PreprintDao mPreprintDao;
+        private CatalogDao mCatalogDao;
 
         private PopulateDbAsyncTask(UserDatabase database) {
             mUserDao = database.userDao();
@@ -100,6 +106,7 @@ public abstract class UserDatabase extends RoomDatabase {
             mLegisNormDocuments = database.legisNormDocumentsDao();
             mStandartDao = database.standartDao();
             mPreprintDao = database.preprintDao();
+            mCatalogDao = database.catalogDao();
         }
 
         @Override
