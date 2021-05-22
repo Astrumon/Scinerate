@@ -21,6 +21,8 @@ import com.kpi.scineticle.model.subsystemOfDataBase.legislative_normative_docume
 import com.kpi.scineticle.model.subsystemOfDataBase.legislative_normative_documents.LegisNormDocumentsDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.patents.Patent;
 import com.kpi.scineticle.model.subsystemOfDataBase.patents.PatentDao;
+import com.kpi.scineticle.model.subsystemOfDataBase.standarts.Standart;
+import com.kpi.scineticle.model.subsystemOfDataBase.standarts.StandartDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.Thesis;
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.ThesisDao;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
@@ -29,7 +31,8 @@ import com.kpi.scineticle.model.subsystemOfDataBase.user.UserDao;
 @Database(entities = {User.class, Book.class,
                       Dissertation.class, Article.class,
                         Patent.class, Thesis.class,
-                            ElectronicResource.class, LegisNormDocuments.class}, version = 7)
+                            ElectronicResource.class, LegisNormDocuments.class,
+                                Standart.class}, version = 7)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
@@ -49,6 +52,8 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract ElectronicResourceDao electronicResourceDao();
 
     public abstract LegisNormDocumentsDao legisNormDocumentsDao();
+
+    public abstract StandartDao standartDao();
 
     public static synchronized UserDatabase getInstance(Context context) {
         if (instance == null) {
@@ -77,6 +82,7 @@ public abstract class UserDatabase extends RoomDatabase {
         private ThesisDao mThesisDao;
         private ElectronicResourceDao mElectronicResourceDao;
         private LegisNormDocumentsDao mLegisNormDocuments;
+        private StandartDao mStandartDao;
 
         private PopulateDbAsyncTask(UserDatabase database) {
             mUserDao = database.userDao();
@@ -87,6 +93,7 @@ public abstract class UserDatabase extends RoomDatabase {
             mThesisDao = database.thesisDao();
             mElectronicResourceDao = database.electronicResourceDao();
             mLegisNormDocuments = database.legisNormDocumentsDao();
+            mStandartDao = database.standartDao();
         }
 
         @Override

@@ -1,6 +1,7 @@
 package com.kpi.scineticle.model.subsystemOfDataBase.legislative_normative_documents;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -10,6 +11,7 @@ import com.kpi.scineticle.model.subsystemOfDataBase.patents.Patent;
 
 import java.util.List;
 
+@Dao
 public interface LegisNormDocumentsDao {
     @Insert
     void insert(LegisNormDocuments legisNormDocuments);
