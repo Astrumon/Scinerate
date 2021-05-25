@@ -20,7 +20,7 @@ public class Article {
 
     private String sheets;
 
-    private int idUser;
+    private String userLogin;
 
     public Article() {
 
@@ -83,12 +83,12 @@ public class Article {
         this.sheets = sheets;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public int getId() {
@@ -108,7 +108,7 @@ public class Article {
                 ", date='" + date + '\'' +
                 ", number='" + number + '\'' +
                 ", sheets='" + sheets + '\'' +
-                ", idUser=" + idUser +
+                ", userLogin=" + userLogin +
                 '}';
     }
 }

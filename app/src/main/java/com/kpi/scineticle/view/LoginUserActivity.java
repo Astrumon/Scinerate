@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ActivityLoginUserBinding;
@@ -16,6 +17,7 @@ public class LoginUserActivity extends AppCompatActivity {
     private ActivityLoginUserBinding mBinding;
     private ExistingUserViewModel.ExistingUser mExistingUser;
     private static final int SCIENTIFIC_WORK_REQUEST = 5;
+    public static final String LOGIN = "EMAIL_OF_AUTHORISATION_USER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,8 @@ public class LoginUserActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (mExistingUser.loginUser()) {
                     Intent intent = new Intent(LoginUserActivity.this, ScientificWorkMainActivity.class);
-                    startActivityForResult(intent, SCIENTIFIC_WORK_REQUEST);
+                    intent.putExtra("login", mExistingUser.getLogin());
+                    startActivity(intent);
                 }
             }
         });

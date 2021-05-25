@@ -1,8 +1,10 @@
 package com.kpi.scineticle.view;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,16 +21,34 @@ import com.kpi.scineticle.R;
 public class ScientificWorkMainActivity extends AppCompatActivity {
     public static final int ADD_ARTICLE_REQUEST = 4;
 
+    Context mContext;
+    String login;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scientific_work);
+        Bundle arguments = getIntent().getExtras();
 
+        if (arguments != null) {
+
+            login = arguments.get("login").toString();
+            //Toast.makeText(mContext, arguments.get("login").toString(), Toast.LENGTH_SHORT).show();
+        } else {
+            Log.d("INTENT_SCIENTICLE", "херня " + arguments.getString("login"));
+        }
+        Log.d("INTENT_SCIENTICLE", "ok " + login);
+        Toast.makeText(this, login, Toast.LENGTH_SHORT).show();
+
+
+        mContext = this;
         FloatingActionButton button = findViewById(R.id.button_add_article);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(ScientificWorkMainActivity.this, AddEditScientificWorkActivity.class);
+                intent.putExtra("login", login);
                 startActivityForResult(intent, ADD_ARTICLE_REQUEST);
             }
         });
@@ -60,5 +80,12 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ScientificWorkMainActivity.this, AuthenticationActivity.class);
+        startActivity(intent);
     }
 }

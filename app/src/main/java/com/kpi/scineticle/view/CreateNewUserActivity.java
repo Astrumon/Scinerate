@@ -58,27 +58,31 @@ public class CreateNewUserActivity extends AppCompatActivity {
     private void createUser() {
         String password = mBinding.getNewUserViewModel().password.getValue();
         String confirmPassword = mBinding.editTextConfirmPassword.getText().toString();
-        if ((password.equals(confirmPassword))) {
-
-            String textAlert = "Зберегти дані?";
-            Alert.createAlert(mContext, textAlert)
-                    .setPositiveButton("Так", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (mNewUser.createNewUser()) {
-                                Toast.makeText(mContext, "Новий користувач успішно створений", Toast.LENGTH_SHORT).show();
-                                saveUser();
+        try {
+            if ((password.equals(confirmPassword))) {
+                String textAlert = "Зберегти дані?";
+                Alert.createAlert(mContext, textAlert)
+                        .setPositiveButton("Так", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (mNewUser.createNewUser()) {
+                                    Toast.makeText(mContext, "Новий користувач успішно створений", Toast.LENGTH_SHORT).show();
+                                    saveUser();
+                                }
                             }
-                        }
-                    })
-                    .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        })
+                        .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                        }
-                    }).create().show();
-        } else {
-            Toast.makeText(this, "Поля для ведення паролів мають співпадати", Toast.LENGTH_SHORT).show();
+                            }
+                        }).create().show();
+            } else {
+                Toast.makeText(this, "Поля для ведення паролів мають співпадати", Toast.LENGTH_SHORT).show();
+            }
+        } catch (NullPointerException exception) {
+            exception.printStackTrace();
+            Toast.makeText(this, "Всі поля мають бути заповнені", Toast.LENGTH_SHORT).show();
         }
     }
 

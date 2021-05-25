@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name=".view.ScientificWorkMainActivity"
-            android:parentActivityName=".view.MainActivity" />
+            android:parentActivityName=".view.AuthenticationActivity" />
         <activity android:name=".view.AddEditScientificWorkActivity" />
     </application>
 

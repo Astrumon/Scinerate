@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Scineticle</string>
-    <string name="name">name</string>
+    <string name="name">Ім\'я</string>
     <string name="phone_380">phone +380 (необов\'язково)</string>
     <string name="e_mail">e-mail</string>
-    <string name="save">save</string>
+    <string name="save">Зберегти</string>
     <string name="new_type">new type</string>
     <string name="new_user">Новий користувач</string>
     <string name="existing_user">Існуючий користувач</string>
@@ -13,9 +13,64 @@
     <string name="passwordUser">Пароль</string>
     <string name="repeatPassword">Повторити пароль</string>
     <string name="enterToAccount">Увійти</string>
+    <string name="ok">ok</string>
+    <string name="authors">Автори</string>
+    <string name="name_of_work">Назва</string>
+    <string name="name_of_journal">Назва журналу</string>
+    <string name="date_of_publish">Дата випуску</string>
+    <string name="number_of_work">Номер випуску</string>
+    <string name="count_of_sheets">Кількість сторінок</string>
+    <string name="statement">Номер видання</string>
+    <string name="place">Місце видання</string>
+    <string name="publish">Видавництво</string>
+    <string name="year">Рік видання</string>
+    <string name="count_list">Кількість сторінок</string>
+    <string name="article">Стаття</string>
+    <string name="book">Книга</string>
+    <string name="dissertation">Дисертація</string>
+    <string name="thesis">Тезис</string>
+    <string name="patent">Патент</string>
+    <string name="el_resource">Електронний ресурс</string>
+    <string name="norm_document">Нормативний документ</string>
+    <string name="standart">Стандарт</string>
+    <string name="preprint">Препринт</string>
+    <string name="catalog">Каталог</string>
+    <string name="bibliographic_pointer">Бібліографічний покажчик</string>
+    <string name="name_patent_owner">Ім\'я автора патенту</string>
+    <string name="country">Країна</string>
+    <string name="number">Номер</string>
+    <string name="date">Дата</string>
+    <string name="name_conference">Назва конференції</string>
+    <string name="date_of_conference">Дата проведення конференції</string>
+    <string name="place_conference">Місце проведення конференції</string>
+    <string name="place_publish">Місце публікації</string>
+    <string name="sheets">Сторінки</string>
+    <string name="date_update">Дата оновлення</string>
+    <string name="url">URL</string>
+    <string name="type">Тип</string>
+    <string name="date_uccess">Дата прийняття</string>
+    <string name="serial">Серія</string>
+    <string name="name_of_org">Назва організації</string>
+    <string name="year_publish">Рік публікації</string>
+    <string name="code_letter">Код який складається с літер</string>
+    <string name="code_number">Числовий код</string>
+    <string name="city">Місто</string>
+    <string name="abbreviation">Абревіатура</string>
+    <string name="release">Випуск</string>
+    <string name="authorsOfRelease">Автори випуску</string>
+    <string name="authorsOfPublish">Автори редакції</string>
+    <string name="additionally">Додаткова інформація</string>
     <string-array name="articles">
-        <item>Test1</item>
-        <item>Test2</item>
-        <item>Test3</item>
+        <item>@string/article</item>
+        <item>@string/book</item>
+        <item>@string/dissertation</item>
+        <item>@string/thesis</item>
+        <item>@string/patent</item>
+        <item>@string/el_resource</item>
+        <item>@string/norm_document</item>
+        <item>@string/standart</item>
+        <item>@string/preprint</item>
+        <item>@string/catalog</item>
+        <item>@string/bibliographic_pointer</item>
     </string-array>
 </resources>

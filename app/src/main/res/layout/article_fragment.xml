@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="articleViewModel"
+            type="com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ArticleViewModel" />
+    </data>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/fr_article"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".view.fragments.ArticleFragment">
+
+            <EditText
+                android:id="@+id/article_authors"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:text="@={articleViewModel.authors}"
+                android:hint="@string/authors"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/article_name"
+                android:text="@={articleViewModel.nameArticle}"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/name_of_work"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/article_name_journal"
+                android:text="@={articleViewModel.nameJournal}"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/name_of_journal"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/article_date"
+                android:text="@={articleViewModel.date}"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/date_of_publish"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/article_number"
+                android:text="@={articleViewModel.number}"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/number_of_work"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/article_sheets"
+                android:text="@={articleViewModel.sheets}"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/count_of_sheets"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/btn_create_article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="@string/save" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>
