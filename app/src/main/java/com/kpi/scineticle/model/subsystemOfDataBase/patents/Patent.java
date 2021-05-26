@@ -20,7 +20,7 @@ public class Patent {
 
     private String date;
 
-    private int idUser;
+    private String userLogin;
 
     public int getId() {
         return id;
@@ -52,7 +52,7 @@ public class Patent {
                 ", country='" + country + '\'' +
                 ", number='" + number + '\'' +
                 ", date='" + date + '\'' +
-                ", idUser=" + idUser +
+                ", userLogin=" + userLogin +
                 '}';
     }
 
@@ -104,11 +104,11 @@ public class Patent {
         this.date = date;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 }

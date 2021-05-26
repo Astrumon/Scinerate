@@ -1,121 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.fragments.BibliographicPointerFragment">
+<layout>
 
-    <EditText
-        android:id="@+id/bibliographic_pointer_name"
-        android:hint="@string/name_of_work"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/bibliographic_pointer_release"
-        android:hint="@string/release"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/bibliographic_pointer_authors_of_release"
-        android:hint="@string/authorsOfRelease"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/bibliographic_pointer_authors_of_publish"
-        android:hint="@string/authorsOfPublish"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/bibliographic_pointer_place"
-        android:hint="@string/place"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/bibliographic_pointer_city"
-        android:hint="@string/city"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/bibliographic_pointer_abbreviation"
-        android:hint="@string/abbreviation"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/bibliographic_pointer_year"
-        android:hint="@string/year"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/bibliographic_pointer_sheet"
-        android:hint="@string/sheets"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/bibliographic_pointer_additionally"
-        android:hint="@string/additionally"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <Button
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"/>
+    <data>
 
-</LinearLayout>
-</ScrollView>
+        <variable
+            name="bibliographiPointerViewModel"
+            type="com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BibliographicPointerViewModel" />
+    </data>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".view.fragments.BibliographicPointerFragment">
+
+            <EditText
+                android:id="@+id/bibliographic_pointer_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/name_of_work"
+                android:text="@={bibliographiPointerViewModel.name}"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/bibliographic_pointer_release"
+                android:layout_width="match_parent"
+                android:text="@={bibliographiPointerViewModel.numberOfRelease}"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/release"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/bibliographic_pointer_authors_of_release"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@={bibliographiPointerViewModel.authorOfRelease}"
+                android:layout_margin="10dp"
+                android:hint="@string/authorsOfRelease"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/bibliographic_pointer_authors_of_publish"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@={bibliographiPointerViewModel.aouthorsOfPublish}"
+                android:layout_margin="10dp"
+                android:hint="@string/authorsOfPublish"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/bibliographic_pointer_place"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@={bibliographiPointerViewModel.place}"
+                android:layout_margin="10dp"
+                android:hint="@string/place"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/bibliographic_pointer_city"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:text="@={bibliographiPointerViewModel.city}"
+                android:hint="@string/city"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/bibliographic_pointer_abbreviation"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:text="@={bibliographiPointerViewModel.abbreviation}"
+                android:hint="@string/abbreviation"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/bibliographic_pointer_year"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@={bibliographiPointerViewModel.year}"
+                android:layout_margin="10dp"
+                android:hint="@string/year"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/bibliographic_pointer_sheet"
+                android:layout_width="match_parent"
+                android:text="@={bibliographiPointerViewModel.sheet}"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/sheets"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/bibliographic_pointer_additionally"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@={bibliographiPointerViewModel.additionally}"
+                android:layout_margin="10dp"
+                android:hint="@string/additionally"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btn_create_bibliographic_pointer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="@string/save" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

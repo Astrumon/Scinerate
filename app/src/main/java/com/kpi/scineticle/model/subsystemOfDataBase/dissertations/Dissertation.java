@@ -20,9 +20,9 @@ public class Dissertation {
 
     private String year;
 
-    private int countOfSheets;
+    private String countOfSheets;
 
-    private int idUser;
+    private String userLogin;
 
     public int getId() {
         return id;
@@ -36,7 +36,7 @@ public class Dissertation {
 
     }
 
-    public Dissertation(String authors, String name, String type, String place, String publish, String year, int countOfSheets) {
+    public Dissertation(String authors, String name, String type, String place, String publish, String year, String countOfSheets) {
         this.authors = authors;
         this.name = name;
         this.type = type;
@@ -94,20 +94,20 @@ public class Dissertation {
         this.year = year;
     }
 
-    public int getCountOfSheets() {
+    public String getCountOfSheets() {
         return countOfSheets;
     }
 
-    public void setCountOfSheets(int countOfSheets) {
+    public void setCountOfSheets(String countOfSheets) {
         this.countOfSheets = countOfSheets;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class Dissertation {
                 ", publish='" + publish + '\'' +
                 ", year='" + year + '\'' +
                 ", countOfSheets=" + countOfSheets +
-                ", idUser=" + idUser +
+                ", idUser=" + userLogin +
                 '}';
     }
 }

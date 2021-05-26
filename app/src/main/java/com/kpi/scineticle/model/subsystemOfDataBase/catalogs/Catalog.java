@@ -9,7 +9,7 @@ public class Catalog {
     @PrimaryKey
     private int id;
 
-    private int idUser;
+    private String userLogin;
 
     private String authors;
 
@@ -61,12 +61,12 @@ public class Catalog {
         this.id = id;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public String getAuthors() {
@@ -136,7 +136,7 @@ public class Catalog {
     @Override
     public String toString() {
         return "Catalog{" +
-                "idUser=" + idUser +
+                "idUser=" + userLogin +
                 ", authors='" + authors + '\'' +
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +

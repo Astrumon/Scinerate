@@ -9,7 +9,7 @@ public class Standart {
     @PrimaryKey
     private int id;
 
-    private int idUser;
+    private String userLogin;
 
     private String nameOfOrg;
 
@@ -46,12 +46,12 @@ public class Standart {
         this.id = id;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public String getNameOfOrg() {
@@ -113,7 +113,7 @@ public class Standart {
     @Override
     public String toString() {
         return "Standart{" +
-                "idUser=" + idUser +
+                "idUser=" + userLogin +
                 ", nameOfOrg='" + nameOfOrg + '\'' +
                 ", yearPublish='" + yearPublish + '\'' +
                 ", name='" + name + '\'' +

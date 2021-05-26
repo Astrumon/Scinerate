@@ -1,100 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.fragments.NormDocumentFragment">
+<layout>
 
-    <EditText
-        android:id="@+id/norm_documents_authors"
-        android:hint="@string/authors"
+    <data>
+
+        <variable
+            name="normDocumentsViewModel"
+            type="com.kpi.scineticle.viewmodel.subsystemUser.existingUser.NormDocumentViewModel" />
+    </data>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/norm_documents_type"
-        android:hint="@string/type"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/norm_documents_date_access"
-        android:hint="@string/date_uccess"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/norm_documents_number"
-        android:hint="@string/number"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/norm_documents_publish"
-        android:hint="@string/publish"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/norm_documents_date_publish"
-        android:hint="@string/date_of_publish"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/norm_documents_serial"
-        android:hint="@string/serial"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        tools:ignore="LabelFor" />
-    <EditText
-        android:id="@+id/norm_documents_sheet"
-        android:hint="@string/sheets"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        tools:ignore="LabelFor" />
-    <Button
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"/>
-</LinearLayout>
-</ScrollView>
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".view.fragments.NormDocumentFragment">
+
+            <EditText
+                android:id="@+id/norm_documents_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/name_of_work"
+                android:inputType="text"
+                android:text="@={normDocumentsViewModel.name}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/norm_documents_type"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/type"
+                android:inputType="text"
+                android:text="@={normDocumentsViewModel.type}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/norm_documents_date_access"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/date_uccess"
+                android:inputType="text"
+                android:text="@={normDocumentsViewModel.dateAccess}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/norm_documents_number"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/number"
+                android:inputType="text"
+                android:text="@={normDocumentsViewModel.number}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/norm_documents_publish"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/publish"
+                android:inputType="text"
+                android:text="@={normDocumentsViewModel.publish}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/norm_documents_date_publish"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/date_of_publish"
+                android:inputType="text"
+                android:text="@={normDocumentsViewModel.datePublish}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/norm_documents_serial"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/serial"
+                android:inputType="text"
+                android:text="@={normDocumentsViewModel.serial}"
+                android:textSize="20sp"
+                tools:ignore="LabelFor" />
+
+            <EditText
+                android:id="@+id/norm_documents_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/sheets"
+                android:inputType="text"
+                android:text="@={normDocumentsViewModel.sheets}"
+                android:textSize="20sp"
+                tools:ignore="LabelFor" />
+
+            <Button
+                android:id="@+id/btn_norm_documents_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="@string/save" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

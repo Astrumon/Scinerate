@@ -1,21 +1,31 @@
 package com.kpi.scineticle.view.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.kpi.scineticle.R;
+import com.kpi.scineticle.databinding.PreprintFragmentBinding;
+import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.PreprintViewModel;
 
 public class PreprintFragment extends Fragment {
 
-    private PreprintViewModel mViewModel;
+    private PreprintFragmentBinding mPreprintFragmentBinding;
+    private PreprintViewModel.NewPreprint mNewPreprint;
+    private Context mContext;
+    private String userLogin;
 
     public static PreprintFragment newInstance() {
         return new PreprintFragment();
@@ -24,14 +34,31 @@ public class PreprintFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.preprint_fragment, container, false);
+        PreprintViewModel preprintViewModel = new ViewModelProvider(requireActivity(),
+                ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(PreprintViewModel.class);
+
+        mPreprintFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.preprint_fragment, container, false);
+        View view = mPreprintFragmentBinding.getRoot();
+        mPreprintFragmentBinding.setPreprintViewModel(preprintViewModel);
+        mNewPreprint = preprintViewModel.new NewPreprint();
+
+        userLogin = getArguments().get("login").toString();
+        Log.d("FRAGMENT: ", "onCreateView: " + userLogin);
+        preprintViewModel.setUserLogin(userLogin);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-       // mViewModel = new ViewModelProvider(this).get(PreprintViewModel.class);
-        // TODO: Use the ViewModel
+        mContext = getContext();
+        mPreprintFragmentBinding.btnPreprintCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mNewPreprint.createNewPreprint();
+                Toast.makeText(mContext, "Препринт успішно створено", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

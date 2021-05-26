@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
-import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.ArticleInputViewModel;
+import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.UserInputViewModel;
 
 public class ArticleViewModel extends AndroidViewModel {
     public MutableLiveData<String> authors = new MutableLiveData<>();
@@ -49,10 +49,10 @@ public class ArticleViewModel extends AndroidViewModel {
     }
 
     public class NewArticle {
-        private final ArticleInputViewModel mArticleInputViewModel;
+        private final UserInputViewModel mArticleInputViewModel;
 
         public NewArticle() {
-            mArticleInputViewModel = new ArticleInputViewModel(mApplication);
+            mArticleInputViewModel = new UserInputViewModel(mApplication);
         }
 
         public void createNewArticle() {

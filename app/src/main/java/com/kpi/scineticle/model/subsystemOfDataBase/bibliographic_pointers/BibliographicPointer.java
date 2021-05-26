@@ -9,7 +9,7 @@ public class BibliographicPointer {
     @PrimaryKey
     private int id;
 
-    private int idUser;
+    private String userLogin;
 
     private String name;
 
@@ -55,12 +55,12 @@ public class BibliographicPointer {
         this.id = id;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public String getName() {
@@ -146,7 +146,7 @@ public class BibliographicPointer {
     @Override
     public String toString() {
         return "BibliographicPointers{" +
-                "idUser=" + idUser +
+                "userLogin=" + userLogin +
                 ", name='" + name + '\'' +
                 ", release='" + numberOfRelease + '\'' +
                 ", authorOfRelease='" + authorOfRelease + '\'' +

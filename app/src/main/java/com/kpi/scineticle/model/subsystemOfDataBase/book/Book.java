@@ -31,9 +31,9 @@ public class Book {
 
     private String publish;
 
-    private int countOfSheets;
+    private String countOfSheets;
 
-    private int idUser;
+    private String userLogin;
 
     public Book() {
 
@@ -47,7 +47,7 @@ public class Book {
         this.publish = publish;
     }
 
-    public Book(String authors, String name, String statement, String place, String publish, String year, String part, int countOfSheets) {
+    public Book(String authors, String name, String statement, String place, String publish, String year, String part, String countOfSheets) {
         this.authors = authors;
         this.name = name;
         this.statement = statement;
@@ -105,20 +105,20 @@ public class Book {
         this.part = part;
     }
 
-    public int getCountOfSheets() {
+    public String getCountOfSheets() {
         return countOfSheets;
     }
 
-    public void setCountOfSheets(int countOfSheets) {
+    public void setCountOfSheets(String countOfSheets) {
         this.countOfSheets = countOfSheets;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     @Override
@@ -131,7 +131,7 @@ public class Book {
                 ", year='" + year + '\'' +
                 ", part='" + part + '\'' +
                 ", countOfSheets=" + countOfSheets +
-                ", idUser=" + idUser +
+                ", userLogin=" + userLogin +
                 '}';
     }
 }

@@ -22,13 +22,13 @@ public class ElectronicResource {
 
     private String url;
 
-    private int idUser;
+    private String userLogin;
 
     public ElectronicResource() {
 
     }
 
-    public ElectronicResource(String authors, String name, String placePublish, String publish, String date, String updateDate, String url, int idUser) {
+    public ElectronicResource(String authors, String name, String placePublish, String publish, String date, String updateDate, String url) {
         this.authors = authors;
         this.name = name;
         this.placePublish = placePublish;
@@ -36,7 +36,7 @@ public class ElectronicResource {
         this.date = date;
         this.updateDate = updateDate;
         this.url = url;
-        this.idUser = idUser;
+
     }
 
     public int getId() {
@@ -103,12 +103,12 @@ public class ElectronicResource {
         this.url = url;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     @Override
@@ -121,7 +121,7 @@ public class ElectronicResource {
                 ", date='" + date + '\'' +
                 ", updateDate='" + updateDate + '\'' +
                 ", url='" + url + '\'' +
-                ", idUser=" + idUser +
+                ", userLogin=" + userLogin +
                 '}';
     }
 }

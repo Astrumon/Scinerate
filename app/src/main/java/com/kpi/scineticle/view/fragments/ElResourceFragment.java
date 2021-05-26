@@ -1,21 +1,31 @@
 package com.kpi.scineticle.view.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.kpi.scineticle.R;
+import com.kpi.scineticle.databinding.ElResourceFragmentBinding;
+import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ElResourceViewModel;
 
 public class ElResourceFragment extends Fragment {
 
-    private ElResourceViewModel mViewModel;
+    private ElResourceFragmentBinding mElResourceFragmentBinding;
+    private ElResourceViewModel.NewElectronicResource mNewElectronicResource;
+    private Context mContext;
+    private String userLogin;
 
     public static ElResourceFragment newInstance() {
         return new ElResourceFragment();
@@ -24,14 +34,31 @@ public class ElResourceFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.el_resource_fragment, container, false);
+        ElResourceViewModel elResourceViewModel = new ViewModelProvider(requireActivity(),
+                ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(ElResourceViewModel.class);
+
+        mElResourceFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.el_resource_fragment, container, false);
+        View view = mElResourceFragmentBinding.getRoot();
+        mElResourceFragmentBinding.setElResourceViewModel(elResourceViewModel);
+        mNewElectronicResource = elResourceViewModel.new NewElectronicResource();
+
+        userLogin = getArguments().get("login").toString();
+        Log.d("FRAGMENT: ", "onCreateView: " + userLogin);
+        elResourceViewModel.setUserLogin(userLogin);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //mViewModel = new ViewModelProvider(this).get(ElResourceViewModel.class);
-        // TODO: Use the ViewModel
+        mContext = getContext();
+        mElResourceFragmentBinding.btnElResourceCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mNewElectronicResource.createNewElectronicResource();
+                Toast.makeText(mContext, "Електронний ресурс успішно створено", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

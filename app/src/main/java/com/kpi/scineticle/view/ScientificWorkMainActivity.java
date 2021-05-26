@@ -20,9 +20,8 @@ import com.kpi.scineticle.R;
 
 public class ScientificWorkMainActivity extends AppCompatActivity {
     public static final int ADD_ARTICLE_REQUEST = 4;
-
-    Context mContext;
-    String login;
+    private Context mContext;
+    private String login;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(ScientificWorkMainActivity.this, AddEditScientificWorkActivity.class);
                 intent.putExtra("login", login);
                 startActivityForResult(intent, ADD_ARTICLE_REQUEST);

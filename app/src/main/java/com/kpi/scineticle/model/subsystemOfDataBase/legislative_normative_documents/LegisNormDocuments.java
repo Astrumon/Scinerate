@@ -24,12 +24,12 @@ public class LegisNormDocuments {
 
     private String sheets;
 
-    private int idUser;
+    private String userLogin;
 
     public LegisNormDocuments() {
     }
 
-    public LegisNormDocuments(String name, String type, String dateAccess, String number, String publish, String datePublish, String serial, String sheets, int idUser) {
+    public LegisNormDocuments(String name, String type, String dateAccess, String number, String publish, String datePublish, String serial, String sheets) {
         this.name = name;
         this.type = type;
         this.dateAccess = dateAccess;
@@ -38,7 +38,7 @@ public class LegisNormDocuments {
         this.datePublish = datePublish;
         this.serial = serial;
         this.sheets = sheets;
-        this.idUser = idUser;
+
     }
 
     public int getId() {
@@ -113,12 +113,12 @@ public class LegisNormDocuments {
         this.sheets = sheets;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     @Override
@@ -132,7 +132,7 @@ public class LegisNormDocuments {
                 ", datePublish='" + datePublish + '\'' +
                 ", serial='" + serial + '\'' +
                 ", sheets='" + sheets + '\'' +
-                ", idUser=" + idUser +
+                ", userLogin=" + userLogin +
                 '}';
     }
 }

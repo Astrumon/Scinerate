@@ -1,91 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.fragments.ElResourceFragment">
+<layout>
 
-    <EditText
-        android:id="@+id/el_resource_authors"
-        android:hint="@string/authors"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/el_resource_name"
-        android:hint="@string/name_of_work"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/el_resource_place_publish"
-        android:hint="@string/place_publish"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/el_resource_publish"
-        android:hint="@string/publish"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/el_resource_date"
-        android:hint="@string/date"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/el_resource_date_update"
-        android:hint="@string/date_update"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/el_resource_url"
-        android:hint="@string/url"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <Button
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"/>
+    <data>
 
-</LinearLayout>
-</ScrollView>
+        <variable
+            name="elResourceViewModel"
+            type="com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ElResourceViewModel" />
+    </data>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".view.fragments.ElResourceFragment">
+
+            <EditText
+                android:id="@+id/el_resource_authors"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/authors"
+                android:inputType="text"
+                android:text="@={elResourceViewModel.authors}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/el_resource_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/name_of_work"
+                android:inputType="text"
+                android:text="@={elResourceViewModel.name}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/el_resource_place_publish"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/place_publish"
+                android:inputType="text"
+                android:text="@={elResourceViewModel.placePublish}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/el_resource_publish"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/publish"
+                android:inputType="text"
+                android:text="@={elResourceViewModel.publish}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/el_resource_date"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/date"
+                android:inputType="text"
+                android:text="@={elResourceViewModel.date}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/el_resource_date_update"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/date_update"
+                android:inputType="text"
+                android:text="@={elResourceViewModel.updateDate}"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/el_resource_url"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/url"
+                android:inputType="text"
+                android:text="@={elResourceViewModel.url}"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btn_el_resource_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="@string/save" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

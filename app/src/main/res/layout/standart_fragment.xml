@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="standartViewModel"
+            type="com.kpi.scineticle.viewmodel.subsystemUser.existingUser.StandartViewModel" />
+    </data>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -13,74 +21,75 @@
     <EditText
         android:id="@+id/standard_name_of_org"
         android:hint="@string/name_of_org"
+        android:text="@={standartViewModel.nameOfOrg}"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         tools:ignore="LabelFor" />
     <EditText
         android:id="@+id/standard_year_publish"
         android:hint="@string/year_publish"
+        android:text="@={standartViewModel.yearPublish}"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <EditText
         android:id="@+id/standard_name"
         android:hint="@string/name_of_work"
+        android:text="@={standartViewModel.name}"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <EditText
         android:id="@+id/standard_code_letter"
         android:hint="@string/code_letter"
         android:layout_width="match_parent"
+        android:text="@={standartViewModel.codeLetter}"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <EditText
         android:id="@+id/standard_code_number"
         android:hint="@string/code_number"
+        android:text="@={standartViewModel.codeNumber}"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <EditText
         android:id="@+id/standard_publish"
         android:hint="@string/publish"
+        android:text="@={standartViewModel.publish}"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <EditText
         android:id="@+id/standart_place_publish"
+        android:text="@={standartViewModel.placePublish}"
         android:hint="@string/place_publish"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <Button
+        android:id="@+id/btn_standart_create"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
@@ -89,3 +98,4 @@
 
 </LinearLayout>
 </ScrollView>
+</layout>

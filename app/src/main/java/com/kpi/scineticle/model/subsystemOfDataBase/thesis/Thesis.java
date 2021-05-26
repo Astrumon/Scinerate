@@ -24,7 +24,7 @@ public class Thesis {
 
     private String sheets;
 
-    private int idUser;
+    private String loginUser;
 
     public Thesis() {
 
@@ -114,13 +114,12 @@ public class Thesis {
         this.sheets = sheets;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getLoginUser() {
+        return loginUser;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-
+    public void setLoginUser(String loginUser) {
+        this.loginUser = loginUser;
     }
 
     @Override
@@ -134,7 +133,7 @@ public class Thesis {
                 ", placePublish='" + placePublish + '\'' +
                 ", year='" + year + '\'' +
                 ", sheets='" + sheets + '\'' +
-                ", idUser=" + idUser +
+                ", idUser=" + loginUser +
                 '}';
     }
 }

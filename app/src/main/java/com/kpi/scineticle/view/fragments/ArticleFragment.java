@@ -28,8 +28,6 @@ public class ArticleFragment extends Fragment {
     private Context mContext;
     private String userLogin;
 
-    private ArticleViewModel mViewModel;
-
     public static ArticleFragment newInstance() {
         return new ArticleFragment();
     }
@@ -37,7 +35,6 @@ public class ArticleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         ArticleViewModel articleViewModel = new ViewModelProvider(requireActivity(),
                 ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(ArticleViewModel.class);
 
@@ -61,6 +58,7 @@ public class ArticleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mNewArticle.createNewArticle();
+                Toast.makeText(mContext, "Стаття успішно створена", Toast.LENGTH_SHORT).show();
             }
         });
     }

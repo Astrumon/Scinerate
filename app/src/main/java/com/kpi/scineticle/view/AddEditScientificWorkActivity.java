@@ -50,17 +50,34 @@ public class AddEditScientificWorkActivity extends AppCompatActivity implements 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_scientific_work);
+
         container = (FrameLayout) findViewById(R.id.container);
+
         initFragments();
-        Bundle bundle = getIntent().getExtras();
-        Log.d("ADD_EDIT", "onCreate: " + bundle.get("login"));
-        mArticleFragment.setArguments(bundle);
+        setArgumentsToFragments();
+
         Spinner spinner = findViewById(R.id.spinner_article);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter
                 .createFromResource(this, R.array.articles, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+    }
+
+    public void setArgumentsToFragments() {
+        Bundle bundle = getIntent().getExtras();
+        Log.d("ADD_EDIT", "onCreate: " + bundle.get("login"));
+        mArticleFragment.setArguments(bundle);
+        mCatalogFragment.setArguments(bundle);
+        mElResourceFragment.setArguments(bundle);
+        mBookFragment.setArguments(bundle);
+        mDissertationFragment.setArguments(bundle);
+        mPatentsFragment.setArguments(bundle);
+        mThesisFragment.setArguments(bundle);
+        mNormDocumentFragment.setArguments(bundle);
+        mPreprintFragment.setArguments(bundle);
+        mStandartFragment.setArguments(bundle);
+        mBibliographicPointerFragment.setArguments(bundle);
     }
 
     private void initFragments() {

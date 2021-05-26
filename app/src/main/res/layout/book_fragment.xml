@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="bookViewModel"
+            type="com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel" />
+    </data>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -12,6 +20,7 @@
 
     <EditText
         android:id="@+id/book_authors"
+        android:text="@={bookViewModel.authors}"
         android:hint="@string/authors"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -22,65 +31,66 @@
         />
     <EditText
         android:id="@+id/book_name"
+        android:text="@={bookViewModel.name}"
         android:hint="@string/name_of_work"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <EditText
         android:id="@+id/book_statement"
+        android:text="@={bookViewModel.statement}"
         android:hint="@string/statement"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <EditText
         android:id="@+id/book_place"
+        android:text="@={bookViewModel.place}"
         android:hint="@string/place"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <EditText
         android:id="@+id/book_publish"
+        android:text="@={bookViewModel.publish}"
         android:hint="@string/publish"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <EditText
         android:id="@+id/book_year"
+        android:text="@={bookViewModel.year}"
         android:hint="@string/year"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <EditText
         android:id="@+id/book_count_list"
+        android:text="@={bookViewModel.countOfSheets}"
         android:hint="@string/count_list"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"
         android:layout_margin="10dp"
-        android:textColor="#ffffff"
         android:textSize="20sp"
         />
     <Button
+        android:id="@+id/btn_book_create"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
@@ -89,3 +99,4 @@
 
 </LinearLayout>
 </ScrollView>
+</layout>

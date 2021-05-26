@@ -1,105 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.fragments.ThesisFragment">
+<layout>
 
-    <EditText
-        android:id="@+id/thesis_authors"
-        android:hint="@string/authors"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
+    <data>
 
-    <EditText
-        android:id="@+id/thesis_name"
-        android:hint="@string/name_of_work"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/thesis_name_publish"
-        android:hint="@string/name_conference"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
+        <variable
+            name="thesisViewModel"
+            type="com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ThesisViewModel" />
+    </data>
 
-    <EditText
-        android:id="@+id/thesis_date"
-        android:hint="@string/date_of_conference"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/thesis_place_conference"
-        android:hint="@string/place_conference"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".view.fragments.ThesisFragment">
 
-    <EditText
-        android:id="@+id/thesis_place_publish"
-        android:hint="@string/place_publish"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/thesis_year"
-        android:hint="@string/year"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <EditText
-        android:id="@+id/thesis_sheets"
-        android:hint="@string/sheets"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="text"
-        android:layout_margin="10dp"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        />
-    <Button
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"/>
+            <EditText
+                android:id="@+id/thesis_authors"
+                android:layout_width="match_parent"
+                android:text="@={thesisViewModel.authors}"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/authors"
+                android:inputType="text"
+                android:textSize="20sp" />
 
-</LinearLayout>
-</ScrollView>
+            <EditText
+                android:id="@+id/thesis_name"
+                android:layout_width="match_parent"
+                android:text="@={thesisViewModel.name}"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/name_of_work"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/thesis_name_publish"
+                android:layout_width="match_parent"
+                android:text="@={thesisViewModel.namePublish}"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/name_conference"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/thesis_date"
+                android:layout_width="match_parent"
+                android:text="@={thesisViewModel.date}"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/date_of_conference"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/thesis_place_conference"
+                android:layout_width="match_parent"
+                android:text="@={thesisViewModel.placeConference}"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/place_conference"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/thesis_place_publish"
+                android:layout_width="match_parent"
+                android:text="@={thesisViewModel.placePublish}"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/place_publish"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/thesis_year"
+                android:layout_width="match_parent"
+                android:text="@={thesisViewModel.year}"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/year"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/thesis_sheets"
+                android:layout_width="match_parent"
+                android:text="@={thesisViewModel.sheets}"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:hint="@string/sheets"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btn_thesis_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="@string/save" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>
