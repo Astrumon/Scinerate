@@ -25,7 +25,7 @@ public class Article extends ScientWork {
     private String userLogin;
 
     public Article() {
-
+        super.setTypeOfWork("Стаття");
     }
 
     public Article(String authors, String nameArticle, String nameJournal, String date, String number, String sheets) {
@@ -35,7 +35,16 @@ public class Article extends ScientWork {
         this.date = date;
         this.number = number;
         this.sheets = sheets;
+        super.setTypeOfWork("Стаття");
+
     }
+
+    @Override
+    public String getTypeOfWork() {
+        return super.getTypeOfWork();
+    }
+
+
 
     public String getAuthors() {
         return authors;

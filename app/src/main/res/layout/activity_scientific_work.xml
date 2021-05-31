@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="-16dp"
             tools:layout_editor_absoluteY="-137dp"
-            tools:listitem="@layout/item_scientific_work" />
+            tools:listitem="@layout/item_article_work" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/button_add_article"

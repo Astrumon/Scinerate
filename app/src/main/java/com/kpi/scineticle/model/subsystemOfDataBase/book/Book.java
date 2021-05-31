@@ -38,7 +38,7 @@ public class Book extends ScientWork {
     private String userLogin;
 
     public Book() {
-
+        super.setTypeOfWork("Книга");
     }
 
     public String getPublish() {
@@ -57,6 +57,7 @@ public class Book extends ScientWork {
         this.year = year;
         this.part = part;
         this.countOfSheets = countOfSheets;
+        super.setTypeOfWork("Книга");
     }
 
     public String getAuthors() {

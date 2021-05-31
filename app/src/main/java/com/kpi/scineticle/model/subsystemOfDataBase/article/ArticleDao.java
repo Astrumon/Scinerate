@@ -47,4 +47,7 @@ public interface ArticleDao {
     @Query("Select * FROM article_table WHERE sheets = :sheets")
     Article getArticleSheets(String sheets);
 
+    @Query("Select * FROM article_table WHERE typeOfWork = :typeOfWork")
+    Article getArticleTypeOfWork(String typeOfWork);
+
 }

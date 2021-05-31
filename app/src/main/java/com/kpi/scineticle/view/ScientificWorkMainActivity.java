@@ -2,6 +2,7 @@ package com.kpi.scineticle.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,22 +18,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ActivityScientificWorkBinding;
 import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
+import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
+import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.Alert;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ScientificWorkCRUDViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScientificWorkMainActivity extends AppCompatActivity {
     public static final int ADD_ARTICLE_REQUEST = 1;
     public static final int EDIT_ARTICLE_REQUEST = 2;
-    private ScientificWorkAdapter mScientificWorkAdapter;
+    private ScientificWorkAdapter<ScientWork> mScientificWorkAdapter;
     private ScientificWorkCRUDViewModel mScientificWorkCRUDViewModel;
     private ActivityScientificWorkBinding mBinding;
     private Context mContext;
@@ -56,6 +60,8 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         initDataBinding();
         setupListScienticView(mBinding.recyclerArticle);
 
+
+
         mContext = this;
         mBinding.buttonAddArticle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,26 +74,63 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
 
         mScientificWorkAdapter.setOnItemClickListener(new ScientificWorkAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Article article) {
+            public void onItemClick(Object o) {
                 Toast.makeText(mContext, "TEST", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onLongItemClick(Article article) {
+            public void onLongItemClick(Object o) {
                 Toast.makeText(mContext, "LONG_TEST", Toast.LENGTH_SHORT).show();
             }
+
+
         });
+
+        deleteWork();
+    }
+
+    private void deleteWork() {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                String textAlert = "Ви впевнені, що хочете видалити дану роботу?";
+                Alert.createAlert(mContext, textAlert)
+                        .setPositiveButton("Так", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteWorkByType(viewHolder.getAdapterPosition());
+                            }
+                        })
+                        .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                setupListScienticView(mBinding.recyclerArticle);
+                            }
+                        }).create().show();
+            }
+        }).attachToRecyclerView(mBinding.recyclerArticle);
+    }
+
+    public void deleteWorkByType(int position) {
+        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mArticleRepository
+                .delete((Article) mScientificWorkAdapter.getScientWorkAt(position));
     }
 
     private void setupListScienticView(RecyclerView recyclerView) {
-
-        mScientificWorkCRUDViewModel.getAllScientWorks().observe(this, new Observer<List<Article>>() {
+        mScientificWorkCRUDViewModel.getAllScientWorks().observe(this, new Observer<List<? extends ScientWork>>() {
             @Override
-            public void onChanged(List<Article> scientWorks) {
-                Toast.makeText(mContext, scientWorks.size() + " ", Toast.LENGTH_SHORT).show();
+            public void onChanged(List<? extends ScientWork> articles) {
+                List<ScientWork> scientWorks = new ArrayList<>(articles);
+                Log.d("MAIN", "onChanged: " + (scientWorks.get(0) instanceof Article));
                 mScientificWorkAdapter.submitList(scientWorks);
             }
         });
+
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -100,6 +143,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
                 ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication()))
         .get(ScientificWorkCRUDViewModel.class);
         mScientificWorkCRUDViewModel.setUserLogin(getIntent().getExtras().get("login").toString());
+        Log.d("MAIN", "initDataBinding: " + getIntent().getExtras().get("login").toString());
     }
 
     @Override

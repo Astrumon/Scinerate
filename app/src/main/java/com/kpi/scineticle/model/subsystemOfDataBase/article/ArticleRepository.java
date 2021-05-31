@@ -6,7 +6,6 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
 
 import java.util.List;
@@ -98,6 +97,19 @@ public class ArticleRepository {
     public Article getArticleByNumber(String number) {
         Article article = new Article();
         AsyncTask task = new GetArticleByNumber(mArticleDao, number).execute();
+        try {
+            article = (Article) task.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return article;
+    }
+
+    public Article getArticleByTypeOfWork(String typeOfWork) {
+        Article article = new Article();
+        AsyncTask task = new GetArticleByNumber(mArticleDao, typeOfWork).execute();
         try {
             article = (Article) task.get();
         } catch (ExecutionException e) {
@@ -279,6 +291,27 @@ public class ArticleRepository {
         @Override
         protected Article doInBackground(Void... voids) {
             return mArticleDao.getArticleNumber(number);
+        }
+
+        @Override
+        protected void onPostExecute(Article article) {
+            super.onPostExecute(article);
+        }
+    }
+
+    private static class GetArticleByTypeOfWork extends AsyncTask<Void, Void, Article>{
+        private ArticleDao mArticleDao;
+        private String typeOfWork;
+
+        public GetArticleByTypeOfWork(ArticleDao articleDao, String typeOfWork) {
+            this.typeOfWork = typeOfWork;
+            mArticleDao = articleDao;
+
+        }
+
+        @Override
+        protected Article doInBackground(Void... voids) {
+            return mArticleDao.getArticleTypeOfWork(typeOfWork);
         }
 
         @Override
