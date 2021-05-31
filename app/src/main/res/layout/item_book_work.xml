@@ -15,7 +15,7 @@
         app:cardCornerRadius="@dimen/cardview_radius_corner"
         app:cardElevation="@dimen/cardview_default_elevation"
         app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="@color/article_color"
+        app:cardBackgroundColor="@color/card_user"
         >
         <RelativeLayout
             android:id="@+id/item_article"

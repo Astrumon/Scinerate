@@ -17,42 +17,45 @@ import com.kpi.scineticle.view.holders.ArticleHolder;
 import com.kpi.scineticle.view.holders.BaseViewHolder;
 import com.kpi.scineticle.view.holders.BookHolder;
 
-public class ScientificWorkAdapter<T extends ScientWork> extends ListAdapter<T, BaseViewHolder<? extends ScientWork>> {
-    private OnItemClickListener<T> mListener;
+import java.util.List;
+
+public class ScientificWorkAdapter<T extends ScientWork> extends ListAdapter<ScientWork, BaseViewHolder<T>> {
+    private OnItemClickListener mListener;
     private ScientWork work;
     private static final int ARTICLE = 1;
     private static final int BOOK = 2;
 
 
     public ScientificWorkAdapter() {
-        super(new DiffUtil.ItemCallback<T>() {
+        super(new DiffUtil.ItemCallback<ScientWork>() {
 
             @Override
-            public boolean areItemsTheSame(@NonNull T oldItem, @NonNull T newItem) {
+            public boolean areItemsTheSame(@NonNull ScientWork oldItem, @NonNull ScientWork newItem) {
                 return oldItem.getId() == newItem.getId();
             }
 
+
+
             @Override
-            public boolean areContentsTheSame(@NonNull T oldItem, @NonNull T newItem) {
+            public boolean areContentsTheSame(@NonNull ScientWork oldItem, @NonNull ScientWork newItem) {
                 return oldItem.getTypeOfWork().equals(newItem.getTypeOfWork());
             }
         });
     }
 
 
-
-    public T getScientWorkAt(int pos) {
+    public ScientWork getScientWorkAt(int pos) {
         return getItem(pos);
     }
 
     @NonNull
     @Override
-    public BaseViewHolder<? extends ScientWork> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return getByType(parent, viewType);
     }
 
-    private BaseViewHolder<? extends ScientWork> getByType(ViewGroup parent, int viewType) {
-        BaseViewHolder<? extends ScientWork> viewHolder = null;
+    private BaseViewHolder<T> getByType(ViewGroup parent, int viewType) {
+        BaseViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         switch (viewType) {
@@ -73,7 +76,9 @@ public class ScientificWorkAdapter<T extends ScientWork> extends ListAdapter<T, 
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        holder.onBind(work);
+        Log.d("HOL", "onBindViewHolder: " + getItemCount());
+
+        holder.onBind(getItem(position));
         holder.setListener(mListener);
     }
 
@@ -94,12 +99,14 @@ public class ScientificWorkAdapter<T extends ScientWork> extends ListAdapter<T, 
         return -1;
     }
 
+
+
     public interface OnItemClickListener<T> {
         void onItemClick(T t);
         void onLongItemClick(T t);
     }
 
-    public void setOnItemClickListener(OnItemClickListener<T> listener) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 }

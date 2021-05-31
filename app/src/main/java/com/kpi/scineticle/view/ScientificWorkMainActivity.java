@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -36,11 +38,12 @@ import java.util.List;
 public class ScientificWorkMainActivity extends AppCompatActivity {
     public static final int ADD_ARTICLE_REQUEST = 1;
     public static final int EDIT_ARTICLE_REQUEST = 2;
-    private ScientificWorkAdapter<ScientWork> mScientificWorkAdapter;
+    private ScientificWorkAdapter<? extends ScientWork> mScientificWorkAdapter;
     private ScientificWorkCRUDViewModel mScientificWorkCRUDViewModel;
     private ActivityScientificWorkBinding mBinding;
     private Context mContext;
     private String login;
+    private List<ScientWork> list = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
 
         Toast.makeText(this, login, Toast.LENGTH_SHORT).show();
 
-        mScientificWorkAdapter = new ScientificWorkAdapter();
+        mScientificWorkAdapter = new ScientificWorkAdapter<>();
 
         initDataBinding();
         setupListScienticView(mBinding.recyclerArticle);
@@ -122,14 +125,22 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
     }
 
     private void setupListScienticView(RecyclerView recyclerView) {
-        mScientificWorkCRUDViewModel.getAllScientWorks().observe(this, new Observer<List<? extends ScientWork>>() {
-            @Override
-            public void onChanged(List<? extends ScientWork> articles) {
-                List<ScientWork> scientWorks = new ArrayList<>(articles);
-                Log.d("MAIN", "onChanged: " + (scientWorks.get(0) instanceof Article));
-                mScientificWorkAdapter.submitList(scientWorks);
-            }
-        });
+        List<ScientWork> list = new ArrayList<>();
+          mScientificWorkCRUDViewModel.getAllScientWorks().observe(this, new Observer<List<? extends ScientWork>>() {
+
+
+              @Override
+              public void onChanged(List<? extends ScientWork> scientWorks) {
+                  List<ScientWork> list1 = new ArrayList<>();
+                 // list.addAll(scientWorks);
+                  list1.addAll(scientWorks);
+                  mScientificWorkAdapter.submitList(list1);
+              }
+
+          });
+
+
+
 
 
         recyclerView.setHasFixedSize(true);
