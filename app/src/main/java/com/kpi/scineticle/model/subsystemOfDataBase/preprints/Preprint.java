@@ -3,8 +3,10 @@ package com.kpi.scineticle.model.subsystemOfDataBase.preprints;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+
 @Entity (tableName = "preprint_table")
-public class Preprint {
+public class Preprint extends ScientWork {
 
     @PrimaryKey
     private int id;

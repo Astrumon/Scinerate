@@ -28,7 +28,7 @@ public class CatalogRepository {
         new DeleteCatalogAsyncTask(mCatalogDao).execute(catalog);
     }
 
-    public void deleteAllPatents() {
+    public void deleteAllCatalogs() {
         new DeleteAllCatalogsAsyncTask(mCatalogDao).execute();
     }
 
@@ -36,7 +36,7 @@ public class CatalogRepository {
         return allCatalogs;
     }
 
-    public Catalog getPreprintsByName(String name) {
+    public Catalog getCatalogByName(String name) {
         Catalog catalog = new Catalog();
         AsyncTask task = new GetCatalogByName(mCatalogDao, name).execute();
         try {
@@ -49,7 +49,7 @@ public class CatalogRepository {
         return catalog;
     }
 
-    public Catalog getPreprintsByPlace(String place) {
+    public Catalog getCatalogByPlace(String place) {
         Catalog catalog = new Catalog();
         AsyncTask task = new GetCatalogByPlace(mCatalogDao, place).execute();
         try {
@@ -62,7 +62,7 @@ public class CatalogRepository {
         return catalog;
     }
 
-    public Catalog getPreprintsByCity(String city) {
+    public Catalog getCatalogByCity(String city) {
         Catalog catalog = new Catalog();
         AsyncTask task = new GetCatalogByCity(mCatalogDao, city).execute();
         try {
@@ -75,7 +75,7 @@ public class CatalogRepository {
         return catalog;
     }
 
-    public Catalog getPreprintsByPublish(String publish) {
+    public Catalog getCatalogByPublish(String publish) {
         Catalog catalog = new Catalog();
         AsyncTask task = new GetCatalogByPublish(mCatalogDao, publish).execute();
         try {
@@ -88,7 +88,7 @@ public class CatalogRepository {
         return catalog;
     }
 
-    public Catalog getPreprintsByYear(String year) {
+    public Catalog getCatalogByYear(String year) {
         Catalog catalog = new Catalog();
         AsyncTask task = new GetCatalogByYear(mCatalogDao, year).execute();
         try {
@@ -101,7 +101,7 @@ public class CatalogRepository {
         return catalog;
     }
 
-    public Catalog getPreprintsBySheet(String sheet) {
+    public Catalog getCatalogBySheet(String sheet) {
         Catalog catalog = new Catalog();
         AsyncTask task = new GetCatalogBySheet(mCatalogDao, sheet).execute();
         try {

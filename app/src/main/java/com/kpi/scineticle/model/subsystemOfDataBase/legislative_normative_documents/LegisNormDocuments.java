@@ -3,8 +3,10 @@ package com.kpi.scineticle.model.subsystemOfDataBase.legislative_normative_docum
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+
 @Entity (tableName = "legislative_normative_documents")
-public class LegisNormDocuments {
+public class LegisNormDocuments extends ScientWork {
     @PrimaryKey(autoGenerate = true)
     private int id;
 

@@ -39,7 +39,7 @@ public class DissertationRepository {
         new DeleteAllDissertations(mDissertationDao).execute();
     }
 
-    public LiveData<List<Dissertation>> getAllBooks() {
+    public LiveData<List<Dissertation>> getAllDissertation() {
         return allDissertations;
     }
 

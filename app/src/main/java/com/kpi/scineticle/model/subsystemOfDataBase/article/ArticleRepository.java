@@ -2,9 +2,11 @@ package com.kpi.scineticle.model.subsystemOfDataBase.article;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
 
 import java.util.List;
@@ -38,6 +40,20 @@ public class ArticleRepository {
 
     public LiveData<List<Article>> getAllArticles() {
         return allArticles;
+    }
+
+    public LiveData<List<Article>> getAllArticlesByLogin(String userLogin) {
+        LiveData<List<Article>> listLiveData = mArticleDao.getAllArticles(userLogin);
+//        AsyncTask task = new GetALlArticleByLogin(mArticleDao, userLogin).execute();
+//        try {
+//            listLiveData = (LiveData<List<Article>>) task.get();
+//            return listLiveData;
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException exception) {
+//            exception.printStackTrace();
+//        }
+        return listLiveData;
     }
 
     public Article getArticleByName(String name) {
@@ -104,7 +120,6 @@ public class ArticleRepository {
         }
         return article;
     }
-
 
 
     private static class InsertArticleAsyncTask extends AsyncTask<Article, Void, Void> {
@@ -182,6 +197,31 @@ public class ArticleRepository {
         @Override
         protected void onPostExecute(Article article) {
             super.onPostExecute(article);
+        }
+    }
+
+    private static class GetALlArticleByLogin extends AsyncTask<Void, Void, LiveData<List<Article>>> {
+        private ArticleDao mArticleDao;
+        private String userLogin;
+
+        public GetALlArticleByLogin(ArticleDao articleDao, String userLogin) {
+            mArticleDao = articleDao;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<Article>> doInBackground(Void... voids) {
+
+            return mArticleDao.getAllArticles(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<Article>> listLiveData) {
+            if (listLiveData == null) {
+                Log.d("ScientWorks", "FUCK TASK");
+            }
+
+            super.onPostExecute(listLiveData);
         }
     }
 

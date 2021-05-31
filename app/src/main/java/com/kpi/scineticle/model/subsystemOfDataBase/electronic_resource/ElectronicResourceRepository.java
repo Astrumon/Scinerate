@@ -33,7 +33,7 @@ public class ElectronicResourceRepository {
         new DeleteElectronicResourceAsyncTask(mElectronicResourceDao).execute(electronicResource);
     }
 
-    public void deleteAllArticles() {
+    public void deleteAllElectronicResources() {
         new DeleteAllElectronicResourceAsyncTask(mElectronicResourceDao).execute();
     }
 

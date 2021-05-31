@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
+import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
+import com.kpi.scineticle.model.subsystemOfDataBase.article.ArticleDao;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -38,6 +40,20 @@ public class BookRepository {
 
     public LiveData<List<Book>> getAllBooks() {
         return allBooks;
+    }
+
+    public LiveData<List<Book>> getAllBooksByLogin(String userLogin) {
+
+        AsyncTask task = new GetALlBooksByLogin(mBookDao, userLogin).execute();
+        try {
+            LiveData<List<Book>>  books = (LiveData<List<Book>>) task.get();
+            return books;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 
     public Book getBookByName(String name) {
@@ -132,6 +148,26 @@ public class BookRepository {
         protected Void doInBackground(Book... books) {
             mBookDao.update(books[0]);
             return null;
+        }
+    }
+
+    private static class GetALlBooksByLogin extends AsyncTask<Void, Void, LiveData<List<Book>>> {
+        private BookDao mBookDao;
+        private String userLogin;
+
+        public GetALlBooksByLogin(BookDao bookDao, String userLogin) {
+            mBookDao = bookDao;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<Book>> doInBackground(Void... voids) {
+            return mBookDao.getAllBooksByLogin(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<Book>> listLiveData) {
+            super.onPostExecute(listLiveData);
         }
     }
 

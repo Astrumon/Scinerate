@@ -3,8 +3,10 @@ package com.kpi.scineticle.model.subsystemOfDataBase.catalogs;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+
 @Entity (tableName = "catalog_table")
-public class Catalog {
+public class Catalog extends ScientWork {
 
     @PrimaryKey
     private int id;

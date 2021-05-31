@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 
 import java.util.List;
@@ -27,6 +28,9 @@ public interface ArticleDao {
 
     @Query("SELECT * FROM article_table ORDER BY nameArticle")
     LiveData<List<Article>> getAllArticles();
+
+    @Query("SELECT * FROM article_table WHERE userLogin = :userLogin ORDER BY nameArticle")
+    LiveData<List<Article>> getAllArticles(String userLogin);
 
     @Query("Select * FROM article_table WHERE nameArticle = :nameArticle")
     Article getArticleName(String nameArticle);

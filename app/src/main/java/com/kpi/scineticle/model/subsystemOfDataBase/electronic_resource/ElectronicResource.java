@@ -3,8 +3,10 @@ package com.kpi.scineticle.model.subsystemOfDataBase.electronic_resource;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+
 @Entity (tableName = "el_resource_table")
-public class ElectronicResource {
+public class ElectronicResource extends ScientWork {
     @PrimaryKey(autoGenerate = true)
     private int id;
 

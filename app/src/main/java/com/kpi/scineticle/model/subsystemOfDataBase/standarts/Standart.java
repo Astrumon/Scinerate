@@ -3,8 +3,10 @@ package com.kpi.scineticle.model.subsystemOfDataBase.standarts;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+
 @Entity(tableName = "standart_table")
-public class Standart {
+public class Standart extends ScientWork {
 
     @PrimaryKey
     private int id;

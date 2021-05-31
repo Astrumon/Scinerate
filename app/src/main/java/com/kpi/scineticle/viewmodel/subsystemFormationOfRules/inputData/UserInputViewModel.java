@@ -34,20 +34,7 @@ import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserValidation;
 
 public class UserInputViewModel extends InputViewModel<User> {
 
-    private final UserRepository mUserRepository;
-    private UserValidation mUserValidation;
-    private UserFinder mUserFinder;
-    private ArticleRepository mArticleRepository;
-    private BibliographicRepository mBibliographicRepository;
-    private PatentRepository mPatentRepository;
-    private StandartRepository mStandartRepository;
-    private BookRepository mBookRepository;
-    private DissertationRepository mDissertationRepository;
-    private ThesisRepository mThesisRepository;
-    private ElectronicResourceRepository mElectronicResourceRepository;
-    private LegisNormDocumentsRepository mLegisNormDocumentsRepository;
-    private PreprintRepository mPreprintRepository;
-    private CatalogRepository mCatalogRepository;
+
 
 
     public UserInputViewModel(@NonNull Application application) {

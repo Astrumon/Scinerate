@@ -34,7 +34,7 @@ public class PreprintRepository {
         new DeletePreprintAsyncTask(mPreprintDao).execute(preprint);
     }
 
-    public void deleteAllPatents() {
+    public void deleteAllPreprints() {
         new DeleteAllPreprintsAsyncTask(mPreprintDao).execute();
     }
 

@@ -26,6 +26,9 @@ public interface BookDao {
     @Query("SELECT * FROM book_table ORDER BY name")
     LiveData<List<Book>> getAllBooks();
 
+    @Query("SELECT * FROM book_table WHERE userLogin = :userLogin ORDER BY name")
+    LiveData<List<Book>> getAllBooksByLogin(String userLogin);
+
     @Query("Select * FROM book_table WHERE name = :name")
     Book getBookByName(String name);
 

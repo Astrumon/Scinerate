@@ -3,8 +3,10 @@ package com.kpi.scineticle.model.subsystemOfDataBase.patents;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+
 @Entity(tableName = "patent_table")
-public class Patent {
+public class Patent extends ScientWork {
     @PrimaryKey(autoGenerate = true)
     private int id;
 

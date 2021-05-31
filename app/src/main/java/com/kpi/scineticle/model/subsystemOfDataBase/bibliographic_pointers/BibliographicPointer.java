@@ -3,8 +3,10 @@ package com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+
 @Entity(tableName = "bibliographic_pointers_table")
-public class BibliographicPointer {
+public class BibliographicPointer extends ScientWork {
 
     @PrimaryKey
     private int id;

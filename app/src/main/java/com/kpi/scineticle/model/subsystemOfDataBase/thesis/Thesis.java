@@ -3,8 +3,10 @@ package com.kpi.scineticle.model.subsystemOfDataBase.thesis;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+
 @Entity(tableName = "thesis_table")
-public class Thesis {
+public class Thesis extends ScientWork {
     @PrimaryKey(autoGenerate = true)
     private int id;
 

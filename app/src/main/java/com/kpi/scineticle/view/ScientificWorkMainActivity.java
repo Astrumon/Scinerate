@@ -14,12 +14,27 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kpi.scineticle.R;
+import com.kpi.scineticle.databinding.ActivityScientificWorkBinding;
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
+import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ScientificWorkCRUDViewModel;
+
+import java.util.List;
 
 public class ScientificWorkMainActivity extends AppCompatActivity {
-    public static final int ADD_ARTICLE_REQUEST = 4;
+    public static final int ADD_ARTICLE_REQUEST = 1;
+    public static final int EDIT_ARTICLE_REQUEST = 2;
+    private ScientificWorkAdapter mScientificWorkAdapter;
+    private ScientificWorkCRUDViewModel mScientificWorkCRUDViewModel;
+    private ActivityScientificWorkBinding mBinding;
     private Context mContext;
     private String login;
 
@@ -27,22 +42,22 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scientific_work);
+
         Bundle arguments = getIntent().getExtras();
-
         if (arguments != null) {
-
             login = arguments.get("login").toString();
-            //Toast.makeText(mContext, arguments.get("login").toString(), Toast.LENGTH_SHORT).show();
-        } else {
-            Log.d("INTENT_SCIENTICLE", "херня " + arguments.getString("login"));
         }
         Log.d("INTENT_SCIENTICLE", "ok " + login);
+
         Toast.makeText(this, login, Toast.LENGTH_SHORT).show();
 
+        mScientificWorkAdapter = new ScientificWorkAdapter();
+
+        initDataBinding();
+        setupListScienticView(mBinding.recyclerArticle);
 
         mContext = this;
-        FloatingActionButton button = findViewById(R.id.button_add_article);
-        button.setOnClickListener(new View.OnClickListener() {
+        mBinding.buttonAddArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ScientificWorkMainActivity.this, AddEditScientificWorkActivity.class);
@@ -51,6 +66,40 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
             }
         });
 
+        mScientificWorkAdapter.setOnItemClickListener(new ScientificWorkAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Article article) {
+                Toast.makeText(mContext, "TEST", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongItemClick(Article article) {
+                Toast.makeText(mContext, "LONG_TEST", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setupListScienticView(RecyclerView recyclerView) {
+
+        mScientificWorkCRUDViewModel.getAllScientWorks().observe(this, new Observer<List<Article>>() {
+            @Override
+            public void onChanged(List<Article> scientWorks) {
+                Toast.makeText(mContext, scientWorks.size() + " ", Toast.LENGTH_SHORT).show();
+                mScientificWorkAdapter.submitList(scientWorks);
+            }
+        });
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(mScientificWorkAdapter);
+    }
+
+    public void initDataBinding() {
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_scientific_work);
+        mScientificWorkCRUDViewModel = new ViewModelProvider(this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication()))
+        .get(ScientificWorkCRUDViewModel.class);
+        mScientificWorkCRUDViewModel.setUserLogin(getIntent().getExtras().get("login").toString());
     }
 
     @Override

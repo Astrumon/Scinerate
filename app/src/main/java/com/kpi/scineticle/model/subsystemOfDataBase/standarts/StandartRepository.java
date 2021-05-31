@@ -34,7 +34,7 @@ public class StandartRepository {
         new DeleteStandartAsyncTask(mStandartDao).execute(standart);
     }
 
-    public void deleteAllPatents() {
+    public void deleteAllStandarts() {
         new DeleteAllStandartsAsyncTask(mStandartDao).execute();
     }
 
