@@ -8,7 +8,7 @@ import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 @Entity(tableName = "bibliographic_pointers_table")
 public class BibliographicPointer extends ScientWork {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String userLogin;
@@ -34,6 +34,7 @@ public class BibliographicPointer extends ScientWork {
     private String additionally;
 
     public BibliographicPointer() {
+        super.setTypeOfWork("Бібліографічний покажчик");
     }
 
     public BibliographicPointer(String name, String numberOfRelease, String authorOfRelease, String aouthorsOfPublish, String place, String city, String abbreviation, String year, String sheet, String additionally) {

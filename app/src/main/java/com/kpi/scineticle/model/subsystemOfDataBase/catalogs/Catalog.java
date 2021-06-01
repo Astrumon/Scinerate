@@ -8,7 +8,7 @@ import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 @Entity (tableName = "catalog_table")
 public class Catalog extends ScientWork {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String userLogin;

@@ -1,105 +1,129 @@
 package com.kpi.scineticle.view;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.kpi.scineticle.databinding.ItemArticleWorkBinding;
+import com.kpi.scineticle.databinding.ItemBibliographicPointerWorkBinding;
 import com.kpi.scineticle.databinding.ItemBookWorkBinding;
-import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+import com.kpi.scineticle.model.Data;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
+import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointer;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 import com.kpi.scineticle.view.holders.ArticleHolder;
 import com.kpi.scineticle.view.holders.BaseViewHolder;
+import com.kpi.scineticle.view.holders.BibliographicHolder;
 import com.kpi.scineticle.view.holders.BookHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ScientificWorkAdapter<T extends ScientWork> extends ListAdapter<ScientWork, BaseViewHolder<T>> {
+
+public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private OnItemClickListener mListener;
-    private ScientWork work;
-    private static final int ARTICLE = 1;
-    private static final int BOOK = 2;
 
-
-    public ScientificWorkAdapter() {
-        super(new DiffUtil.ItemCallback<ScientWork>() {
-
-            @Override
-            public boolean areItemsTheSame(@NonNull ScientWork oldItem, @NonNull ScientWork newItem) {
-                return oldItem.getId() == newItem.getId();
-            }
-
-
-
-            @Override
-            public boolean areContentsTheSame(@NonNull ScientWork oldItem, @NonNull ScientWork newItem) {
-                return oldItem.getTypeOfWork().equals(newItem.getTypeOfWork());
-            }
-        });
-    }
-
-
-    public ScientWork getScientWorkAt(int pos) {
-        return getItem(pos);
-    }
+    private List<Article> mListArticle = new ArrayList<>();
+    private List<Book> mListBook = new ArrayList<>();
+    private List<BibliographicPointer> mListBibliographicPointers = new ArrayList<>();
+    private List<Data> mData;
 
     @NonNull
     @Override
-    public BaseViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return getByType(parent, viewType);
     }
 
-    private BaseViewHolder<T> getByType(ViewGroup parent, int viewType) {
-        BaseViewHolder viewHolder = null;
+    private BaseViewHolder getByType(ViewGroup parent, int viewType) {
+        BaseViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         switch (viewType) {
-            case ARTICLE:
+            case Data.ARTICLE:
                 ItemArticleWorkBinding bindingArticle = ItemArticleWorkBinding.inflate(inflater, parent, false);
-                Log.d("VIEW", "getByType: " + bindingArticle.articleName.getText());
                 viewHolder = new ArticleHolder(bindingArticle.getRoot());
-                break;
-            case BOOK:
+                return viewHolder;
+            case Data.BOOK:
                 ItemBookWorkBinding bindingBook = ItemBookWorkBinding.inflate(inflater, parent, false);
                 viewHolder = new BookHolder(bindingBook.getRoot());
-                break;
-
+                return viewHolder;
+            case Data.BIBLIOGRAPHIC_POINTER:
+                ItemBibliographicPointerWorkBinding bibliographicPointerWorkBinding = ItemBibliographicPointerWorkBinding.inflate(inflater, parent, false);
+                viewHolder = new BibliographicHolder(bibliographicPointerWorkBinding.getRoot());
+                return viewHolder;
         }
 
-        return viewHolder;
+        return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        Log.d("HOL", "onBindViewHolder: " + getItemCount());
 
-        holder.onBind(getItem(position));
-        holder.setListener(mListener);
+        switch (holder.getItemViewType()) {
+            case Data.ARTICLE:
+               ArticleHolder articleHolder = (ArticleHolder)holder;
+               articleHolder.onBind((Article)getScientWork(position).article);
+               articleHolder.setListener(mListener);
+               break;
+            case Data.BOOK:
+                BookHolder bookHolder = (BookHolder) holder;
+                bookHolder.onBind((Book)getScientWork(position).book);
+                bookHolder.setListener(mListener);
+                break;
+            case Data.BIBLIOGRAPHIC_POINTER:
+                BibliographicHolder bibliographicHolder = (BibliographicHolder) holder;
+                bibliographicHolder.onBind((BibliographicPointer)getScientWork(position).bibliographicPointer);
+                bibliographicHolder.setListener(mListener);
+                break;
+        }
+
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (getItem(position) instanceof Article) {
-            work = (Article) getItem(position);
-            Log.d("VIEW", "test: " + position);
-            return ARTICLE;
+        if (getScientWork(position).article instanceof Article) {
+            return Data.ARTICLE;
         }
 
-        if (getItem(position) instanceof Book) {
-            work = (Book) getItem(position);
-            Log.d("VIEW", "test: " + position);
-            return BOOK;
+        if (getScientWork(position).book instanceof Book) {
+            return Data.BOOK;
+        }
+
+        if (getScientWork(position).bibliographicPointer instanceof BibliographicPointer) {
+            return Data.BIBLIOGRAPHIC_POINTER;
         }
 
         return -1;
     }
 
+    @Override
+    public int getItemCount() {
+        mData = Data.merge(mListArticle, mListBook, mListBibliographicPointers);
+        return mData.size();
+    }
 
+    public void setArticles(List<Article> list) {
+        mListArticle = list;
+
+        notifyDataSetChanged();
+    }
+
+
+    public void setBooks(List<Book> list) {
+        mListBook = list;
+        notifyDataSetChanged();
+    }
+
+    public void setListBibliographicPointers(List<BibliographicPointer> list) {
+        mListBibliographicPointers = list;
+        notifyDataSetChanged();
+    }
+
+    public Data getScientWork(int position) {
+        return mData.get(position);
+    }
 
     public interface OnItemClickListener<T> {
         void onItemClick(T t);

@@ -27,6 +27,9 @@ public interface BibliographicPointersDao {
     @Query("SELECT * FROM bibliographic_pointers_table ORDER BY name")
     LiveData<List<BibliographicPointer>> getAllBibliograbicPointers();
 
+    @Query("SELECT * FROM bibliographic_pointers_table WHERE userLogin = :userLogin ORDER BY name")
+    LiveData<List<BibliographicPointer>> getAllBibliograbicPointersByLogin(String userLogin);
+
     @Query("Select * FROM bibliographic_pointers_table WHERE name = :name")
     BibliographicPointer getBibliographicPointersByName(String name);
 

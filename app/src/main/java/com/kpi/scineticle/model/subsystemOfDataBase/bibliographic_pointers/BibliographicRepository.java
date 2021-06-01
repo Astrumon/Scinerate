@@ -6,8 +6,8 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
-import com.kpi.scineticle.model.subsystemOfDataBase.catalogs.Catalog;
-import com.kpi.scineticle.model.subsystemOfDataBase.catalogs.CatalogRepository;
+import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
+import com.kpi.scineticle.model.subsystemOfDataBase.book.BookDao;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -38,8 +38,22 @@ public class BibliographicRepository {
         new DeleteAllCatalogsAsyncTask(mBibliographicPointersDao).execute();
     }
 
-    public LiveData<List<BibliographicPointer>> getAllCatalogs() {
+    public LiveData<List<BibliographicPointer>> getAllBibliographicPointers() {
         return allBibliographicPointers;
+    }
+
+    public LiveData<List<BibliographicPointer>> getAllBibliographicPointersByLogin(String userLogin) {
+
+        AsyncTask task = new GetAllBibliographicPointersByLogin(mBibliographicPointersDao, userLogin).execute();
+        try {
+            LiveData<List<BibliographicPointer>>  bibliographicPointers = (LiveData<List<BibliographicPointer>>) task.get();
+            return bibliographicPointers;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 
     public BibliographicPointer getBibliographicPointersByName(String name) {
@@ -158,6 +172,26 @@ public class BibliographicRepository {
         protected Void doInBackground(BibliographicPointer... bibliographicPointers) {
             mBibliographicPointersDao.insert(bibliographicPointers[0]);
             return null;
+        }
+    }
+
+    private static class GetAllBibliographicPointersByLogin extends AsyncTask<Void, Void, LiveData<List<BibliographicPointer>>> {
+        private BibliographicPointersDao mBibliographicPointersDao;
+        private String userLogin;
+
+        public GetAllBibliographicPointersByLogin(BibliographicPointersDao bibliographicPointersDao, String userLogin) {
+            mBibliographicPointersDao = bibliographicPointersDao;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<BibliographicPointer>> doInBackground(Void... voids) {
+            return mBibliographicPointersDao.getAllBibliograbicPointersByLogin(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<BibliographicPointer>> listLiveData) {
+            super.onPostExecute(listLiveData);
         }
     }
 

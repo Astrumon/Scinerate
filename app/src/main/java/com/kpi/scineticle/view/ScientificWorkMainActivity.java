@@ -16,8 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -26,55 +24,44 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ActivityScientificWorkBinding;
-import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
+import com.kpi.scineticle.model.Data;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
+import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointer;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.Alert;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ScientificWorkCRUDViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScientificWorkMainActivity extends AppCompatActivity {
     public static final int ADD_ARTICLE_REQUEST = 1;
     public static final int EDIT_ARTICLE_REQUEST = 2;
-    private ScientificWorkAdapter<? extends ScientWork> mScientificWorkAdapter;
+    private ScientificWorkAdapter mScientificWorkAdapter;
     private ScientificWorkCRUDViewModel mScientificWorkCRUDViewModel;
     private ActivityScientificWorkBinding mBinding;
     private Context mContext;
     private String login;
-    private List<ScientWork> list = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scientific_work);
 
-        Bundle arguments = getIntent().getExtras();
-        if (arguments != null) {
-            login = arguments.get("login").toString();
-        }
-        Log.d("INTENT_SCIENTICLE", "ok " + login);
+        setLogin();
 
-        Toast.makeText(this, login, Toast.LENGTH_SHORT).show();
-
-        mScientificWorkAdapter = new ScientificWorkAdapter<>();
+        mScientificWorkAdapter = new ScientificWorkAdapter();
 
         initDataBinding();
         setupListScienticView(mBinding.recyclerArticle);
 
-
-
         mContext = this;
-        mBinding.buttonAddArticle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ScientificWorkMainActivity.this, AddEditScientificWorkActivity.class);
-                intent.putExtra("login", login);
-                startActivityForResult(intent, ADD_ARTICLE_REQUEST);
-            }
-        });
 
+        clickToAddWork();
+        clickItem();
+        swipeToDeleteWork();
+    }
+
+    private void clickItem() {
         mScientificWorkAdapter.setOnItemClickListener(new ScientificWorkAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Object o) {
@@ -85,14 +72,30 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
             public void onLongItemClick(Object o) {
                 Toast.makeText(mContext, "LONG_TEST", Toast.LENGTH_SHORT).show();
             }
-
-
         });
-
-        deleteWork();
     }
 
-    private void deleteWork() {
+    private void clickToAddWork() {
+        mBinding.buttonAddArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScientificWorkMainActivity.this, AddEditScientificWorkActivity.class);
+                intent.putExtra("login", login);
+                startActivityForResult(intent, ADD_ARTICLE_REQUEST);
+            }
+        });
+    }
+
+    private void setLogin() {
+        Bundle arguments = getIntent().getExtras();
+        if (arguments != null) {
+            login = arguments.get("login").toString();
+        }
+
+        Toast.makeText(this, login + " Вітаємо!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void swipeToDeleteWork() {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -106,7 +109,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                deleteWorkByType(viewHolder.getAdapterPosition());
+                                deleteWorkByType(viewHolder.getItemViewType(), viewHolder.getAdapterPosition());
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -119,32 +122,49 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         }).attachToRecyclerView(mBinding.recyclerArticle);
     }
 
-    public void deleteWorkByType(int position) {
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mArticleRepository
-                .delete((Article) mScientificWorkAdapter.getScientWorkAt(position));
+    public void deleteWorkByType(int type, int position) {
+        switch (type) {
+            case Data.ARTICLE:
+                mScientificWorkCRUDViewModel.getUserDeleteViewModel().mArticleRepository
+                        .delete((Article) mScientificWorkAdapter.getScientWork(position).article);
+                break;
+            case Data.BOOK:
+                mScientificWorkCRUDViewModel.getUserDeleteViewModel().mBookRepository
+                        .delete((Book) mScientificWorkAdapter.getScientWork(position).book);
+                break;
+            case Data.BIBLIOGRAPHIC_POINTER:
+                mScientificWorkCRUDViewModel.getUserDeleteViewModel().mBibliographicRepository
+                        .delete((BibliographicPointer) mScientificWorkAdapter.getScientWork(position).bibliographicPointer);
+                break;
+        }
+
     }
 
     private void setupListScienticView(RecyclerView recyclerView) {
-        List<ScientWork> list = new ArrayList<>();
-          mScientificWorkCRUDViewModel.getAllScientWorks().observe(this, new Observer<List<? extends ScientWork>>() {
-
-
-              @Override
-              public void onChanged(List<? extends ScientWork> scientWorks) {
-                  List<ScientWork> list1 = new ArrayList<>();
-                 // list.addAll(scientWorks);
-                  list1.addAll(scientWorks);
-                  mScientificWorkAdapter.submitList(list1);
-              }
-
-          });
-
-
-
-
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mScientificWorkCRUDViewModel.getAllTestWorks().observe(this, new Observer<List<Book>>() {
+            @Override
+            public void onChanged(List<Book> books) {
+                mScientificWorkAdapter.setBooks(books);
+            }
+        });
+
+        mScientificWorkCRUDViewModel.getAllArticle().observe(this, new Observer<List<Article>>() {
+            @Override
+            public void onChanged(List<Article> books) {
+                mScientificWorkAdapter.setArticles(books);
+            }
+        });
+
+        mScientificWorkCRUDViewModel.getAllBibliographicPointers().observe(this, new Observer<List<BibliographicPointer>>() {
+            @Override
+            public void onChanged(List<BibliographicPointer> bibliographicPointers) {
+                mScientificWorkAdapter.setListBibliographicPointers(bibliographicPointers);
+            }
+        });
+
         recyclerView.setAdapter(mScientificWorkAdapter);
     }
 
@@ -152,7 +172,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_scientific_work);
         mScientificWorkCRUDViewModel = new ViewModelProvider(this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication()))
-        .get(ScientificWorkCRUDViewModel.class);
+                .get(ScientificWorkCRUDViewModel.class);
         mScientificWorkCRUDViewModel.setUserLogin(getIntent().getExtras().get("login").toString());
         Log.d("MAIN", "initDataBinding: " + getIntent().getExtras().get("login").toString());
     }

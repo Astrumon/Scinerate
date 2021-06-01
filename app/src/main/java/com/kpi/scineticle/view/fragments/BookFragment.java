@@ -57,7 +57,7 @@ public class BookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mNewBook.createNewBook();
-                Toast.makeText(mContext, "Стаття успішно створена", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Книга успішно створена", Toast.LENGTH_SHORT).show();
             }
         });
     }
