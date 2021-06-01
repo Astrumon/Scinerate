@@ -28,6 +28,7 @@ public class Standart extends ScientWork {
     private String placePublish;
 
     public Standart() {
+        super.setTypeOfWork("Стандарт");
     }
 
     public Standart(String nameOfOrg, String yearPublish, String name, String codeLetter, String codeNumber, String publish, String placePublish) {

@@ -32,7 +32,7 @@ public class Catalog extends ScientWork {
     private String abbreviation;
 
     public Catalog() {
-
+        super.setTypeOfWork("Каталог");
     }
 
     public Catalog(String authors, String name, String city, String publish, String place, String year, String sheet, String organisation, String abbreviation) {

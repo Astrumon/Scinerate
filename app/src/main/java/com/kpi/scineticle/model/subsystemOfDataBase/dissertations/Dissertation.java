@@ -35,7 +35,7 @@ public class Dissertation extends ScientWork {
     }
 
     public Dissertation() {
-
+        super.setTypeOfWork("Дисертація");
     }
 
     public Dissertation(String authors, String name, String type, String place, String publish, String year, String countOfSheets) {

@@ -1,6 +1,7 @@
 package com.kpi.scineticle.view.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ThesisFragmentBinding;
+import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ThesisViewModel;
 
@@ -57,6 +59,7 @@ public class ThesisFragment extends Fragment {
             public void onClick(View v) {
                 mNewThesis.createNewThesis();
                 Toast.makeText(mContext, "Тезис успішно створено", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
             }
         });
     }

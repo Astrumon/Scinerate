@@ -33,7 +33,7 @@ public class Patent extends ScientWork {
     }
 
     public Patent() {
-
+        super.setTypeOfWork("Патент");
     }
 
     public Patent(String authors, String namePatentOwner, String name, String country, String number, String date) {

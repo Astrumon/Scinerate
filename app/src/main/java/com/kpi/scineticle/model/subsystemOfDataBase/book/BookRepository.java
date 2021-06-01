@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
-import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.ArticleDao;
 
 import java.util.List;
@@ -36,6 +35,10 @@ public class BookRepository {
 
     public void deleteAllBooks() {
         new DeleteAllBookAsyncTask(mBookDao).execute();
+    }
+
+    public void deleteAllBooks(String userLogin) {
+        new DeleteAllBookByUserLoginAsyncTask(mBookDao, userLogin).execute();
     }
 
     public LiveData<List<Book>> getAllBooks() {
@@ -147,6 +150,23 @@ public class BookRepository {
         @Override
         protected Void doInBackground(Book... books) {
             mBookDao.update(books[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllBookByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private BookDao mBookDao1;
+        private String userLogin;
+
+        public DeleteAllBookByUserLoginAsyncTask(BookDao bookDao, String userLogin) {
+            mBookDao1 = bookDao;
+            this.userLogin = userLogin;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mBookDao1.deleteAllByUserLogin(userLogin);
             return null;
         }
     }

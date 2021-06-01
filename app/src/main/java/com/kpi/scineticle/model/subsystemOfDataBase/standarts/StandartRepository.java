@@ -6,8 +6,7 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
-import com.kpi.scineticle.model.subsystemOfDataBase.patents.Patent;
-import com.kpi.scineticle.model.subsystemOfDataBase.patents.PatentRepository;
+import com.kpi.scineticle.model.subsystemOfDataBase.preprints.PreprintDao;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -38,8 +37,26 @@ public class StandartRepository {
         new DeleteAllStandartsAsyncTask(mStandartDao).execute();
     }
 
+    public void deleteAllStandarts(String userLogin) {
+        new DeleteAllStandartsByUserLoginAsyncTask(mStandartDao, userLogin).execute();
+    }
+
     public LiveData<List<Standart>> getAllStandarts() {
         return allStandarts;
+    }
+
+    public LiveData<List<Standart>> getAllStandartsByLogin(String userLogin) {
+
+        AsyncTask task = new GetAllStandartsByLogin(mStandartDao, userLogin).execute();
+        try {
+            LiveData<List<Standart>>  standarts = (LiveData<List<Standart>>) task.get();
+            return standarts;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 
     public Standart getStandartByNameOfOrg(String nameOfOrg) {
@@ -133,6 +150,25 @@ public class StandartRepository {
         return standart;
     }
 
+    private static class GetAllStandartsByLogin extends AsyncTask<Void, Void, LiveData<List<Standart>>> {
+        private StandartDao mStandartDao1;
+        private String userLogin;
+
+        public GetAllStandartsByLogin(StandartDao standartDao1, String userLogin) {
+            mStandartDao1 = standartDao1;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<Standart>> doInBackground(Void... voids) {
+            return mStandartDao1.getAllStandartsByLogin(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<Standart>> listLiveData) {
+            super.onPostExecute(listLiveData);
+        }
+    }
     private static class UpdateStandartAsyncTask extends AsyncTask<Standart, Void, Void> {
         private StandartDao mStandartDao;
 
@@ -143,6 +179,23 @@ public class StandartRepository {
         @Override
         protected Void doInBackground(Standart... standarts) {
             mStandartDao.update(standarts[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllStandartsByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private StandartDao mStandartDao1;
+        private String userLogin;
+
+        public DeleteAllStandartsByUserLoginAsyncTask(StandartDao standartDao, String userLogin) {
+            mStandartDao1 = standartDao;
+            this.userLogin = userLogin;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mStandartDao1.deleteAllByUserLogin(userLogin);
             return null;
         }
     }

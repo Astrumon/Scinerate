@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
+import com.kpi.scineticle.model.subsystemOfDataBase.article.ArticleDao;
+import com.kpi.scineticle.model.subsystemOfDataBase.article.ArticleRepository;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.BookDao;
 
@@ -36,6 +38,10 @@ public class BibliographicRepository {
 
     public void deleteAllBibliographicPointers() {
         new DeleteAllCatalogsAsyncTask(mBibliographicPointersDao).execute();
+    }
+
+    public void deleteAllBibliographicPointers(String userLogin) {
+        new DeleteAllBiblioGraphicPointersByUserLoginAsyncTask(mBibliographicPointersDao, userLogin).execute();
     }
 
     public LiveData<List<BibliographicPointer>> getAllBibliographicPointers() {
@@ -171,6 +177,23 @@ public class BibliographicRepository {
         @Override
         protected Void doInBackground(BibliographicPointer... bibliographicPointers) {
             mBibliographicPointersDao.insert(bibliographicPointers[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllBiblioGraphicPointersByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private BibliographicPointersDao mBibliographicPointersDao;
+        private String userLogin;
+
+        public DeleteAllBiblioGraphicPointersByUserLoginAsyncTask(BibliographicPointersDao bibliographicPointersDao, String userLogin) {
+            mBibliographicPointersDao = bibliographicPointersDao;
+            this.userLogin = userLogin;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mBibliographicPointersDao.deleteAllByUserLogin(userLogin);
             return null;
         }
     }

@@ -7,26 +7,26 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kpi.scineticle.databinding.ItemBookWorkBinding;
-import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
+import com.kpi.scineticle.databinding.ItemCatalogWorkBinding;
+import com.kpi.scineticle.model.subsystemOfDataBase.catalogs.Catalog;
 import com.kpi.scineticle.view.ScientificWorkAdapter;
 
-public class BookHolder extends BaseViewHolder<Book>{
-    private ScientificWorkAdapter.OnItemClickListener<Book> mListener;
-    private Book mBook;
-    public ItemBookWorkBinding mItemBookWorkBinding;
+public class CatalogHolder extends BaseViewHolder<Catalog>{
+    private ScientificWorkAdapter.OnItemClickListener<Catalog> mListener;
+    private Catalog mCatalog;
+    public ItemCatalogWorkBinding mItemCatalogWorkBinding;
 
 
-    public BookHolder(@NonNull View itemView) {
+    public CatalogHolder(@NonNull View itemView) {
         super(itemView);
-        mItemBookWorkBinding = DataBindingUtil.bind(itemView);
+        mItemCatalogWorkBinding = DataBindingUtil.bind(itemView);
 
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 int position = getAdapterPosition();
                 if (mListener != null && position != RecyclerView.NO_POSITION) {
-                    mListener.onLongItemClick(mBook);
+                    mListener.onLongItemClick(mCatalog);
                 }
                 return false;
             }
@@ -36,7 +36,7 @@ public class BookHolder extends BaseViewHolder<Book>{
             public void onClick(View v) {
                 int position = getAdapterPosition();
                 if (mListener != null && position != RecyclerView.NO_POSITION) {
-                    mListener.onItemClick(mBook);
+                    mListener.onItemClick(mCatalog);
                 }
             }
         });
@@ -44,13 +44,13 @@ public class BookHolder extends BaseViewHolder<Book>{
 
 
     @Override
-    public void onBind(Book book) {
-        mBook = book;
-        mItemBookWorkBinding.setBookWork(book);
+    public void onBind(Catalog catalog) {
+        mCatalog = catalog;
+        mItemCatalogWorkBinding.setCatalogWork(catalog);
     }
 
     @Override
-    public void setListener(ScientificWorkAdapter.OnItemClickListener<Book> listener) {
+    public void setListener(ScientificWorkAdapter.OnItemClickListener<Catalog> listener) {
         mListener = listener;
     }
 }

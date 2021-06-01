@@ -3,6 +3,8 @@ import android.app.Application;
 import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
+import com.kpi.scineticle.model.subsystemOfDataBase.book.BookDao;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -28,8 +30,26 @@ public class CatalogRepository {
         new DeleteCatalogAsyncTask(mCatalogDao).execute(catalog);
     }
 
+    public LiveData<List<Catalog>> getAllBooksByLogin(String userLogin) {
+
+        AsyncTask task = new GetALlCatalogsByLogin(mCatalogDao, userLogin).execute();
+        try {
+            LiveData<List<Catalog>>  catalogs = (LiveData<List<Catalog>>) task.get();
+            return catalogs;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
     public void deleteAllCatalogs() {
         new DeleteAllCatalogsAsyncTask(mCatalogDao).execute();
+    }
+
+    public void deleteAllCatalogs(String userLogin) {
+        new DeleteAllCatalogsByUserLoginAsyncTask(mCatalogDao, userLogin).execute();
     }
 
     public LiveData<List<Catalog>> getAllCatalogs() {
@@ -114,8 +134,22 @@ public class CatalogRepository {
         return catalog;
     }
 
+    private static class DeleteAllCatalogsByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private CatalogDao mCatalogDao1;
+        private String userLogin;
+
+        public DeleteAllCatalogsByUserLoginAsyncTask(CatalogDao catalogDao, String userLogin) {
+            mCatalogDao1 = catalogDao;
+            this.userLogin = userLogin;
+        }
 
 
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mCatalogDao1.deleteAllByUserLogin(userLogin);
+            return null;
+        }
+    }
     private static class InsertCatalogAsyncTask extends AsyncTask<Catalog, Void, Void> {
         private CatalogDao mCatalogDao;
 
@@ -290,6 +324,26 @@ public class CatalogRepository {
         @Override
         protected void onPostExecute(Catalog catalog) {
             super.onPostExecute(catalog);
+        }
+    }
+
+    private static class GetALlCatalogsByLogin extends AsyncTask<Void, Void, LiveData<List<Catalog>>> {
+        private CatalogDao mCatalogDao;
+        private String userLogin;
+
+        public GetALlCatalogsByLogin(CatalogDao catalogDao, String userLogin) {
+            mCatalogDao = catalogDao;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<Catalog>> doInBackground(Void... voids) {
+            return mCatalogDao.getAllCatalogsByLogin(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<Catalog>> listLiveData) {
+            super.onPostExecute(listLiveData);
         }
     }
 

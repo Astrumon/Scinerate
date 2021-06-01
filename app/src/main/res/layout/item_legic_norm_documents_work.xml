@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="legisNormDocumentsWork"
+            type="com.kpi.scineticle.model.subsystemOfDataBase.legislative_normative_documents.LegisNormDocuments" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_margin"
+        app:cardCornerRadius="@dimen/cardview_radius_corner"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="#E3AA65"
+        >
+        <RelativeLayout
+            android:id="@+id/item_legis_norm_documents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_name"
+            >
+            <TextView
+                android:id="@+id/legis_norm_type_of_work"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{legisNormDocumentsWork.typeOfWork}"
+                android:layout_marginStart="@dimen/margin_name"
+                android:layout_marginLeft="@dimen/margin_name"
+                android:textColor="@color/text"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                />
+            <TextView
+                android:id="@+id/legis_norm_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{legisNormDocumentsWork.name}"
+
+                android:layout_below="@+id/legis_norm_type_of_work"
+
+                android:layout_marginStart="@dimen/margin_name"
+                android:layout_marginLeft="@dimen/margin_name"
+                android:textColor="@color/text"
+                android:textSize="@dimen/article_name_size"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:id="@+id/legis_norm_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{legisNormDocumentsWork.datePublish}"
+                android:layout_below="@+id/legis_norm_name"
+                android:layout_marginStart="@dimen/margin_name"
+                android:layout_marginLeft="@dimen/margin_name"
+                android:textColor="@color/text"
+                android:textSize="@dimen/article_name_size"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                />
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

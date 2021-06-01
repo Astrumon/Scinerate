@@ -22,7 +22,7 @@ public class UserFinder {
 
         User dbUser = mUserRepository.getUser(user.getEmail(), user.getPassword());
         if (dbUser == null) {
-            mUserOutputInfo.showError("Користувача не знайдено");
+            mUserOutputInfo.showError("Користувача не існує, або невірно ведений пароль");
             return false;
         }
 

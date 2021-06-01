@@ -1,6 +1,7 @@
 package com.kpi.scineticle.view.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.CatalogFragmentBinding;
+import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.CatalogViewModel;
 
@@ -57,6 +59,7 @@ public class CatalogFragment extends Fragment {
             public void onClick(View v) {
                 mNewCatalog.createNewCatalog();
                 Toast.makeText(mContext, "Каталог успішно створено", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
             }
         });
     }

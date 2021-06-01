@@ -24,6 +24,9 @@ public interface BibliographicPointersDao {
     @Query("DELETE FROM bibliographic_pointers_table")
     void deleteAll();
 
+    @Query("DELETE FROM bibliographic_pointers_table WHERE userLogin = :userLogin")
+    void deleteAllByUserLogin(String userLogin);
+
     @Query("SELECT * FROM bibliographic_pointers_table ORDER BY name")
     LiveData<List<BibliographicPointer>> getAllBibliograbicPointers();
 

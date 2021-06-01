@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 
+import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 
 import java.util.List;
 
@@ -27,6 +28,12 @@ public interface DissertationDao {
 
     @Query("SELECT * FROM dissertation_table ORDER BY name")
     LiveData<List<Dissertation>> getAllDissertations();
+
+    @Query("DELETE FROM dissertation_table WHERE userLogin = :userLogin")
+    void deleteAllByUserLogin(String userLogin);
+
+    @Query("SELECT * FROM dissertation_table WHERE userLogin = :userLogin ORDER BY name")
+    LiveData<List<Dissertation>> getAllDissertationByLogin(String userLogin);
 
     @Query("Select * FROM dissertation_table WHERE name = :name")
     Dissertation getDissertationByName(String name);

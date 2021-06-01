@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 import com.kpi.scineticle.model.subsystemOfDataBase.preprints.Preprint;
 
 import java.util.List;
@@ -26,8 +27,14 @@ public interface CatalogDao {
     @Query("DELETE FROM catalog_table")
     void deleteAll();
 
+    @Query("DELETE FROM catalog_table WHERE userLogin = :userLogin")
+    void deleteAllByUserLogin(String userLogin);
+
     @Query("SELECT * FROM catalog_table ORDER BY name")
     LiveData<List<Catalog>> getAllCatalogs();
+
+    @Query("SELECT * FROM catalog_table WHERE userLogin = :userLogin ORDER BY name")
+    LiveData<List<Catalog>> getAllCatalogsByLogin(String userLogin);
 
     @Query("Select * FROM catalog_table WHERE name = :name")
     Catalog getCatalogByName(String name);

@@ -27,7 +27,7 @@ public class ElectronicResource extends ScientWork {
     private String userLogin;
 
     public ElectronicResource() {
-
+        super.setTypeOfWork("Електроний ресурс");
     }
 
     public ElectronicResource(String authors, String name, String placePublish, String publish, String date, String updateDate, String url) {

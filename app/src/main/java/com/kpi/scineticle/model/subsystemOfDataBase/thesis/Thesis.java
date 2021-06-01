@@ -29,8 +29,9 @@ public class Thesis extends ScientWork {
     private String loginUser;
 
     public Thesis() {
-
+        super.setTypeOfWork("Тезис");
     }
+
     public Thesis(String authors, String name, String namePublish,
                   String date, String placeConference,
                   String placePublish, String year, String sheets) {

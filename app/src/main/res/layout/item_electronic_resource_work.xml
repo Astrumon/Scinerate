@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="electronicResourceWork"
+            type="com.kpi.scineticle.model.subsystemOfDataBase.electronic_resource.ElectronicResource" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_margin"
+        app:cardCornerRadius="@dimen/cardview_radius_corner"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="#EAE475"
+        >
+        <RelativeLayout
+            android:id="@+id/item_electronic_resource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_name"
+            >
+            <TextView
+                android:id="@+id/electronic_resource_type_of_work"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{electronicResourceWork.typeOfWork}"
+                android:layout_marginStart="@dimen/margin_name"
+                android:layout_marginLeft="@dimen/margin_name"
+                android:textColor="@color/text"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                />
+            <TextView
+                android:id="@+id/electronic_resource_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{electronicResourceWork.name}"
+
+                android:layout_below="@+id/electronic_resource_type_of_work"
+
+                android:layout_marginStart="@dimen/margin_name"
+                android:layout_marginLeft="@dimen/margin_name"
+                android:textColor="@color/text"
+                android:textSize="@dimen/article_name_size"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:id="@+id/electronic_resource_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{electronicResourceWork.date}"
+                android:layout_below="@+id/electronic_resource_name"
+                android:layout_marginStart="@dimen/margin_name"
+                android:layout_marginLeft="@dimen/margin_name"
+                android:textColor="@color/text"
+                android:textSize="@dimen/article_name_size"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                />
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

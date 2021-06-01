@@ -6,9 +6,7 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
-import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
-import com.kpi.scineticle.model.subsystemOfDataBase.book.BookDao;
-import com.kpi.scineticle.model.subsystemOfDataBase.book.BookRepository;
+import com.kpi.scineticle.model.subsystemOfDataBase.catalogs.CatalogDao;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -37,6 +35,10 @@ public class DissertationRepository {
 
     public void deleteAllDissertations() {
         new DeleteAllDissertations(mDissertationDao).execute();
+    }
+
+    public void deleteAllDissertations(String userLogin) {
+        new DeleteAllDissertationsByUserLoginAsyncTask(mDissertationDao, userLogin).execute();
     }
 
     public LiveData<List<Dissertation>> getAllDissertation() {
@@ -119,6 +121,20 @@ public class DissertationRepository {
             exception.printStackTrace();
         }
         return dissertation;
+    }
+
+    public LiveData<List<Dissertation>> getAllBooksByLogin(String userLogin) {
+
+        AsyncTask task = new GetALlDissertationByLogin(mDissertationDao, userLogin).execute();
+        try {
+            LiveData<List<Dissertation>>  dissertation = (LiveData<List<Dissertation>>) task.get();
+            return dissertation;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -285,6 +301,42 @@ public class DissertationRepository {
         }
     }
 
+    private static class GetALlDissertationByLogin extends AsyncTask<Void, Void, LiveData<List<Dissertation>>> {
+        private DissertationDao mDissertationDao;
+        private String userLogin;
+
+        public GetALlDissertationByLogin(DissertationDao dissertationDao, String userLogin) {
+            mDissertationDao = dissertationDao;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<Dissertation>> doInBackground(Void... voids) {
+            return mDissertationDao.getAllDissertationByLogin(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<Dissertation>> listLiveData) {
+            super.onPostExecute(listLiveData);
+        }
+    }
+
+    private static class DeleteAllDissertationsByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private DissertationDao mDissertationDao1;
+        private String userLogin;
+
+        public DeleteAllDissertationsByUserLoginAsyncTask(DissertationDao dissertationDao, String userLogin) {
+            mDissertationDao1 = dissertationDao;
+            this.userLogin = userLogin;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mDissertationDao1.deleteAllByUserLogin(userLogin);
+            return null;
+        }
+    }
     private static class GetDissertationByCountOfList extends AsyncTask<Void, Void, Dissertation> {
         private DissertationDao mDissertationDao;
         private int countOfSheets;

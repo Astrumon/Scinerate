@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 
+import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 
 import java.util.List;
 
@@ -25,8 +26,14 @@ public interface ElectronicResourceDao {
     @Query("DELETE FROM el_resource_table")
     void deleteAll();
 
+    @Query("DELETE FROM el_resource_table WHERE userLogin = :userLogin")
+    void deleteAllByUserLogin(String userLogin);
+
     @Query("SELECT * FROM el_resource_table ORDER BY name")
     LiveData<List<ElectronicResource>> getAllElectronicResources();
+
+    @Query("SELECT * FROM el_resource_table WHERE userLogin = :userLogin ORDER BY name")
+    LiveData<List<ElectronicResource>> getAllElectronicResourcesByLogin(String userLogin);
 
     @Query("Select * FROM el_resource_table WHERE name = :name")
     ElectronicResource getElectronicByName(String name);

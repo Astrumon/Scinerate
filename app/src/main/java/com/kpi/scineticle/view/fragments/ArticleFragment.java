@@ -4,6 +4,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ArticleFragmentBinding;
+import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ArticleViewModel;
 
 public class ArticleFragment extends Fragment {
@@ -44,7 +46,6 @@ public class ArticleFragment extends Fragment {
         mNewArticle = articleViewModel.new NewArticle();
 
         userLogin = getArguments().get("login").toString();
-        Log.d("FRAGMENT: ", "onCreateView: " + userLogin);
         articleViewModel.setUserLogin(userLogin);
         return view;
     }
@@ -59,6 +60,7 @@ public class ArticleFragment extends Fragment {
             public void onClick(View v) {
                 mNewArticle.createNewArticle();
                 Toast.makeText(mContext, "Стаття успішно створена", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
             }
         });
     }

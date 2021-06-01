@@ -6,8 +6,7 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
-import com.kpi.scineticle.model.subsystemOfDataBase.patents.Patent;
-import com.kpi.scineticle.model.subsystemOfDataBase.patents.PatentRepository;
+import com.kpi.scineticle.model.subsystemOfDataBase.patents.PatentDao;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -34,8 +33,26 @@ public class PreprintRepository {
         new DeletePreprintAsyncTask(mPreprintDao).execute(preprint);
     }
 
+    public LiveData<List<Preprint>> getAllPreprintsByLogin(String userLogin) {
+
+        AsyncTask task = new GetALlPreprintsByLogin(mPreprintDao, userLogin).execute();
+        try {
+            LiveData<List<Preprint>>  preprints = (LiveData<List<Preprint>>) task.get();
+            return preprints;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
     public void deleteAllPreprints() {
         new DeleteAllPreprintsAsyncTask(mPreprintDao).execute();
+    }
+
+    public void deleteAllPreprints(String userLogin) {
+        new DeleteAllPreprintsByUserLoginAsyncTask(mPreprintDao, userLogin).execute();
     }
 
     public LiveData<List<Preprint>> getAllPreprints() {
@@ -134,7 +151,25 @@ public class PreprintRepository {
     }
 
 
+    private static class GetALlPreprintsByLogin extends AsyncTask<Void, Void, LiveData<List<Preprint>>> {
+        private PreprintDao mPreprintDao1;
+        private String userLogin;
 
+        public GetALlPreprintsByLogin(PreprintDao preprintDao1, String userLogin) {
+            mPreprintDao1 = preprintDao1;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<Preprint>> doInBackground(Void... voids) {
+            return mPreprintDao1.getAllPreprintsByLogin(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<Preprint>> listLiveData) {
+            super.onPostExecute(listLiveData);
+        }
+    }
     private static class InsertPreprintAsyncTask extends AsyncTask<Preprint, Void, Void> {
         private PreprintDao mPreprintDao;
 
@@ -149,6 +184,22 @@ public class PreprintRepository {
         }
     }
 
+    private static class DeleteAllPreprintsByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private PreprintDao mPreprintDao1;
+        private String userLogin;
+
+        public DeleteAllPreprintsByUserLoginAsyncTask(PreprintDao preprintDao, String userLogin) {
+            mPreprintDao1 = preprintDao;
+            this.userLogin = userLogin;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mPreprintDao1.deleteAllByUserLogin(userLogin);
+            return null;
+        }
+    }
     private static class UpdatePreprintAsyncTask extends AsyncTask<Preprint, Void, Void> {
         private PreprintDao mPreprintDao;
 

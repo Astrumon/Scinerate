@@ -8,6 +8,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 
+import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
+
 import java.util.List;
 
 @Dao
@@ -21,7 +23,7 @@ public interface PreprintDao {
     @Delete
     void delete(Preprint preprint);
 
-    @Query("DELETE FROM standart_table")
+    @Query("DELETE FROM preprint_table")
     void deleteAll();
 
     @Query("SELECT * FROM preprint_table ORDER BY name")
@@ -30,11 +32,17 @@ public interface PreprintDao {
     @Query("Select * FROM preprint_table WHERE name = :name")
     Preprint getPreprintsByName(String name);
 
+    @Query("SELECT * FROM preprint_table WHERE userLogin = :userLogin ORDER BY name")
+    LiveData<List<Preprint>> getAllPreprintsByLogin(String userLogin);
+
     @Query("Select * FROM preprint_table WHERE city = :city")
     Preprint getPreprintsByCity(String city);
 
     @Query("Select * FROM preprint_table WHERE place = :place")
     Preprint getPreprintsByPlace(String place);
+
+    @Query("DELETE FROM preprint_table WHERE userLogin = :userLogin")
+    void deleteAllByUserLogin(String userLogin);
 
     @Query("Select * FROM preprint_table WHERE year = :year")
     Preprint getPreprintsByYear(String year);

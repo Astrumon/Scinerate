@@ -38,21 +38,16 @@ public class ArticleRepository {
         new DeleteAllArticlesAsyncTask(mArticleDao).execute();
     }
 
+    public void deleteAllArticles(String userLogin) {
+        new DeleteAllArticlesByUserLoginAsyncTask(mArticleDao, userLogin).execute();
+    }
+
     public LiveData<List<Article>> getAllArticles() {
         return allArticles;
     }
 
     public LiveData<List<Article>> getAllArticlesByLogin(String userLogin) {
         LiveData<List<Article>> listLiveData = mArticleDao.getAllArticles(userLogin);
-//        AsyncTask task = new GetALlArticleByLogin(mArticleDao, userLogin).execute();
-//        try {
-//            listLiveData = (LiveData<List<Article>>) task.get();
-//            return listLiveData;
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException exception) {
-//            exception.printStackTrace();
-//        }
         return listLiveData;
     }
 
@@ -173,6 +168,23 @@ public class ArticleRepository {
         @Override
         protected Void doInBackground(Article... articles) {
             mArticleDao.delete(articles[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllArticlesByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private ArticleDao mArticleDao;
+        private String userLogin;
+
+        public DeleteAllArticlesByUserLoginAsyncTask(ArticleDao articleDao, String userLogin) {
+            mArticleDao = articleDao;
+            this.userLogin = userLogin;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mArticleDao.deleteAllByUserLogin(userLogin);
             return null;
         }
     }

@@ -29,6 +29,7 @@ public class LegisNormDocuments extends ScientWork {
     private String userLogin;
 
     public LegisNormDocuments() {
+        super.setTypeOfWork("Нормативний документ");
     }
 
     public LegisNormDocuments(String name, String type, String dateAccess, String number, String publish, String datePublish, String serial, String sheets) {

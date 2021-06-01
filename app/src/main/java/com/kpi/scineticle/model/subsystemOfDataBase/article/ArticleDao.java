@@ -26,6 +26,9 @@ public interface ArticleDao {
     @Query("DELETE FROM article_table")
     void deleteAll();
 
+    @Query("DELETE FROM article_table WHERE userLogin = :userLogin")
+    void deleteAllByUserLogin(String userLogin);
+
     @Query("SELECT * FROM article_table ORDER BY nameArticle")
     LiveData<List<Article>> getAllArticles();
 

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
+import com.kpi.scineticle.model.subsystemOfDataBase.standarts.StandartDao;
 
 
 import java.util.List;
@@ -37,6 +38,10 @@ public class ThesisRepository {
         new DeleteAllThesisAsyncTask(mThesisDao).execute();
     }
 
+    public void deleteAllThesis(String userLogin) {
+        new DeleteAllThesesByUserLoginAsyncTask(mThesisDao, userLogin).execute();
+    }
+
     public LiveData<List<Thesis>> getAllThesis() {
         return allThesis;
     }
@@ -52,6 +57,20 @@ public class ThesisRepository {
             exception.printStackTrace();
         }
         return thesis;
+    }
+
+    public LiveData<List<Thesis>> getAllThesisByLogin(String userLogin) {
+
+        AsyncTask task = new GetAllThesesByLogin(mThesisDao, userLogin).execute();
+        try {
+            LiveData<List<Thesis>>  theses = (LiveData<List<Thesis>>) task.get();
+            return theses;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 
     public Thesis getThesisByNamePublish(String namePublish) {
@@ -166,6 +185,7 @@ public class ThesisRepository {
         public DeleteDeleteAsyncTask(ThesisDao thesisDao) {
             mThesisDao = thesisDao;
         }
+
 
         @Override
         protected Void doInBackground(Thesis... theses) {
@@ -333,6 +353,43 @@ public class ThesisRepository {
         @Override
         protected void onPostExecute(Thesis thesis) {
             super.onPostExecute(thesis);
+        }
+    }
+
+    private static class DeleteAllThesesByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private ThesisDao mThesisDao1;
+        private String userLogin;
+
+        public DeleteAllThesesByUserLoginAsyncTask(ThesisDao thesisDao, String userLogin) {
+            mThesisDao1 = thesisDao;
+            this.userLogin = userLogin;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mThesisDao1.deleteAllByUserLogin(userLogin);
+            return null;
+        }
+    }
+
+    private static class GetAllThesesByLogin extends AsyncTask<Void, Void, LiveData<List<Thesis>>> {
+        private ThesisDao mThesisDao1;
+        private String userLogin;
+
+        public GetAllThesesByLogin(ThesisDao thesisDao, String userLogin) {
+            mThesisDao1 = thesisDao;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<Thesis>> doInBackground(Void... voids) {
+            return mThesisDao1.getAllThesisByLogin(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<Thesis>> listLiveData) {
+            super.onPostExecute(listLiveData);
         }
     }
 }

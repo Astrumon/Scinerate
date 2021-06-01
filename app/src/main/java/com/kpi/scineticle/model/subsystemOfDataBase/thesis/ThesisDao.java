@@ -7,6 +7,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
+
 import java.util.List;
 
 @Dao
@@ -26,6 +28,9 @@ public interface ThesisDao {
     @Query("SELECT * FROM thesis_table ORDER BY name")
     LiveData<List<Thesis>> getAllThesis();
 
+    @Query("SELECT * FROM thesis_table WHERE loginUser = :userLogin ORDER BY name")
+    LiveData<List<Thesis>> getAllThesisByLogin(String userLogin);
+
     @Query("Select * FROM thesis_table WHERE name = :name")
     Thesis getThesisByName(String name);
 
@@ -34,6 +39,9 @@ public interface ThesisDao {
 
     @Query("Select * FROM thesis_table WHERE date = :date")
     Thesis getThesisByDate(String date);
+
+    @Query("DELETE FROM thesis_table WHERE loginUser = :userLogin")
+    void deleteAllByUserLogin(String userLogin);
 
     @Query("Select * FROM thesis_table WHERE placeConference = :placeConference")
     Thesis getThesisByPlaceConference(String placeConference);

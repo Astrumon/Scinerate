@@ -1,32 +1,32 @@
 package com.kpi.scineticle.view.holders;
 
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kpi.scineticle.databinding.ItemBookWorkBinding;
-import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
+import com.kpi.scineticle.databinding.ItemPatentWorkBinding;
+import com.kpi.scineticle.model.subsystemOfDataBase.legislative_normative_documents.LegisNormDocuments;
+import com.kpi.scineticle.model.subsystemOfDataBase.patents.Patent;
 import com.kpi.scineticle.view.ScientificWorkAdapter;
 
-public class BookHolder extends BaseViewHolder<Book>{
-    private ScientificWorkAdapter.OnItemClickListener<Book> mListener;
-    private Book mBook;
-    public ItemBookWorkBinding mItemBookWorkBinding;
+public class PatentHolder extends BaseViewHolder<Patent> {
+    private ScientificWorkAdapter.OnItemClickListener<Patent> mListener;
+    private Patent mPatent;
+    public ItemPatentWorkBinding mItemPatentWorkBinding;
 
 
-    public BookHolder(@NonNull View itemView) {
+    public PatentHolder(@NonNull View itemView) {
         super(itemView);
-        mItemBookWorkBinding = DataBindingUtil.bind(itemView);
+        mItemPatentWorkBinding = DataBindingUtil.bind(itemView);
 
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 int position = getAdapterPosition();
                 if (mListener != null && position != RecyclerView.NO_POSITION) {
-                    mListener.onLongItemClick(mBook);
+                    mListener.onLongItemClick(mPatent);
                 }
                 return false;
             }
@@ -36,7 +36,7 @@ public class BookHolder extends BaseViewHolder<Book>{
             public void onClick(View v) {
                 int position = getAdapterPosition();
                 if (mListener != null && position != RecyclerView.NO_POSITION) {
-                    mListener.onItemClick(mBook);
+                    mListener.onItemClick(mPatent);
                 }
             }
         });
@@ -44,13 +44,13 @@ public class BookHolder extends BaseViewHolder<Book>{
 
 
     @Override
-    public void onBind(Book book) {
-        mBook = book;
-        mItemBookWorkBinding.setBookWork(book);
+    public void onBind(Patent patent) {
+        mPatent = patent;
+        mItemPatentWorkBinding.setPatentWork(patent);
     }
 
     @Override
-    public void setListener(ScientificWorkAdapter.OnItemClickListener<Book> listener) {
+    public void setListener(ScientificWorkAdapter.OnItemClickListener<Patent> listener) {
         mListener = listener;
     }
 }

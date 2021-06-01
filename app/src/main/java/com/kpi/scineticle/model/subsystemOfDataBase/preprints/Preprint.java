@@ -30,6 +30,7 @@ public class Preprint extends ScientWork {
     private String abbreviation;
 
     public Preprint() {
+        super.setTypeOfWork("Препринт");
     }
 
     public Preprint(String authors, String name, String city, String place, String year, String sheet, String organisation, String abbreviation) {

@@ -37,7 +37,6 @@ public class ExistingUserViewModel extends AndroidViewModel {
         }
 
         public boolean loginUser() {
-            Log.d("EXISTINGUSER", "email: " + email.getValue() + ", pass: " + password.getValue());
             return mInputViewModel.inputDataForCheck(email.getValue(), password.getValue());
         }
 

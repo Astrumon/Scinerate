@@ -28,6 +28,12 @@ public interface PatentDao {
     @Query("SELECT * FROM patent_table ORDER BY name")
     LiveData<List<Patent>> getAllPatents();
 
+    @Query("SELECT * FROM patent_table WHERE userLogin = :userLogin ORDER BY name")
+    LiveData<List<Patent>> getAllPatentsByLogin(String userLogin);
+
+    @Query("DELETE FROM patent_table WHERE userLogin = :userLogin")
+    void deleteAllByUserLogin(String userLogin);
+
     @Query("Select * FROM patent_table WHERE name = :name")
     Patent getPatentByName(String name);
 

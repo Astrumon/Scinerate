@@ -37,8 +37,26 @@ public class PatentRepository {
         new DeleteAllPatentsAsyncTask(mPatentDao).execute();
     }
 
+    public void deleteAllPatents(String userLogin) {
+        new DeleteAllPatentsByUserLoginAsyncTask(mPatentDao, userLogin).execute();
+    }
+
     public LiveData<List<Patent>> getAllPatents() {
         return allPatents;
+    }
+
+    public LiveData<List<Patent>> getAllPatentsByLogin(String userLogin) {
+
+        AsyncTask task = new GetALlPatentsByLogin(mPatentDao, userLogin).execute();
+        try {
+            LiveData<List<Patent>>  patents = (LiveData<List<Patent>>) task.get();
+            return patents;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 
     public Patent getPatentByName(String name) {
@@ -106,7 +124,25 @@ public class PatentRepository {
         return patent;
     }
 
+    private static class GetALlPatentsByLogin extends AsyncTask<Void, Void, LiveData<List<Patent>>> {
+        private PatentDao mPatentDao1;
+        private String userLogin;
 
+        public GetALlPatentsByLogin(PatentDao patentDao, String userLogin) {
+            mPatentDao1 = patentDao;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<Patent>> doInBackground(Void... voids) {
+            return mPatentDao1.getAllPatentsByLogin(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<Patent>> listLiveData) {
+            super.onPostExecute(listLiveData);
+        }
+    }
 
     private static class InsertPatentAsyncTask extends AsyncTask<Patent, Void, Void> {
         private PatentDao mPatentDao;
@@ -132,6 +168,23 @@ public class PatentRepository {
         @Override
         protected Void doInBackground(Patent... patents) {
             mPatentDao.update(patents[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllPatentsByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private PatentDao mPatentDao1;
+        private String userLogin;
+
+        public DeleteAllPatentsByUserLoginAsyncTask(PatentDao patentDao, String userLogin) {
+            mPatentDao1 = patentDao;
+            this.userLogin = userLogin;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mPatentDao1.deleteAllByUserLogin(userLogin);
             return null;
         }
     }

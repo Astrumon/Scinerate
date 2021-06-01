@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
 import com.kpi.scineticle.model.subsystemOfDataBase.patents.Patent;
 
 import java.util.List;
@@ -27,6 +28,12 @@ public interface LegisNormDocumentsDao {
 
     @Query("SELECT * FROM legislative_normative_documents ORDER BY name")
     LiveData<List<LegisNormDocuments>> getAllLegisNormDocuments();
+
+    @Query("DELETE FROM legislative_normative_documents WHERE userLogin = :userLogin")
+    void deleteAllByUserLogin(String userLogin);
+
+    @Query("SELECT * FROM legislative_normative_documents WHERE userLogin = :userLogin ORDER BY name")
+    LiveData<List<LegisNormDocuments>> getAllLegisNormDocumentsByLogin(String userLogin);
 
     @Query("Select * FROM legislative_normative_documents WHERE name = :name")
     LegisNormDocuments getLegisNormDocumentsByName(String name);

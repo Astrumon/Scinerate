@@ -37,6 +37,10 @@ public class ElectronicResourceRepository {
         new DeleteAllElectronicResourceAsyncTask(mElectronicResourceDao).execute();
     }
 
+    public void deleteAllElectronicResources(String userLogin) {
+        new DeleteAllElectronicResourcesByUserLoginAsyncTask(mElectronicResourceDao, userLogin).execute();
+    }
+
     public LiveData<List<ElectronicResource>> getAllElectronicResources() {
         return allElectronicResources;
     }
@@ -119,6 +123,20 @@ public class ElectronicResourceRepository {
         return electronicResource;
     }
 
+    public LiveData<List<ElectronicResource>> getAllElectronicResourcesByLogin(String userLogin) {
+
+        AsyncTask task = new GetALlElectronicResourcesByLogin(mElectronicResourceDao, userLogin).execute();
+        try {
+            LiveData<List<ElectronicResource>>  electronicResources = (LiveData<List<ElectronicResource>>) task.get();
+            return electronicResources;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
 
     private static class InsertElectronicAsyncTask extends AsyncTask<ElectronicResource, Void, Void> {
         private ElectronicResourceDao mElectronicResourceDao;
@@ -144,6 +162,23 @@ public class ElectronicResourceRepository {
         @Override
         protected Void doInBackground(ElectronicResource... electronicResources) {
             mElectronicResource.update(electronicResources[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllElectronicResourcesByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private ElectronicResourceDao mElectronicResourceDao1;
+        private String userLogin;
+
+        public DeleteAllElectronicResourcesByUserLoginAsyncTask(ElectronicResourceDao electronicResourceDao, String userLogin) {
+            mElectronicResourceDao1 = electronicResourceDao;
+            this.userLogin = userLogin;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mElectronicResourceDao1.deleteAllByUserLogin(userLogin);
             return null;
         }
     }
@@ -300,6 +335,26 @@ public class ElectronicResourceRepository {
         @Override
         protected void onPostExecute(ElectronicResource electronicResource) {
             super.onPostExecute(electronicResource);
+        }
+    }
+
+    private static class GetALlElectronicResourcesByLogin extends AsyncTask<Void, Void, LiveData<List<ElectronicResource>>> {
+        private ElectronicResourceDao mElectronicResourceDao;
+        private String userLogin;
+
+        public GetALlElectronicResourcesByLogin(ElectronicResourceDao electronicResourceDao, String userLogin) {
+            mElectronicResourceDao = electronicResourceDao;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<ElectronicResource>> doInBackground(Void... voids) {
+            return mElectronicResourceDao.getAllElectronicResourcesByLogin(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<ElectronicResource>> listLiveData) {
+            super.onPostExecute(listLiveData);
         }
     }
 

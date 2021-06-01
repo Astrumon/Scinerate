@@ -6,8 +6,8 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.UserDatabase;
-import com.kpi.scineticle.model.subsystemOfDataBase.patents.Patent;
-import com.kpi.scineticle.model.subsystemOfDataBase.patents.PatentRepository;
+import com.kpi.scineticle.model.subsystemOfDataBase.book.BookDao;
+import com.kpi.scineticle.model.subsystemOfDataBase.electronic_resource.ElectronicResourceDao;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -36,6 +36,25 @@ public class LegisNormDocumentsRepository {
 
     public void deleteAllLegisNormDocuments() {
         new DeleteAllLegisNormDocumentsAsyncTask(mLegisNormDocumentsDao).execute();
+    }
+
+    public void deleteAllLegisNormDocuments(String userLogin) {
+        new DeleteAllLegisNormDocumentsByUserLoginAsyncTask(mLegisNormDocumentsDao, userLogin).execute();
+    }
+
+
+    public LiveData<List<LegisNormDocuments>> getAllLegisNormDocumentsByLogin(String userLogin) {
+
+        AsyncTask task = new GetALlLegisNormDocumentsByLogin(mLegisNormDocumentsDao, userLogin).execute();
+        try {
+            LiveData<List<LegisNormDocuments>>  legisNormDocuments = (LiveData<List<LegisNormDocuments>>) task.get();
+            return legisNormDocuments;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 
     public LiveData<List<LegisNormDocuments>> getAllLegisNormDoucuments() {
@@ -147,6 +166,26 @@ public class LegisNormDocumentsRepository {
     }
 
 
+    private static class GetALlLegisNormDocumentsByLogin extends AsyncTask<Void, Void, LiveData<List<LegisNormDocuments>>> {
+        private LegisNormDocumentsDao mLegisNormDocumentsDao1;
+        private String userLogin;
+
+        public GetALlLegisNormDocumentsByLogin(LegisNormDocumentsDao legisNormDocumentsDao1, String userLogin) {
+            mLegisNormDocumentsDao1 = legisNormDocumentsDao1;
+            this.userLogin = userLogin;
+        }
+
+        @Override
+        protected LiveData<List<LegisNormDocuments>> doInBackground(Void... voids) {
+            return mLegisNormDocumentsDao1.getAllLegisNormDocumentsByLogin(userLogin);
+        }
+
+        @Override
+        protected void onPostExecute(LiveData<List<LegisNormDocuments>> listLiveData) {
+            super.onPostExecute(listLiveData);
+        }
+    }
+
     private static class InsertLegisNormDocumentsAsyncTask extends AsyncTask<LegisNormDocuments, Void, Void> {
         private LegisNormDocumentsDao mLegisNormDocumentsDao;
 
@@ -171,6 +210,23 @@ public class LegisNormDocumentsRepository {
         @Override
         protected Void doInBackground(LegisNormDocuments... legisNormDocuments) {
             mLegisNormDocumentsDao.update(legisNormDocuments[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllLegisNormDocumentsByUserLoginAsyncTask extends AsyncTask<Void, Void, Void> {
+        private LegisNormDocumentsDao mLegisNormDocuments;
+        private String userLogin;
+
+        public DeleteAllLegisNormDocumentsByUserLoginAsyncTask(LegisNormDocumentsDao legisNormDocumentsDao, String userLogin) {
+            mLegisNormDocuments = legisNormDocumentsDao;
+            this.userLogin = userLogin;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mLegisNormDocuments.deleteAllByUserLogin(userLogin);
             return null;
         }
     }

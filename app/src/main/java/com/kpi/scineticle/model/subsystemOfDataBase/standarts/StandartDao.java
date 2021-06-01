@@ -7,6 +7,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
+
 import java.util.List;
 
 @Dao
@@ -25,12 +27,17 @@ public interface StandartDao {
 
     @Query("SELECT * FROM standart_table ORDER BY name")
     LiveData<List<Standart>> getAllStandarts();
+    @Query("SELECT * FROM standart_table WHERE userLogin = :userLogin ORDER BY name")
+    LiveData<List<Standart>> getAllStandartsByLogin(String userLogin);
 
     @Query("Select * FROM standart_table WHERE nameOfOrg = :nameOfOrg")
     Standart getStandartByNameOfOrg(String nameOfOrg);
 
     @Query("Select * FROM standart_table WHERE name = :name")
     Standart getStandartByName(String name);
+
+    @Query("DELETE FROM standart_table WHERE userLogin = :userLogin")
+    void deleteAllByUserLogin(String userLogin);
 
     @Query("Select * FROM standart_table WHERE yearPublish = :yearPublish")
     Standart getStandartByYearOfPublish(String yearPublish);
