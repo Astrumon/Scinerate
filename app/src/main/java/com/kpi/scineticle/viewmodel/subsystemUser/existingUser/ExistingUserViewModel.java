@@ -25,6 +25,7 @@ public class ExistingUserViewModel extends AndroidViewModel {
         mApplication = application;
     }
 
+
     public class ExistingUser {
         private InputViewModel mInputViewModel;
         private EditViewModel mEditViewModel;

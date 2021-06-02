@@ -29,6 +29,16 @@ public class StandartViewModel extends AndroidViewModel {
         mStandart = new Standart();
     }
 
+    public void setValues(Standart standart) {
+        nameOfOrg.setValue(standart.getNameOfOrg());
+        yearPublish.setValue(standart.getYearPublish());
+        name.setValue(standart.getName());
+        codeLetter.setValue(standart.getCodeLetter());
+        codeNumber.setValue(standart.getCodeNumber());
+        publish.setValue(standart.getPublish());
+        placePublish.setValue(standart.getPlacePublish());
+    }
+
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
     }

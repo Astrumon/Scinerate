@@ -5,8 +5,10 @@ import androidx.room.PrimaryKey;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 
+import java.io.Serializable;
+
 @Entity(tableName = "standart_table")
-public class Standart extends ScientWork {
+public class Standart extends ScientWork implements Serializable {
 
     @PrimaryKey
     private int id;

@@ -25,6 +25,19 @@ public class BibliographicPointerViewModel extends AndroidViewModel {
     public MutableLiveData<String> sheet = new MutableLiveData<>();
     public MutableLiveData<String> additionally = new MutableLiveData<>();
 
+    public void setValues(BibliographicPointer bibliographicPointer) {
+        name.setValue(bibliographicPointer.getName());
+        numberOfRelease.setValue(bibliographicPointer.getNumberOfRelease());
+        authorOfRelease.setValue(bibliographicPointer.getAuthorOfRelease());
+        aouthorsOfPublish.setValue(bibliographicPointer.getAouthorsOfPublish());
+        place.setValue(bibliographicPointer.getPlace());
+        city.setValue(bibliographicPointer.getCity());
+        abbreviation.setValue(bibliographicPointer.getAbbreviation());
+        year.setValue(bibliographicPointer.getYear());
+        sheet.setValue(bibliographicPointer.getSheet());
+        additionally.setValue(bibliographicPointer.getAdditionally());
+    }
+
     public BibliographicPointerViewModel(@NonNull Application application) {
         super(application);
         mBibliographicPointer = new BibliographicPointer();

@@ -30,6 +30,10 @@ public class DissertationFragment extends Fragment {
     private Context mContext;
     private String userLogin;
 
+    public static final String ID = "com.kpi.scienticle.dissertation.ID";
+    public static final String SCIENT_WORK = "com.kpi.scienticle.dissertation.SCIENT_WORK";
+
+
     public static DissertationFragment newInstance() {
         return new DissertationFragment();
     }

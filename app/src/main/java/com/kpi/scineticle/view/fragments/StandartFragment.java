@@ -29,6 +29,9 @@ public class StandartFragment extends Fragment {
     private Context mContext;
     private String userLogin;
 
+    public static final String ID = "com.kpi.scienticle.standart.ID";
+    public static final String SCIENT_WORK = "com.kpi.scienticle.standart.SCIENT_WORK";
+
     public static StandartFragment newInstance() {
         return new StandartFragment();
     }

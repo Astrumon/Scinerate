@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ActivityScientificWorkBinding;
 import com.kpi.scineticle.model.Data;
+import com.kpi.scineticle.model.TypeOfWorkIntentGenerator;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
 import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointer;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
@@ -49,11 +49,12 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
     private ActivityScientificWorkBinding mBinding;
     private Context mContext;
     private String login;
+    private TypeOfWorkIntentGenerator mTypeOfWorkIntentGenerator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         setContentView(R.layout.activity_scientific_work);
 
         setLogin();
@@ -74,12 +75,13 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         mScientificWorkAdapter.setOnItemClickListener(new ScientificWorkAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Object o) {
-                Toast.makeText(mContext, "TEST", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "TEST ", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onLongItemClick(Object o) {
-                Toast.makeText(mContext, "LONG_TEST", Toast.LENGTH_SHORT).show();
+                mTypeOfWorkIntentGenerator = new TypeOfWorkIntentGenerator(mContext, EditScientificWorkActivity.class);
+                startActivity(mTypeOfWorkIntentGenerator.getIntent(o));
             }
         });
     }
@@ -88,7 +90,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         mBinding.buttonAddArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ScientificWorkMainActivity.this, AddEditScientificWorkActivity.class);
+                Intent intent = new Intent(ScientificWorkMainActivity.this, AddScientificWorkActivity.class);
                 intent.putExtra("login", login);
                 startActivityForResult(intent, ADD_ARTICLE_REQUEST);
             }

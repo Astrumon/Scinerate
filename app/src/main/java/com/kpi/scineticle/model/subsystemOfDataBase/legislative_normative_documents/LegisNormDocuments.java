@@ -5,8 +5,10 @@ import androidx.room.PrimaryKey;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 
+import java.io.Serializable;
+
 @Entity (tableName = "legislative_normative_documents")
-public class LegisNormDocuments extends ScientWork {
+public class LegisNormDocuments extends ScientWork implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
 

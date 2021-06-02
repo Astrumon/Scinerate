@@ -45,7 +45,6 @@ public class ScientificWorkCRUDViewModel extends AndroidViewModel {
         this.userLogin = userLogin;
     }
 
-
     public ScientificWorkCRUDViewModel(@NonNull Application application) {
         super(application);
         this.application = application;

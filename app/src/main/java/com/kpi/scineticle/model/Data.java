@@ -28,7 +28,7 @@ public class Data {
     public static final int STANDART = 10;
     public static final int THESIS = 11;
 
-    int type;
+    public int type;
     public Article article;
     public Book book;
     public BibliographicPointer bibliographicPointer;
@@ -242,5 +242,53 @@ public class Data {
         }
 
         return datas;
+    }
+
+    public static int defineTypeOfData(Object o) {
+        if (o instanceof Article) {
+            return ARTICLE;
+        }
+
+        if (o instanceof Book) {
+            return BOOK;
+        }
+
+        if (o instanceof BibliographicPointer) {
+            return BIBLIOGRAPHIC_POINTER;
+        }
+
+        if (o instanceof Catalog) {
+            return CATALOG;
+        }
+
+        if (o instanceof Dissertation) {
+            return DISSERTATION;
+        }
+
+        if (o instanceof ElectronicResource) {
+            return ELECTRONIC_RESOURCE;
+        }
+
+        if (o instanceof LegisNormDocuments) {
+            return LEGIS_NORM_DOCUMENTS;
+        }
+
+        if (o instanceof Patent) {
+            return PATENT;
+        }
+
+        if (o instanceof Preprint) {
+            return PREPRINT;
+        }
+
+        if (o instanceof Standart) {
+            return STANDART;
+        }
+
+        if (o instanceof Thesis) {
+            return THESIS;
+        }
+
+        return 0;
     }
 }

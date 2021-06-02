@@ -29,6 +29,9 @@ public class ElResourceFragment extends Fragment {
     private Context mContext;
     private String userLogin;
 
+    public static final String ID = "com.kpi.scienticle.electronic_resource.ID";
+    public static final String SCIENT_WORK = "com.kpi.scienticle.electronic_resource.SCIENT_WORK";
+
     public static ElResourceFragment newInstance() {
         return new ElResourceFragment();
     }

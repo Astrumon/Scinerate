@@ -23,6 +23,16 @@ public class ElResourceViewModel extends AndroidViewModel {
     private String userLogin;
     private ElectronicResource mElectronicResource;
 
+    public void setValues(ElectronicResource electronicResource) {
+        authors.setValue(electronicResource.getAuthors());
+        name.setValue(electronicResource.getName());
+        publish.setValue(electronicResource.getPublish());
+        placePublish.setValue(electronicResource.getPlacePublish());
+        date.setValue(electronicResource.getDate());
+        updateDate.setValue(electronicResource.getUpdateDate());
+        url.setValue(electronicResource.getUrl());
+    }
+
     public ElResourceViewModel(@NonNull Application application) {
         super(application);
         mApplication = application;

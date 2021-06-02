@@ -3,6 +3,7 @@ package com.kpi.scineticle.viewmodel.subsystemUser.existingUser;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.ActionMenuItem;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
@@ -23,6 +24,16 @@ public class PreprintViewModel extends AndroidViewModel {
     private String userLogin;
     private Preprint mPreprint;
 
+    public void setValues(Preprint preprint) {
+        authors.setValue(preprint.getAuthors());
+        name.setValue(preprint.getName());
+        city.setValue(preprint.getCity());
+        place.setValue(preprint.getPlace());
+        year.setValue(preprint.getYear());
+        sheet.setValue(preprint.getSheet());
+        organisation.setValue(preprint.getOrganisation());
+        abbreviation.setValue(preprint.getAbbreviation());
+    }
     public PreprintViewModel(@NonNull Application application) {
         super(application);
         mApplication = application;

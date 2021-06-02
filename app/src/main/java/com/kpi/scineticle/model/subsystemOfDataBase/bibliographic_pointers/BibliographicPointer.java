@@ -5,8 +5,10 @@ import androidx.room.PrimaryKey;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 
+import java.io.Serializable;
+
 @Entity(tableName = "bibliographic_pointers_table")
-public class BibliographicPointer extends ScientWork {
+public class BibliographicPointer extends ScientWork implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;

@@ -22,6 +22,16 @@ public class DissertationViewModel extends AndroidViewModel {
     private String userLogin;
     private Dissertation mDissertation;
 
+   public void setValues(Dissertation dissertation) {
+       authors.setValue(dissertation.getAuthors());
+       name.setValue(dissertation.getName());
+       publish.setValue(dissertation.getPublish());
+       type.setValue(dissertation.getType());
+       year.setValue(dissertation.getYear());
+       countOfSheets.setValue(dissertation.getCountOfSheets());
+       place.setValue(dissertation.getPlace());
+   }
+
     public DissertationViewModel(@NonNull Application application) {
         super(application);
         mApplication = application;

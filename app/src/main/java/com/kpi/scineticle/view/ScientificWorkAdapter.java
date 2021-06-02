@@ -317,7 +317,7 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
         void onLongItemClick(T t);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener<Data> listener) {
         mListener = listener;
     }
 }

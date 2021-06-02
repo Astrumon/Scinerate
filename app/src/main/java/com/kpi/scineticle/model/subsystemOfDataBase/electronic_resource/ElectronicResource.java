@@ -5,8 +5,10 @@ import androidx.room.PrimaryKey;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 
+import java.io.Serializable;
+
 @Entity (tableName = "el_resource_table")
-public class ElectronicResource extends ScientWork {
+public class ElectronicResource extends ScientWork implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
 

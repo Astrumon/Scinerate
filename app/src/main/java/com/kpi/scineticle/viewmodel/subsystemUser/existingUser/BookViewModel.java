@@ -23,6 +23,16 @@ public class BookViewModel extends AndroidViewModel {
     private String userLogin;
     private Book mBook;
 
+    public void setValues(Book book) {
+        authors.setValue(book.getAuthors());
+        name.setValue(book.getName());
+        publish.setValue(book.getPublish());
+        statement.setValue(book.getStatement());
+        year.setValue(book.getYear());
+        part.setValue(book.getPart());
+        place.setValue(book.getPlace());
+        countOfSheets.setValue(book.getCountOfSheets());
+    }
     public BookViewModel(@NonNull Application application) {
         super(application);
         mApplication = application;

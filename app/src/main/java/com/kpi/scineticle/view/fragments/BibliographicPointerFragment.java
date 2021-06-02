@@ -29,6 +29,8 @@ public class BibliographicPointerFragment extends Fragment {
     private String userLogin;
     private BibliographicPointerViewModel.NewBibliographicPointer mNewBibliographicPointer;
     private BibliographicPointerFragmentBinding mBibliographicPointerFragmentBinding;
+    public static final String SCIENT_WORK = "com.kpi.scienticle.bibliographic.SCIENT_WORK";
+    public static final String ID = "com.kpi.scienticle.bibliographic.ID";
 
     public static BibliographicPointerFragment newInstance() {
         return new BibliographicPointerFragment();

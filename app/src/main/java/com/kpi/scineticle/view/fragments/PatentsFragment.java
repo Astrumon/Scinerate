@@ -29,6 +29,9 @@ public class PatentsFragment extends Fragment {
     private Context mContext;
     private String userLogin;
 
+    public static final String ID = "com.kpi.scienticle.patents.ID";
+    public static final String SCIENT_WORK = "com.kpi.scienticle.patents.SCIENT_WORK";
+
     public static PatentsFragment newInstance() {
         return new PatentsFragment();
     }

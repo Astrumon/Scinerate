@@ -5,8 +5,10 @@ import androidx.room.PrimaryKey;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 
+import java.io.Serializable;
+
 @Entity (tableName = "preprint_table")
-public class Preprint extends ScientWork {
+public class Preprint extends ScientWork implements Serializable {
 
     @PrimaryKey
     private int id;

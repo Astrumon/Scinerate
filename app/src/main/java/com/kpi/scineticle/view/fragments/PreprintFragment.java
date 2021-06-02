@@ -29,6 +29,9 @@ public class PreprintFragment extends Fragment {
     private Context mContext;
     private String userLogin;
 
+    public static final String ID = "com.kpi.scienticle.preprints.ID";
+    public static final String SCIENT_WORK = "com.kpi.scienticle.preprints.SCIENT_WORK";
+
     public static PreprintFragment newInstance() {
         return new PreprintFragment();
     }

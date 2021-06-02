@@ -29,6 +29,9 @@ public class CatalogFragment extends Fragment {
     private Context mContext;
     private String userLogin;
 
+    public static final String SCIENT_WORK = "com.kpi.scienticle.catalog.SCIENT_WORK";
+    public static final String ID = "com.kpi.scienticle.catalog.ID";
+
     public static CatalogFragment newInstance() {
         return new CatalogFragment();
     }

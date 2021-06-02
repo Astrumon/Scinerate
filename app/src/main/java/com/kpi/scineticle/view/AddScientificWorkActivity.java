@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,9 +19,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.kpi.scineticle.R;
-import com.kpi.scineticle.model.subsystemOfDataBase.catalogs.Catalog;
-import com.kpi.scineticle.model.subsystemOfDataBase.dissertations.Dissertation;
-import com.kpi.scineticle.model.subsystemOfDataBase.electronic_resource.ElectronicResource;
 import com.kpi.scineticle.view.fragments.ArticleFragment;
 import com.kpi.scineticle.view.fragments.BibliographicPointerFragment;
 import com.kpi.scineticle.view.fragments.BookFragment;
@@ -35,8 +31,8 @@ import com.kpi.scineticle.view.fragments.PreprintFragment;
 import com.kpi.scineticle.view.fragments.StandartFragment;
 import com.kpi.scineticle.view.fragments.ThesisFragment;
 
-public class AddEditScientificWorkActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private FrameLayout container;
+public class AddScientificWorkActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
     private FragmentManager mFragmentManager;
     private ArticleFragment mArticleFragment;
     private BookFragment mBookFragment;
@@ -53,9 +49,7 @@ public class AddEditScientificWorkActivity extends AppCompatActivity implements 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit_scientific_work);
-
-        container = (FrameLayout) findViewById(R.id.container);
+        setContentView(R.layout.activity_add_scientific_work);
 
         initFragments();
         setArgumentsToFragments();

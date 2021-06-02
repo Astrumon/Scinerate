@@ -29,6 +29,10 @@ public class ThesisFragment extends Fragment {
     private Context mContext;
     private String userLogin;
 
+    public static final String ID = "com.kpi.scienticle.theses.ID";
+    public static final String SCIENT_WORK = "com.kpi.scienticle.theses.SCIENT_WORK";
+
+
     public static ThesisFragment newInstance() {
         return new ThesisFragment();
     }

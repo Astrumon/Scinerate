@@ -22,6 +22,15 @@ public class ArticleViewModel extends AndroidViewModel {
     private Application mApplication;
     private final Article mArticle;
 
+    public void setValues(Article article) {
+        authors.setValue(article.getAuthors());
+        nameJournal.setValue(article.getNameJournal());
+        nameArticle.setValue(article.getNameArticle());
+        date.setValue(article.getDate());
+        number.setValue(article.getNumber());
+        sheets.setValue(article.getSheets());
+    }
+
     public String getIdUser() {
         return userLogin;
     }

@@ -29,6 +29,17 @@ public class NormDocumentViewModel extends AndroidViewModel {
         mLegisNormDocuments = new LegisNormDocuments();
     }
 
+    public void setValues(LegisNormDocuments legisNormDocuments) {
+        type.setValue(legisNormDocuments.getType());
+        name.setValue(legisNormDocuments.getName());
+        dateAccess.setValue(legisNormDocuments.getDateAccess());
+        datePublish.setValue(legisNormDocuments.getDateAccess());
+        number.setValue(legisNormDocuments.getNumber());
+        serial.setValue(legisNormDocuments.getSerial());
+        sheets.setValue(legisNormDocuments.getSheets());
+        publish.setValue(legisNormDocuments.getPublish());
+    }
+
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
     }

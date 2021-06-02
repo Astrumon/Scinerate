@@ -5,8 +5,10 @@ import androidx.room.PrimaryKey;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 
+import java.io.Serializable;
+
 @Entity (tableName = "catalog_table")
-public class Catalog extends ScientWork {
+public class Catalog extends ScientWork implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;

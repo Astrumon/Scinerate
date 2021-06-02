@@ -30,6 +30,19 @@ public class CatalogViewModel extends AndroidViewModel {
         mCatalog = new Catalog();
     }
 
+
+    public void setValues(Catalog catalog) {
+        authors.setValue(catalog.getAuthors());
+        name.setValue(catalog.getName());
+        publish.setValue(catalog.getPublish());
+        city.setValue(catalog.getCity());
+        year.setValue(catalog.getYear());
+        sheet.setValue(catalog.getSheet());
+        place.setValue(catalog.getPlace());
+        organisation.setValue(catalog.getOrganisation());
+        abbreviation.setValue(catalog.getAbbreviation());
+    }
+
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
     }

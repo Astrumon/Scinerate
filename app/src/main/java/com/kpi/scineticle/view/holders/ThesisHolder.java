@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kpi.scineticle.databinding.ItemThesisWorkBinding;
+import com.kpi.scineticle.model.Data;
 import com.kpi.scineticle.model.subsystemOfDataBase.standarts.Standart;
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.Thesis;
 import com.kpi.scineticle.view.ScientificWorkAdapter;

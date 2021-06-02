@@ -25,6 +25,9 @@ import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 
 public class BookFragment extends Fragment {
 
+    public static final String SCIENT_WORK = "com.kpi.scienticle.book.SCIENT_WORK";
+    public static final String ID = "com.kpi.scienticle.book.ID";
+
     private BookFragmentBinding mBookFragmentBinding;
     private BookViewModel.NewBook mNewBook;
     private Context mContext;

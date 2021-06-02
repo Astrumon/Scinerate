@@ -29,6 +29,11 @@ public class NormDocumentFragment extends Fragment {
     private Context mContext;
     private String userLogin;
 
+
+    public static final String ID = "com.kpi.scienticle.documents.ID";
+    public static final String SCIENT_WORK = "com.kpi.scienticle.documents.SCIENT_WORK";
+
+
     public static NormDocumentFragment newInstance() {
         return new NormDocumentFragment();
     }

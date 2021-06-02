@@ -30,6 +30,17 @@ public class ThesisViewModel extends AndroidViewModel {
         mApplication = application;
     }
 
+    public void setValues(Thesis thesis) {
+        authors.setValue(thesis.getAuthors());
+        name.setValue(thesis.getName());
+        namePublish.setValue(thesis.getNamePublish());
+        date.setValue(thesis.getDate());
+        placeConference.setValue(thesis.getPlaceConference());
+        year.setValue(thesis.getYear());
+        sheets.setValue(thesis.getSheets());
+        placePublish.setValue(thesis.getPlacePublish());
+    }
+
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
     }

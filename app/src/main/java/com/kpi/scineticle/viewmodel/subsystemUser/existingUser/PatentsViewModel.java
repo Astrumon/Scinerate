@@ -28,6 +28,15 @@ public class PatentsViewModel extends AndroidViewModel {
         mPatent = new Patent();
     }
 
+   public void setValues(Patent patent) {
+       authors.setValue(patent.getAuthors());
+       name.setValue(patent.getName());
+       namePatentOwner.setValue(patent.getNamePatentOwner());
+       country.setValue(patent.getCountry());
+       number.setValue(patent.getNumber());
+       date.setValue(patent.getDate());
+   }
+
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
     }
