@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity(tableName = "standart_table")
 public class Standart extends ScientWork implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String userLogin;

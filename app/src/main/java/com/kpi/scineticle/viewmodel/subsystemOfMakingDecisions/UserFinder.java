@@ -26,11 +26,7 @@ public class UserFinder {
             return false;
         }
 
-        if (dbUser.getEmail().equals(user.getEmail()) && dbUser.getPassword().equals(user.getPassword())) {
-            return true;
-        }
-
-        return false;
+        return dbUser.getEmail().equals(user.getEmail()) && dbUser.getPassword().equals(user.getPassword());
     }
 
     public boolean isExistUserForRegistration(User user) {

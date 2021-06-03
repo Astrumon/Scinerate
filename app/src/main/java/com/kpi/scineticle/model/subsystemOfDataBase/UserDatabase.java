@@ -39,7 +39,7 @@ import com.kpi.scineticle.model.subsystemOfDataBase.user.UserDao;
                       Patent.class, Thesis.class,
                       ElectronicResource.class, LegisNormDocuments.class,
                       Standart.class, Preprint.class,
-                      Catalog.class, BibliographicPointer.class}, version = 15)
+                      Catalog.class, BibliographicPointer.class}, version = 16)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;

@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity (tableName = "preprint_table")
 public class Preprint extends ScientWork implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String userLogin;
