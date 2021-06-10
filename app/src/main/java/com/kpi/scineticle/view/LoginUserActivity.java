@@ -20,8 +20,6 @@ import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ExistingUserViewM
 public class LoginUserActivity extends AppCompatActivity {
     private ActivityLoginUserBinding mBinding;
     private ExistingUserViewModel.ExistingUser mExistingUser;
-    private static final int SCIENTIFIC_WORK_REQUEST = 5;
-    public static final String LOGIN = "EMAIL_OF_AUTHORISATION_USER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +49,11 @@ public class LoginUserActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.close:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.close) {
+            finish();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initDataBinding() {

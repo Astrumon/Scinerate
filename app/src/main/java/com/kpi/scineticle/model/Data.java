@@ -12,10 +12,11 @@ import com.kpi.scineticle.model.subsystemOfDataBase.preprints.Preprint;
 import com.kpi.scineticle.model.subsystemOfDataBase.standarts.Standart;
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.Thesis;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Data {
+public class Data implements Serializable {
     public static final int ARTICLE = 1;
     public static final int BOOK = 2;
     public static final int BIBLIOGRAPHIC_POINTER = 3;

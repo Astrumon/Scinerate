@@ -128,57 +128,57 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
         switch (holder.getItemViewType()) {
             case Data.ARTICLE:
                ArticleHolder articleHolder = (ArticleHolder)holder;
-               articleHolder.onBind((Article)getScientWork(position).article);
+               articleHolder.onBind(getScientWork(position).article);
                articleHolder.setListener(mListener);
                break;
             case Data.BOOK:
                 BookHolder bookHolder = (BookHolder) holder;
-                bookHolder.onBind((Book)getScientWork(position).book);
+                bookHolder.onBind(getScientWork(position).book);
                 bookHolder.setListener(mListener);
                 break;
             case Data.BIBLIOGRAPHIC_POINTER:
                 BibliographicHolder bibliographicHolder = (BibliographicHolder) holder;
-                bibliographicHolder.onBind((BibliographicPointer)getScientWork(position).bibliographicPointer);
+                bibliographicHolder.onBind(getScientWork(position).bibliographicPointer);
                 bibliographicHolder.setListener(mListener);
                 break;
             case Data.CATALOG:
                 CatalogHolder catalogHolder = (CatalogHolder) holder;
-                catalogHolder.onBind((Catalog) getScientWork(position).catalog);
+                catalogHolder.onBind(getScientWork(position).catalog);
                 catalogHolder.setListener(mListener);
                 break;
             case Data.DISSERTATION:
                 DissertationHolder dissertationHolder = (DissertationHolder) holder;
-                dissertationHolder.onBind((Dissertation) getScientWork(position).dissertation);
+                dissertationHolder.onBind(getScientWork(position).dissertation);
                 dissertationHolder.setListener(mListener);
                 break;
             case Data.ELECTRONIC_RESOURCE:
                 ElectronicResourceHolder electronicResourceHolder = (ElectronicResourceHolder) holder;
-                electronicResourceHolder.onBind((ElectronicResource) getScientWork(position).electronicResource);
+                electronicResourceHolder.onBind(getScientWork(position).electronicResource);
                 electronicResourceHolder.setListener(mListener);
                 break;
             case Data.LEGIS_NORM_DOCUMENTS:
                 LegisNormDocumentsHolder legisNormDocumentsHolder = (LegisNormDocumentsHolder) holder;
-                legisNormDocumentsHolder.onBind((LegisNormDocuments) getScientWork(position).legisNormDocuments);
+                legisNormDocumentsHolder.onBind(getScientWork(position).legisNormDocuments);
                 legisNormDocumentsHolder.setListener(mListener);
                 break;
             case Data.PATENT:
                 PatentHolder patentHolder = (PatentHolder) holder;
-                patentHolder.onBind((Patent) getScientWork(position).patent);
+                patentHolder.onBind(getScientWork(position).patent);
                 patentHolder.setListener(mListener);
                 break;
             case Data.PREPRINT:
                 PreprintHolder preprintHolder = (PreprintHolder) holder;
-                preprintHolder.onBind((Preprint) getScientWork(position).preprint);
+                preprintHolder.onBind(getScientWork(position).preprint);
                 preprintHolder.setListener(mListener);
                 break;
             case Data.STANDART:
                 StandartHolder standartHolder = (StandartHolder) holder;
-                standartHolder.onBind((Standart) getScientWork(position).standart);
+                standartHolder.onBind(getScientWork(position).standart);
                 standartHolder.setListener(mListener);
                 break;
             case Data.THESIS:
                 ThesisHolder thesisHolder = (ThesisHolder) holder;
-                thesisHolder.onBind((Thesis) getScientWork(position).thesis);
+                thesisHolder.onBind(getScientWork(position).thesis);
                 thesisHolder.setListener(mListener);
                 break;
         }
@@ -253,7 +253,6 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
 
     public void setArticles(List<Article> list) {
         mListArticle = list;
-
         notifyDataSetChanged();
     }
 
@@ -308,6 +307,10 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
         notifyDataSetChanged();
     }
 
+    public List<Data> getData() {
+        return mData;
+    }
+
     public Data getScientWork(int position) {
         return mData.get(position);
     }
@@ -315,6 +318,7 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
     public interface OnItemClickListener<T> {
         void onItemClick(T t);
         void onLongItemClick(T t);
+
     }
 
     public void setOnItemClickListener(OnItemClickListener<Data> listener) {

@@ -39,7 +39,7 @@ import com.kpi.scineticle.model.subsystemOfDataBase.user.UserDao;
                       Patent.class, Thesis.class,
                       ElectronicResource.class, LegisNormDocuments.class,
                       Standart.class, Preprint.class,
-                      Catalog.class, BibliographicPointer.class}, version = 16)
+                      Catalog.class, BibliographicPointer.class}, version = 17)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
@@ -118,9 +118,9 @@ public abstract class UserDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            mUserDao.insert(new User("Name 1", "Mail 1", "Phone 1", "LastName 1", "test123"));
-            mUserDao.insert(new User("Name 2", "Mail 2", "Phone 2", "LastName 1", "test123"));
-            mUserDao.insert(new User("Name 3", "Mail 3", "Phone 3", "LastName 1", "test123"));
+            mUserDao.insert(new User("Name 1", "Mail 1", "LastName 1", "test123"));
+            mUserDao.insert(new User("Name 2", "Mail 2" ,"LastName 1", "test123"));
+            mUserDao.insert(new User("Name 3", "Mail 3",  "LastName 1", "test123"));
             return null;
         }
     }

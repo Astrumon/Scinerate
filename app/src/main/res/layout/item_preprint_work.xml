@@ -27,7 +27,7 @@
                 android:id="@+id/preprint_type_of_work"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{preprintWork.typeOfWork}"
+                android:text="@{preprintWork.typeOfWork + ':'}"
                 android:layout_marginStart="@dimen/margin_name"
                 android:layout_marginLeft="@dimen/margin_name"
                 android:textColor="@color/text"

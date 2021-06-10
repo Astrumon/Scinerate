@@ -138,4 +138,18 @@ public class UserDeleteViewModel extends DeleteViewModel<User> {
     public void deleteAllBooks() {
         mBookRepository.deleteAllBooks();
     }
+
+    public void deleteAllWorks() {
+        deleteAllArticles();
+        deleteAllBooks();
+        deleteAllCatalogs();
+        deleteAllBibliographicPointers();
+        deleteAllDissertation();
+        deleteAllElResources();
+        deleteAllPatents();
+        deleteAllPreprints();
+        deleteAllThesis();
+        deleteAllLegisNormDocuments();
+        deleteAllStandarts();
+    }
 }

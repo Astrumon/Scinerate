@@ -29,17 +29,14 @@ public class User {
 
     private String email;
 
-    private String phoneNumber;
-
     public User() {
     }
 
-    public User(String name, String email, String phoneNumber, String lastName, String password) {
+    public User(String name, String email, String lastName, String password) {
         this.name = name;
         this.email = email;
         this.lastName = lastName;
         this.password = password;
-        this.phoneNumber = phoneNumber;
     }
 
     public String getLastName() {
@@ -66,9 +63,6 @@ public class User {
         return email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
     public int getId() {
         return id;
@@ -86,9 +80,6 @@ public class User {
         this.email = email;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public boolean isValidName() {
         if (this.name != null && !TextUtils.isEmpty(name) && Pattern.compile("[\\p{L}| a-zA-Z]+").matcher(name).matches()) {
@@ -114,13 +105,6 @@ public class User {
         }
     }
 
-    public boolean isValidPhone() {
-        if (this.phoneNumber != null && !TextUtils.isEmpty(phoneNumber) && Pattern.compile("^\\+38\\d{10}$").matcher(phoneNumber).matches()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
     public boolean isValidPassword() throws InvalidPasswordException {
@@ -131,6 +115,6 @@ public class User {
 
 
     public String toString() {
-        return "User[name= " + name + ", phone= " + phoneNumber + ", mail= " + email + "]";
+        return "User[name= " + name + ", mail= " + email + "]";
     }
 }

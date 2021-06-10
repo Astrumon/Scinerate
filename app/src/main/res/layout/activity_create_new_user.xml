@@ -36,14 +36,6 @@
              android:inputType="text"
              tools:ignore="MissingConstraints" />
 
-
-        <EditText
-            android:id="@+id/edit_text_phone"
-            android:text="@={newUserViewModel.phone}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/phone_380"
-            tools:ignore="MissingConstraints" />
         <EditText
             android:id="@+id/edit_text_mail"
             android:text="@={newUserViewModel.email}"

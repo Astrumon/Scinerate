@@ -12,4 +12,5 @@
     <color name="title_color">#807676</color>
     <color name="article_color">#B3D5B8</color>
     <color name="background_color">#B3D5B8</color>
+    <color name="type_of_work">#009688</color>
 </resources>

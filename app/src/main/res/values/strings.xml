@@ -60,6 +60,8 @@
     <string name="authorsOfRelease">Автори випуску</string>
     <string name="authorsOfPublish">Автори редакції</string>
     <string name="additionally">Додаткова інформація</string>
+    <string name="organisatino">Організація</string>
+    <string name="publisher">Видавництво</string>
     <string-array name="articles">
         <item>@string/article</item>
         <item>@string/book</item>

@@ -29,10 +29,6 @@ public class UserValidation {
             return false;
         }
 
-        if (!isValidPhone(userData)) {
-            Log.d("UserDataValid", "p " + userData.getPhoneNumber());
-            return false;
-        }
 
         if (!isValidEmail(userData)) {
             Log.d("UserDataValid", "m " + userData.getEmail());
@@ -67,10 +63,6 @@ public class UserValidation {
         if (user == null) {
             mUserOutputInfo.showError("Невірно ведений телефон");
             return false;
-        }
-        if (!user.isValidPhone()) {
-            mUserOutputInfo.showError("Невірно ведений телефон");
-            result = false;
         }
 
         return result;

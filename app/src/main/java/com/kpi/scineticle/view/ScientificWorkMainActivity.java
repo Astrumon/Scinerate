@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -24,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ActivityScientificWorkBinding;
 import com.kpi.scineticle.model.Data;
+import com.kpi.scineticle.model.ReportGenerator;
 import com.kpi.scineticle.model.TypeOfWorkIntentGenerator;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
 import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointer;
@@ -43,7 +48,6 @@ import java.util.List;
 
 public class ScientificWorkMainActivity extends AppCompatActivity {
     public static final int ADD_ARTICLE_REQUEST = 1;
-    public static final int EDIT_ARTICLE_REQUEST = 2;
     private ScientificWorkAdapter mScientificWorkAdapter;
     private ScientificWorkCRUDViewModel mScientificWorkCRUDViewModel;
     private ActivityScientificWorkBinding mBinding;
@@ -58,9 +62,9 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scientific_work);
 
         setLogin();
+        setTitle(login);
 
         mScientificWorkAdapter = new ScientificWorkAdapter();
-
         initDataBinding();
         setupListScienticView(mBinding.recyclerArticle);
 
@@ -75,7 +79,8 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         mScientificWorkAdapter.setOnItemClickListener(new ScientificWorkAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Object o) {
-                Toast.makeText(mContext, "TEST ", Toast.LENGTH_SHORT).show();
+                mTypeOfWorkIntentGenerator = new TypeOfWorkIntentGenerator(mContext, ReportActivity.class);
+                startActivity(mTypeOfWorkIntentGenerator.getIntent(o));
             }
 
             @Override
@@ -137,64 +142,54 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         switch (type) {
             case Data.ARTICLE:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mArticleRepository
-                        .delete((Article) mScientificWorkAdapter.getScientWork(position).article);
+                        .delete(mScientificWorkAdapter.getScientWork(position).article);
                 break;
             case Data.BOOK:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mBookRepository
-                        .delete((Book) mScientificWorkAdapter.getScientWork(position).book);
+                        .delete(mScientificWorkAdapter.getScientWork(position).book);
                 break;
             case Data.BIBLIOGRAPHIC_POINTER:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mBibliographicRepository
-                        .delete((BibliographicPointer) mScientificWorkAdapter.getScientWork(position).bibliographicPointer);
+                        .delete(mScientificWorkAdapter.getScientWork(position).bibliographicPointer);
                 break;
             case Data.CATALOG:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mCatalogRepository
-                        .delete((Catalog) mScientificWorkAdapter.getScientWork(position).catalog);
+                        .delete(mScientificWorkAdapter.getScientWork(position).catalog);
                 break;
             case Data.DISSERTATION:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mDissertationRepository
-                        .delete((Dissertation) mScientificWorkAdapter.getScientWork(position).dissertation);
+                        .delete(mScientificWorkAdapter.getScientWork(position).dissertation);
                 break;
             case Data.ELECTRONIC_RESOURCE:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mElectronicResourceRepository
-                        .delete((ElectronicResource) mScientificWorkAdapter.getScientWork(position).electronicResource);
+                        .delete(mScientificWorkAdapter.getScientWork(position).electronicResource);
                 break;
             case Data.LEGIS_NORM_DOCUMENTS:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mLegisNormDocumentsRepository
-                        .delete((LegisNormDocuments) mScientificWorkAdapter.getScientWork(position).legisNormDocuments);
+                        .delete(mScientificWorkAdapter.getScientWork(position).legisNormDocuments);
                 break;
             case Data.PATENT:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mPatentRepository
-                        .delete((Patent) mScientificWorkAdapter.getScientWork(position).patent);
+                        .delete(mScientificWorkAdapter.getScientWork(position).patent);
                 break;
             case Data.PREPRINT:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mPreprintRepository
-                        .delete((Preprint) mScientificWorkAdapter.getScientWork(position).preprint);
+                        .delete(mScientificWorkAdapter.getScientWork(position).preprint);
                 break;
             case Data.STANDART:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mStandartRepository
-                        .delete((Standart) mScientificWorkAdapter.getScientWork(position).standart);
+                        .delete(mScientificWorkAdapter.getScientWork(position).standart);
                 break;
             case Data.THESIS:
                 mScientificWorkCRUDViewModel.getUserDeleteViewModel().mThesisRepository
-                        .delete((Thesis) mScientificWorkAdapter.getScientWork(position).thesis);
+                        .delete(mScientificWorkAdapter.getScientWork(position).thesis);
                 break;
         }
 
     }
 
     public void deleteAllWorks() {
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mArticleRepository.deleteAllArticles(login);
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mBookRepository.deleteAllBooks(login);
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mCatalogRepository.deleteAllCatalogs(login);
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mDissertationRepository.deleteAllDissertations(login);
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mElectronicResourceRepository.deleteAllElectronicResources(login);
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mLegisNormDocumentsRepository.deleteAllLegisNormDocuments(login);
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mPatentRepository.deleteAllPatents(login);
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mPreprintRepository.deleteAllPreprints(login);
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mStandartRepository.deleteAllStandarts(login);
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mThesisRepository.deleteAllThesis(login);
-        mScientificWorkCRUDViewModel.getUserDeleteViewModel().mBibliographicRepository.deleteAllBibliographicPointers(login);
+        mScientificWorkCRUDViewModel.getUserDeleteViewModel().deleteAllWorks();
     }
 
     private void setupListScienticView(RecyclerView recyclerView) {
@@ -296,6 +291,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -313,7 +309,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // setupListScienticView(mBinding.recyclerArticle);
+
                             }
                         }).create().show();
 
@@ -326,6 +322,9 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
             case R.id.sortByDate:
                 //TODO sort by date article
                 Toast.makeText(this, "All articles sorted by date", Toast.LENGTH_SHORT).show();
+            case R.id.create_reports:
+                showAllReports();
+                return true;
             case R.id.close:
                 alertAboutExit();
                 return true;
@@ -335,6 +334,15 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void showAllReports() {
+        ScientificWorkAdapter adapter = (ScientificWorkAdapter) mBinding.recyclerArticle.getAdapter();
+        Intent intent = new Intent(mContext, ReportActivity.class);
+        ReportGenerator reportGenerator = new ReportGenerator();
+        reportGenerator.setAllData(adapter.getData());
+        intent.putExtra(ReportActivity.REPORT_ALL_DATA,  reportGenerator.generateAll());
+        startActivity(intent);
+    }
 
     @Override
     public void onBackPressed() {
@@ -354,7 +362,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
                 .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // setupListScienticView(mBinding.recyclerArticle);
+
                     }
                 }).create().show();
     }

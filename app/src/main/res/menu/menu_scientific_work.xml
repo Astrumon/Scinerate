@@ -11,6 +11,10 @@
     <item android:id="@+id/sortByDate"
         android:title="Відсортувати за датою"
         app:showAsAction="never"/>
+    <item android:id="@+id/create_reports"
+        android:title="Сформувати всі звіти"
+        app:showAsAction="never"
+        />
     <item
 
         android:id="@+id/close"

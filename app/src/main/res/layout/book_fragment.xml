@@ -41,7 +41,7 @@
     <EditText
         android:id="@+id/book_statement"
         android:text="@={bookViewModel.statement}"
-        android:hint="@string/statement"
+        android:hint="Тип (монографія)"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:inputType="text"

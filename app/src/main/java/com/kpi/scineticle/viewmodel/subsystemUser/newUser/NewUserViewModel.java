@@ -19,7 +19,6 @@ public class NewUserViewModel extends AndroidViewModel {
 
     public MutableLiveData<String> name = new MutableLiveData<>();
     public MutableLiveData<String> lastName = new MutableLiveData<>();
-    public MutableLiveData<String> phone = new MutableLiveData<>();
     public MutableLiveData<String> email = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
 
@@ -32,7 +31,6 @@ public class NewUserViewModel extends AndroidViewModel {
 
     public User getUserData() {
         mNewUser.setName(name.getValue());
-        mNewUser.setPhoneNumber(phone.getValue());
         mNewUser.setEmail(email.getValue());
         mNewUser.setPassword(password.getValue());
         mNewUser.setLastName(lastName.getValue());

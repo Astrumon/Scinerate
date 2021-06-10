@@ -21,11 +21,6 @@ import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.Alert;
 import com.kpi.scineticle.viewmodel.subsystemUser.newUser.NewUserViewModel;
 
 public class CreateNewUserActivity extends AppCompatActivity {
-    public static final String EXTRA_ID = "com.kpi.scineticle.EXTRA_ID";
-    public static final String EXTRA_NAME = "com.kpi.scineticle.EXTRA_NAME";
-    public static final String EXTRA_PHONE = "com.kpi.scineticle.EXTRA_PHONE";
-    public static final String EXTRA_MAIL = "com.kpi.scineticle.EXTRA_MAIL";
-    public static final String EXTRA_LAST_NAME = "com.kpi.scineticle.EXTRA_LAST_NAME";
 
     private ActivityCreateNewUserBinding mBinding;
     private NewUserViewModel.NewUser mNewUser;
@@ -109,12 +104,11 @@ public class CreateNewUserActivity extends AppCompatActivity {
     private void saveUser() {
         String name = mBinding.getNewUserViewModel().name.getValue();
         String lastName = mBinding.getNewUserViewModel().lastName.getValue();
-        String phone = mBinding.getNewUserViewModel().phone.getValue();
         String email = mBinding.getNewUserViewModel().email.getValue();
         String password = mBinding.getNewUserViewModel().password.getValue();
         String confirmPassword = mBinding.editTextConfirmPassword.getText().toString();
 
-        if (name.trim().isEmpty() || phone.trim().isEmpty() || email.trim().isEmpty()
+        if (name.trim().isEmpty() || email.trim().isEmpty()
                 || lastName.trim().isEmpty() || password.trim().isEmpty()) {
             Toast.makeText(this, "Будь-ласка, заповніть всі поля", Toast.LENGTH_SHORT).show();
             return;
@@ -123,20 +117,6 @@ public class CreateNewUserActivity extends AppCompatActivity {
             return;
         }
 
-        Intent data = new Intent();
-        data.putExtra(EXTRA_NAME, name);
-        data.putExtra(EXTRA_LAST_NAME, lastName);
-        data.putExtra(EXTRA_PHONE, phone);
-        data.putExtra(EXTRA_MAIL, email);
-
-
-        int id = getIntent().getIntExtra(EXTRA_ID, -1);
-        if (id != -1) {
-            data.putExtra(EXTRA_ID, id);
-        }
-
-        Toast.makeText(this, phone, Toast.LENGTH_SHORT).show();
-        setResult(RESULT_OK, data);
         finish();
     }
 
