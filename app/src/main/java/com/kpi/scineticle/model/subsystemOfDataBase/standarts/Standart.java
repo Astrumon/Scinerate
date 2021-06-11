@@ -128,4 +128,6 @@ public class Standart extends ScientWork implements Serializable {
                 ", placePublish='" + placePublish + '\'' +
                 '}';
     }
+
+
 }

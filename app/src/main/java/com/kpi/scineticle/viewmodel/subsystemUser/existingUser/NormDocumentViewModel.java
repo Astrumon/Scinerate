@@ -65,8 +65,8 @@ public class NormDocumentViewModel extends AndroidViewModel {
             mLegisNormDocumentsInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewLegisNormDocuments() {
-            mLegisNormDocumentsInputViewModel.insert(getLegisNormDocuments());
+        public boolean createNewLegisNormDocuments() {
+           return mLegisNormDocumentsInputViewModel.insert(getLegisNormDocuments());
         }
     }
 }

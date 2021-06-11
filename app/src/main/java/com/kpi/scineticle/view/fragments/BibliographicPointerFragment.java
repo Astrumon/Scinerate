@@ -23,6 +23,8 @@ import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ArticleViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BibliographicPointerViewModel;
 
+import java.util.Objects;
+
 public class BibliographicPointerFragment extends Fragment {
 
     private Context mContext;
@@ -61,9 +63,10 @@ public class BibliographicPointerFragment extends Fragment {
         mBibliographicPointerFragmentBinding.btnCreateBibliographicPointer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewBibliographicPointer.createNewBibliographicPointer();
-                Toast.makeText(mContext, "Бібліографічний покажчик успішно створено", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                if (mNewBibliographicPointer.createNewBibliographicPointer()) {
+                    Toast.makeText(mContext, "Бібліографічний покажчик успішно створено", Toast.LENGTH_SHORT).show();
+                    Objects.requireNonNull(getActivity()).finish();
+                }
             }
         });
     }

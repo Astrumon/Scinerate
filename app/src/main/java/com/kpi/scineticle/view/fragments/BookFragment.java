@@ -23,6 +23,8 @@ import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ArticleViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 
+import java.util.Objects;
+
 public class BookFragment extends Fragment {
 
     public static final String SCIENT_WORK = "com.kpi.scienticle.book.SCIENT_WORK";
@@ -61,9 +63,10 @@ public class BookFragment extends Fragment {
         mBookFragmentBinding.btnBookCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewBook.createNewBook();
-                Toast.makeText(mContext, "Книга успішно створена", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                if (mNewBook.createNewBook()) {
+                    Toast.makeText(mContext, "Книга успішно створена", Toast.LENGTH_SHORT).show();
+                    Objects.requireNonNull(getActivity()).finish();
+                }
             }
         });
     }

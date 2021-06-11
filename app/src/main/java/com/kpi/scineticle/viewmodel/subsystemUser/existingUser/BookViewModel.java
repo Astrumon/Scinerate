@@ -64,8 +64,8 @@ public class BookViewModel extends AndroidViewModel {
             mBookInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewBook() {
-            mBookInputViewModel.insert(getBook());
+        public boolean createNewBook() {
+            return  mBookInputViewModel.insert(getBook());
         }
     }
 }

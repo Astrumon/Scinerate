@@ -65,8 +65,8 @@ public class PreprintViewModel extends AndroidViewModel {
             mPreprintInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewPreprint() {
-            mPreprintInputViewModel.insert(getPreprintData());
+        public boolean createNewPreprint() {
+            return  mPreprintInputViewModel.insert(getPreprintData());
         }
     }
 }

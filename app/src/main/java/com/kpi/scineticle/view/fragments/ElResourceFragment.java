@@ -22,6 +22,8 @@ import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ElResourceViewModel;
 
+import java.util.Objects;
+
 public class ElResourceFragment extends Fragment {
 
     private ElResourceFragmentBinding mElResourceFragmentBinding;
@@ -60,9 +62,10 @@ public class ElResourceFragment extends Fragment {
         mElResourceFragmentBinding.btnElResourceCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewElectronicResource.createNewElectronicResource();
-                Toast.makeText(mContext, "Електронний ресурс успішно створено", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                if (mNewElectronicResource.createNewElectronicResource()) {
+                    Toast.makeText(mContext, "Електронний ресурс успішно створено", Toast.LENGTH_SHORT).show();
+                    Objects.requireNonNull(getActivity()).finish();
+                }
             }
         });
     }

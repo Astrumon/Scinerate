@@ -20,7 +20,10 @@ import android.widget.Toast;
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ArticleFragmentBinding;
 import com.kpi.scineticle.view.ScientificWorkMainActivity;
+import com.kpi.scineticle.viewmodel.subsystemOutputData.UserOutputInfo;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ArticleViewModel;
+
+import java.util.Objects;
 
 public class ArticleFragment extends Fragment {
 
@@ -70,9 +73,11 @@ public class ArticleFragment extends Fragment {
             mArticleFragmentBinding.btnCreateArticle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mNewArticle.createNewArticle();
-                    Toast.makeText(mContext, "Стаття успішно створена", Toast.LENGTH_SHORT).show();
-                    getActivity().finish();
+                    if (mNewArticle.createNewArticle()) {
+                        Toast.makeText(mContext, "Стаття успішно створена", Toast.LENGTH_SHORT).show();
+                        Objects.requireNonNull(getActivity()).finish();
+                    }
+
                 }
             });
         } else {

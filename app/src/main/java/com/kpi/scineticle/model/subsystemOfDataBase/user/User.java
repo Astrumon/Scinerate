@@ -82,29 +82,16 @@ public class User {
 
 
     public boolean isValidName() {
-        if (this.name != null && !TextUtils.isEmpty(name) && Pattern.compile("[\\p{L}| a-zA-Z]+").matcher(name).matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.name != null && !TextUtils.isEmpty(name) && Pattern.compile("[\\p{L}| a-zA-Z]+").matcher(name).matches();
     }
 
     public boolean isValidLastName() {
-        if (this.lastName != null && !TextUtils.isEmpty(lastName) && Pattern.compile("[\\p{L}| a-zA-Z]+").matcher(lastName).matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.lastName != null && !TextUtils.isEmpty(lastName) && Pattern.compile("[\\p{L}| a-zA-Z]+").matcher(lastName).matches();
     }
 
     public boolean isValidEmail() {
-        if (this.email != null && !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.email != null && !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-
 
 
     public boolean isValidPassword() throws InvalidPasswordException {

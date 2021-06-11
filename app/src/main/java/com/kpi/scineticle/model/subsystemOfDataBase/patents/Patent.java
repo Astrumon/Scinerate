@@ -115,4 +115,8 @@ public class Patent extends ScientWork implements Serializable {
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
     }
+
+    public boolean isValidAuthors() {
+        return super.isValidAuthors(authors);
+    }
 }

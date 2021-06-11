@@ -124,4 +124,8 @@ public class Article extends ScientWork implements Serializable {
                 ", userLogin=" + userLogin +
                 '}';
     }
+
+    public boolean isValidAuthors() {
+        return super.isValidAuthors(authors);
+    }
 }

@@ -1,5 +1,10 @@
 package com.kpi.scineticle.model.subsystemOfDataBase;
 
+import android.text.TextUtils;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public abstract class ScientWork {
 
     public static final String ARTICLE = "Стаття";
@@ -25,4 +30,18 @@ public abstract class ScientWork {
     }
 
     public abstract int getId();
+
+    public boolean isValidAuthors(String authors) {
+        if (authors == null) {
+            return false;
+        }
+
+        Pattern pattern = Pattern.compile("^(([A-ZА-ЯЁ]{1}[a-zа-яё]{2,}\\s[A-ZА-ЯЁ]{1}\\.[A-ZА-ЯЁ]{1}\\.)*(,\\s[A-ZА-ЯЁ]{1}[a-zа-яё]{2,}\\s[A-ZА-ЯЁ]{1}\\.[A-ZА-ЯЁ]{1}\\.)*)*$");
+        Matcher matcher = pattern.matcher(authors);
+        boolean result = false;
+        while (matcher.find()) {
+            result = true;
+        }
+        return !TextUtils.isEmpty(authors) && result;
+    }
 }

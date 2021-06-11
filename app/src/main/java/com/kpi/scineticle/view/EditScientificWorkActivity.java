@@ -98,9 +98,11 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mArticleRepository.update(article);
-                                Toast.makeText(EditScientificWorkActivity.this, article.getTypeOfWork() + " успішно оновлена", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(article)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, article.getTypeOfWork() + " успішно оновлена", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -209,9 +211,10 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mBookRepository.update(book);
-                                Toast.makeText(EditScientificWorkActivity.this, book.getTypeOfWork() + " успішно оновлена", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(book)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, book.getTypeOfWork() + " успішно оновлена", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -253,9 +256,10 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mBibliographicRepository.update(bibliographicPointer);
-                                Toast.makeText(EditScientificWorkActivity.this, bibliographicPointer.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(bibliographicPointer)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, bibliographicPointer.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -293,9 +297,10 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mCatalogRepository.update(catalog);
-                                Toast.makeText(EditScientificWorkActivity.this, catalog.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(catalog)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, catalog.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -333,9 +338,10 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mDissertationRepository.update(dissertation);
-                                Toast.makeText(EditScientificWorkActivity.this,  "Дисертацію успішно оновлено", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(dissertation)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, "Дисертацію успішно оновлено", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -373,9 +379,10 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mElectronicResourceRepository.update(electronicResource);
-                                Toast.makeText(EditScientificWorkActivity.this, electronicResource.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(electronicResource)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, electronicResource.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -413,9 +420,10 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mLegisNormDocumentsRepository.update(legisNormDocuments);
-                                Toast.makeText(EditScientificWorkActivity.this, legisNormDocuments.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(legisNormDocuments)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, legisNormDocuments.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -453,9 +461,10 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mPatentRepository.update(patent);
-                                Toast.makeText(EditScientificWorkActivity.this, patent.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(patent)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, patent.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -493,9 +502,10 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mPreprintRepository.update(preprint);
-                                Toast.makeText(EditScientificWorkActivity.this, preprint.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(preprint)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, preprint.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -533,9 +543,10 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mStandartRepository.update(standart);
-                                Toast.makeText(EditScientificWorkActivity.this, standart.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(standart)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, standart.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
@@ -573,9 +584,10 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                         .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                scientificWorkCRUDViewModel.getUserEditViewModel().mThesisRepository.update(thesis);
-                                Toast.makeText(EditScientificWorkActivity.this, thesis.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (scientificWorkCRUDViewModel.getUserEditViewModel().update(thesis)) {
+                                    Toast.makeText(EditScientificWorkActivity.this, thesis.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Ні", new DialogInterface.OnClickListener() {

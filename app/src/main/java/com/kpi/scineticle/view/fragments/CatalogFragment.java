@@ -22,6 +22,8 @@ import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.CatalogViewModel;
 
+import java.util.Objects;
+
 public class CatalogFragment extends Fragment {
 
     private CatalogFragmentBinding mCatalogFragmentBinding;
@@ -60,9 +62,10 @@ public class CatalogFragment extends Fragment {
         mCatalogFragmentBinding.btnCatalogCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewCatalog.createNewCatalog();
-                Toast.makeText(mContext, "Каталог успішно створено", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                if (mNewCatalog.createNewCatalog()) {
+                    Toast.makeText(mContext, "Каталог успішно створено", Toast.LENGTH_SHORT).show();
+                    Objects.requireNonNull(getActivity()).finish();
+                }
             }
         });
     }

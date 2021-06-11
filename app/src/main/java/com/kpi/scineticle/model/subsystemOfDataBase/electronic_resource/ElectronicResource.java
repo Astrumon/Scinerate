@@ -128,4 +128,8 @@ public class ElectronicResource extends ScientWork implements Serializable {
                 ", userLogin=" + userLogin +
                 '}';
     }
+    public boolean isValidAuthors() {
+        return super.isValidAuthors(authors);
+    }
+
 }

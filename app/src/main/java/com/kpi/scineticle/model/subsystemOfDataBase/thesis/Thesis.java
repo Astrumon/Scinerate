@@ -141,5 +141,9 @@ public class Thesis extends ScientWork implements Serializable {
                 ", idUser=" + loginUser +
                 '}';
     }
+
+    public boolean isValidAuthors() {
+        return super.isValidAuthors(authors);
+    }
 }
 

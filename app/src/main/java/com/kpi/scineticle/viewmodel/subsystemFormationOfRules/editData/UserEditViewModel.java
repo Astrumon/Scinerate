@@ -24,9 +24,11 @@ import com.kpi.scineticle.model.subsystemOfDataBase.preprints.Preprint;
 import com.kpi.scineticle.model.subsystemOfDataBase.preprints.PreprintRepository;
 import com.kpi.scineticle.model.subsystemOfDataBase.standarts.Standart;
 import com.kpi.scineticle.model.subsystemOfDataBase.standarts.StandartRepository;
+import com.kpi.scineticle.model.subsystemOfDataBase.thesis.Thesis;
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.ThesisRepository;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.UserRepository;
+import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.ScientWorkValidation;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserFinder;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserValidation;
 
@@ -45,48 +47,108 @@ public class UserEditViewModel extends EditViewModel<User> {
         mLegisNormDocumentsRepository = new LegisNormDocumentsRepository(application);
         mPreprintRepository = new PreprintRepository(application);
         mCatalogRepository = new CatalogRepository(application);
+        mScientWorkValidation = new ScientWorkValidation(application);
     }
 
     public void update(User user) {
         mUserRepository.update(user);
     }
 
-    public void update(Article article) {
-        mArticleRepository.update(article);
+    public boolean update(Article article) {
+        if (mScientWorkValidation.ArticleDataValid(article)) {
+            mArticleRepository.update(article);
+            return true;
+        } else  {
+            return false;
+        }
     }
 
-    public void update(Standart standart) {
-        mStandartRepository.update(standart);
+    public boolean update(Standart standart) {
+        if (mScientWorkValidation.StandartDataValid(standart)){
+            mStandartRepository.update(standart);
+            return true;
+        }
+
+        return false;
     }
 
-    public void update(Patent patent) {
-        mPatentRepository.update(patent);
+    public boolean update(Patent patent) {
+        if(mScientWorkValidation.PatentDataValid(patent)) {
+            mPatentRepository.update(patent);
+            return true;
+        }
+
+        return false;
     }
 
-    public void update(BibliographicPointer bibliographicPointer) {
-        mBibliographicRepository.update(bibliographicPointer);
+    public boolean update(BibliographicPointer bibliographicPointer) {
+        if (mScientWorkValidation.BibliographicPointerDataValid(bibliographicPointer)) {
+            mBibliographicRepository.update(bibliographicPointer);
+            return true;
+        }
+        return false;
     }
 
-    public void update(Preprint preprint) {
-        mPreprintRepository.update(preprint);
+    public boolean update(Preprint preprint) {
+        if (mScientWorkValidation.PreprintDataValid(preprint)) {
+            mPreprintRepository.update(preprint);
+            return true;
+        }
+
+        return false;
     }
 
-    public void update(Dissertation dissertation) {
-        mDissertationRepository.update(dissertation);
+    public boolean update(Dissertation dissertation) {
+        if (mScientWorkValidation.DissertationDataValid(dissertation)) {
+            mDissertationRepository.update(dissertation);
+            return true;
+        }
+
+        return false;
     }
 
-    public void update(LegisNormDocuments legisNormDocuments) {
-        mLegisNormDocumentsRepository.update(legisNormDocuments);
+    public boolean update(LegisNormDocuments legisNormDocuments){
+        if (mScientWorkValidation.LegisNormDocumentsDataValid(legisNormDocuments)) {
+            mLegisNormDocumentsRepository.update(legisNormDocuments);
+            return true;
+        }
+
+        return false;
     }
 
-    public void update(ElectronicResource electronicResource) {
-        mElectronicResourceRepository.update(electronicResource);
+    public boolean update(ElectronicResource electronicResource) {
+        if (mScientWorkValidation.ElectronicResourceDataValid(electronicResource)) {
+            mElectronicResourceRepository.update(electronicResource);
+            return true;
+        }
+
+        return false;
     }
 
-    public void update(Catalog catalog) {
-        mCatalogRepository.update(catalog);
+    public boolean update(Catalog catalog) {
+        if (mScientWorkValidation.CatalogDataValid(catalog)) {
+            mCatalogRepository.update(catalog);
+            return true;
+        }
+
+        return false;
     }
-    public void update(Book book) {
-        mBookRepository.delete(book);
+
+    public boolean update(Book book) {
+        if (mScientWorkValidation.BookDataValid(book)) {
+            mBookRepository.update(book);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean update(Thesis thesis) {
+        if (mScientWorkValidation.ThesisDataValid(thesis)) {
+            mThesisRepository.update(thesis);
+            return true;
+        }
+
+        return false;
     }
 }

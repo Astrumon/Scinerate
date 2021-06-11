@@ -13,11 +13,12 @@ import com.kpi.scineticle.model.subsystemOfDataBase.standarts.StandartRepository
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.ThesisRepository;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.UserRepository;
+import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.ScientWorkValidation;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserFinder;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserValidation;
 
 public abstract class InputViewModel<T> {
-    public   UserRepository mUserRepository;
+    public UserRepository mUserRepository;
     public UserValidation mUserValidation;
     public UserFinder mUserFinder;
     public ArticleRepository mArticleRepository;
@@ -31,6 +32,7 @@ public abstract class InputViewModel<T> {
     public LegisNormDocumentsRepository mLegisNormDocumentsRepository;
     public PreprintRepository mPreprintRepository;
     public CatalogRepository mCatalogRepository;
+    public ScientWorkValidation mScientWorkValidation;
 
     public abstract boolean insert(T t);
     public abstract boolean inputDataForCheck(String email, String password);

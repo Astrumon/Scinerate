@@ -140,4 +140,8 @@ public class Preprint extends ScientWork implements Serializable {
                 ", abbreviation='" + abbreviation + '\'' +
                 '}';
     }
+
+    public boolean isValidAuthors() {
+        return super.isValidAuthors(authors);
+    }
 }

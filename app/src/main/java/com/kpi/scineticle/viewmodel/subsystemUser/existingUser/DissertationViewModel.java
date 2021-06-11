@@ -62,8 +62,8 @@ public class DissertationViewModel extends AndroidViewModel {
             mDissertationInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewDissertation() {
-            mDissertationInputViewModel.insert(getDissertation());
+        public boolean createNewDissertation() {
+           return mDissertationInputViewModel.insert(getDissertation());
         }
     }
 }

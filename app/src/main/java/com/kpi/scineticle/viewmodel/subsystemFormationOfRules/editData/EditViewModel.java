@@ -17,13 +17,12 @@ import com.kpi.scineticle.model.subsystemOfDataBase.preprints.PreprintRepository
 import com.kpi.scineticle.model.subsystemOfDataBase.standarts.StandartRepository;
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.ThesisRepository;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.UserRepository;
+import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.ScientWorkValidation;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserFinder;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserValidation;
 
 public abstract class EditViewModel<T> {
     public UserRepository mUserRepository;
-    public UserValidation mUserValidation;
-    public UserFinder mUserFinder;
     public ArticleRepository mArticleRepository;
     public BibliographicRepository mBibliographicRepository;
     public PatentRepository mPatentRepository;
@@ -34,6 +33,7 @@ public abstract class EditViewModel<T> {
     public ElectronicResourceRepository mElectronicResourceRepository;
     public LegisNormDocumentsRepository mLegisNormDocumentsRepository;
     public PreprintRepository mPreprintRepository;
+    public ScientWorkValidation mScientWorkValidation;
     public CatalogRepository mCatalogRepository;
 
     public abstract void update(T t);

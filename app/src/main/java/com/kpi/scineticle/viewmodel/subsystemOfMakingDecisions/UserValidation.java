@@ -58,16 +58,6 @@ public class UserValidation {
         return result;
     }
 
-    public boolean isValidPhone(User user) {
-        boolean result = true;
-        if (user == null) {
-            mUserOutputInfo.showError("Невірно ведений телефон");
-            return false;
-        }
-
-        return result;
-    }
-
     public boolean isValidEmail(User user) {
         boolean result = true;
         if (user == null) {

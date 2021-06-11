@@ -71,8 +71,9 @@ public class BibliographicPointerViewModel extends AndroidViewModel {
             mBibliographicInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewBibliographicPointer() {
-            mBibliographicInputViewModel.insert(getBibliographicData());
+        public boolean createNewBibliographicPointer() {
+
+            return mBibliographicInputViewModel.insert(getBibliographicData());
         }
     }
 }

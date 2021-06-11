@@ -63,8 +63,8 @@ public class ElResourceViewModel extends AndroidViewModel {
             mElectronicResourceInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewElectronicResource() {
-            mElectronicResourceInputViewModel.insert(getElectronicResource());
+        public boolean createNewElectronicResource() {
+            return  mElectronicResourceInputViewModel.insert(getElectronicResource());
         }
     }
 }

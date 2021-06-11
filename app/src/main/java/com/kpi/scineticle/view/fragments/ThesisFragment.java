@@ -22,6 +22,8 @@ import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ThesisViewModel;
 
+import java.util.Objects;
+
 public class ThesisFragment extends Fragment {
 
     private ThesisFragmentBinding mThesisFragmentBinding;
@@ -61,9 +63,10 @@ public class ThesisFragment extends Fragment {
         mThesisFragmentBinding.btnThesisCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewThesis.createNewThesis();
-                Toast.makeText(mContext, "Тезис успішно створено", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+               if (mNewThesis.createNewThesis()) {
+                   Toast.makeText(mContext, "Тезис успішно створено", Toast.LENGTH_SHORT).show();
+                   Objects.requireNonNull(getActivity()).finish();
+               }
             }
         });
     }

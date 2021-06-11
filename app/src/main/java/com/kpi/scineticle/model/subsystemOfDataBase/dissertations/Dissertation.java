@@ -127,4 +127,8 @@ public class Dissertation extends ScientWork implements Serializable {
                 ", idUser=" + userLogin +
                 '}';
     }
+
+    public boolean isValidAuthors() {
+        return super.isValidAuthors(authors);
+    }
 }

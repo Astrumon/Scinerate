@@ -22,6 +22,8 @@ import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.PreprintViewModel;
 
+import java.util.Objects;
+
 public class PreprintFragment extends Fragment {
 
     private PreprintFragmentBinding mPreprintFragmentBinding;
@@ -60,9 +62,10 @@ public class PreprintFragment extends Fragment {
         mPreprintFragmentBinding.btnPreprintCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewPreprint.createNewPreprint();
-                Toast.makeText(mContext, "Препринт успішно створено", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+               if (mNewPreprint.createNewPreprint()) {
+                   Toast.makeText(mContext, "Препринт успішно створено", Toast.LENGTH_SHORT).show();
+                   Objects.requireNonNull(getActivity()).finish();
+               }
             }
         });
     }

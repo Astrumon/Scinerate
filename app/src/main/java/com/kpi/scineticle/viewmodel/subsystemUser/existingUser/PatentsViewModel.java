@@ -60,8 +60,8 @@ public class PatentsViewModel extends AndroidViewModel {
             mPatentInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewPatent() {
-            mPatentInputViewModel.insert(getPatentData());
+        public boolean createNewPatent() {
+           return mPatentInputViewModel.insert(getPatentData());
         }
     }
 }

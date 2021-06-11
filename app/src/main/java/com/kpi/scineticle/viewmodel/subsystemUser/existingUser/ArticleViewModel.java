@@ -1,6 +1,7 @@
 package com.kpi.scineticle.viewmodel.subsystemUser.existingUser;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -64,8 +65,8 @@ public class ArticleViewModel extends AndroidViewModel {
             mArticleInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewArticle() {
-            mArticleInputViewModel.insert(getArticleData());
+        public boolean createNewArticle() {
+           return mArticleInputViewModel.insert(getArticleData());
         }
     }
 

@@ -22,6 +22,8 @@ import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.StandartViewModel;
 
+import java.util.Objects;
+
 public class StandartFragment extends Fragment {
 
     private StandartFragmentBinding mStandartFragmentBinding;
@@ -60,9 +62,10 @@ public class StandartFragment extends Fragment {
         mStandartFragmentBinding.btnStandartCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewStandart.createNewStandart();
-                Toast.makeText(mContext, "Стандарт успішно створено", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                if (mNewStandart.createNewStandart()) {
+                    Toast.makeText(mContext, "Стандарт успішно створено", Toast.LENGTH_SHORT).show();
+                    Objects.requireNonNull(getActivity()).finish();
+                }
             }
         });
     }

@@ -63,8 +63,8 @@ public class StandartViewModel extends AndroidViewModel {
             mStandartInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewStandart() {
-            mStandartInputViewModel.insert(getStandartData());
+        public boolean createNewStandart() {
+            return  mStandartInputViewModel.insert(getStandartData());
         }
     }
 

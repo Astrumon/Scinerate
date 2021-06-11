@@ -164,4 +164,12 @@ public class BibliographicPointer extends ScientWork implements Serializable {
                 ", additionally='" + additionally + '\'' +
                 '}';
     }
+
+    public boolean isValidAuthorsRelease() {
+        return super.isValidAuthors(authorOfRelease);
+    }
+
+    public boolean isValidAuthorsPublish() {
+        return super.isValidAuthors(aouthorsOfPublish);
+    }
 }

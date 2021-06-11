@@ -22,8 +22,6 @@ import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserValidation;
 
 public abstract class DeleteViewModel<T> {
     public UserRepository mUserRepository;
-    public UserValidation mUserValidation;
-    public UserFinder mUserFinder;
     public ArticleRepository mArticleRepository;
     public BibliographicRepository mBibliographicRepository;
     public PatentRepository mPatentRepository;
@@ -35,6 +33,5 @@ public abstract class DeleteViewModel<T> {
     public LegisNormDocumentsRepository mLegisNormDocumentsRepository;
     public PreprintRepository mPreprintRepository;
     public CatalogRepository mCatalogRepository;
-    abstract void delete(T t);
-    abstract void deleteAllUsers();
+
 }

@@ -69,8 +69,8 @@ public class CatalogViewModel extends AndroidViewModel {
             mCatalogInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewCatalog() {
-            mCatalogInputViewModel.insert(getCatalog());
+        public boolean createNewCatalog() {
+            return  mCatalogInputViewModel.insert(getCatalog());
         }
     }
 }

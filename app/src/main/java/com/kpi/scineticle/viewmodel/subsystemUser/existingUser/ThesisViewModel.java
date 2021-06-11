@@ -65,8 +65,8 @@ public class ThesisViewModel extends AndroidViewModel {
             mThesisInputViewModel = new UserInputViewModel(mApplication);
         }
 
-        public void createNewThesis() {
-            mThesisInputViewModel.insert(getThesisData());
+        public boolean createNewThesis() {
+           return mThesisInputViewModel.insert(getThesisData());
         }
     }
 

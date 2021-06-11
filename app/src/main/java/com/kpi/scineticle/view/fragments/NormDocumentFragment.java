@@ -22,6 +22,8 @@ import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.NormDocumentViewModel;
 
+import java.util.Objects;
+
 public class NormDocumentFragment extends Fragment {
 
     private NormDocumentFragmentBinding mNormDocumentFragmentBinding;
@@ -62,9 +64,10 @@ public class NormDocumentFragment extends Fragment {
         mNormDocumentFragmentBinding.btnNormDocumentsCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewLegisNormDocuments.createNewLegisNormDocuments();
-                Toast.makeText(mContext, "Документ успішно створено", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                if (mNewLegisNormDocuments.createNewLegisNormDocuments()) {
+                    Toast.makeText(mContext, "Документ успішно створено", Toast.LENGTH_SHORT).show();
+                    Objects.requireNonNull(getActivity()).finish();
+                }
             }
         });
     }

@@ -29,17 +29,16 @@ import com.kpi.scineticle.model.subsystemOfDataBase.thesis.Thesis;
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.ThesisRepository;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.UserRepository;
+import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.ScientWorkValidation;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserFinder;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserValidation;
 
 public class UserInputViewModel extends InputViewModel<User> {
 
-
-
-
     public UserInputViewModel(@NonNull Application application) {
         mUserRepository = new UserRepository(application);
         mUserValidation = new UserValidation(application.getApplicationContext());
+        mScientWorkValidation = new ScientWorkValidation(application.getApplicationContext());
         mUserFinder = new UserFinder(application.getApplicationContext(), mUserRepository);
         mArticleRepository = new ArticleRepository(application);
         mBibliographicRepository = new BibliographicRepository(application);
@@ -63,48 +62,103 @@ public class UserInputViewModel extends InputViewModel<User> {
         return false;
     }
 
-    public void insert(Article article) {
-        mArticleRepository.insert(article);
+    public boolean insert(Article article) {
+        Log.d("VALID", "ArticleDataValid: " +mScientWorkValidation.ArticleDataValid(article));
+        if (mScientWorkValidation.ArticleDataValid(article)) {
+            mArticleRepository.insert(article);
+            return true;
+        }
+
+        return false;
     }
 
-    public void insert(BibliographicPointer bibliographicPointer) {
-        mBibliographicRepository.insert(bibliographicPointer);
+    public boolean insert(BibliographicPointer bibliographicPointer) {
+        if (mScientWorkValidation.BibliographicPointerDataValid(bibliographicPointer)) {
+            mBibliographicRepository.insert(bibliographicPointer);
+            return true;
+        }
+        return false;
     }
 
-    public void insert(Patent patent) {
-        mPatentRepository.insert(patent);
+    public boolean insert(Patent patent) {
+        if(mScientWorkValidation.PatentDataValid(patent)) {
+            mPatentRepository.insert(patent);
+            return true;
+        }
+
+        return false;
     }
 
-    public void insert(Standart standart) {
-        mStandartRepository.insert(standart);
+    public boolean insert(Standart standart) {
+        if (mScientWorkValidation.StandartDataValid(standart)){
+            mStandartRepository.insert(standart);
+            return true;
+        }
+
+        return false;
     }
 
-    public void insert(Preprint preprint) {
-        mPreprintRepository.insert(preprint);
+    public boolean insert(Preprint preprint) {
+        if (mScientWorkValidation.PreprintDataValid(preprint)) {
+            mPreprintRepository.insert(preprint);
+            return true;
+        }
+
+        return false;
     }
 
-    public void insert(Catalog catalog) {
-        mCatalogRepository.insert(catalog);
+    public boolean insert(Catalog catalog) {
+       if (mScientWorkValidation.CatalogDataValid(catalog)) {
+           mCatalogRepository.insert(catalog);
+           return true;
+       }
+
+        return false;
     }
 
-    public void insert(Thesis thesis) {
-        mThesisRepository.insert(thesis);
+    public boolean insert(Thesis thesis) {
+        if (mScientWorkValidation.ThesisDataValid(thesis)) {
+            mThesisRepository.insert(thesis);
+            return true;
+        }
+
+        return false;
     }
 
-    public void insert(ElectronicResource electronicResource) {
-        mElectronicResourceRepository.insert(electronicResource);
+    public boolean insert(ElectronicResource electronicResource) {
+        if (mScientWorkValidation.ElectronicResourceDataValid(electronicResource)) {
+            mElectronicResourceRepository.insert(electronicResource);
+            return true;
+        }
+
+        return false;
     }
 
-    public void insert(Book book) {
-        mBookRepository.insert(book);
+    public boolean insert(Book book) {
+        if (mScientWorkValidation.BookDataValid(book)) {
+            mBookRepository.insert(book);
+            return true;
+        }
+
+        return false;
     }
 
-    public void insert(LegisNormDocuments legisNormDocuments){
-        mLegisNormDocumentsRepository.insert(legisNormDocuments);
+    public boolean insert(LegisNormDocuments legisNormDocuments){
+       if (mScientWorkValidation.LegisNormDocumentsDataValid(legisNormDocuments)) {
+           mLegisNormDocumentsRepository.insert(legisNormDocuments);
+           return true;
+       }
+
+        return false;
     }
 
-    public void insert(Dissertation dissertation) {
-        mDissertationRepository.insert(dissertation);
+    public boolean insert(Dissertation dissertation) {
+        if (mScientWorkValidation.DissertationDataValid(dissertation)) {
+            mDissertationRepository.insert(dissertation);
+            return true;
+        }
+
+        return false;
     }
 
     public boolean inputDataForCheck(String email, String password) {
@@ -123,7 +177,6 @@ public class UserInputViewModel extends InputViewModel<User> {
     public boolean checkExistingMail(User user)  {
         Log.d("UserInputDataForCheck", "email: " + user);
         boolean result = false;
-
 
         if (mUserValidation.isValidEmail(user)) {
             result = mUserFinder.isExistUserForRegistration(user);

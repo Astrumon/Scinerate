@@ -22,6 +22,8 @@ import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.PatentsViewModel;
 
+import java.util.Objects;
+
 public class PatentsFragment extends Fragment {
 
     private PatentsFragmentBinding mPatentsFragmentBinding;
@@ -60,9 +62,11 @@ public class PatentsFragment extends Fragment {
         mPatentsFragmentBinding.btnPatentCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewPatent.createNewPatent();
-                Toast.makeText(mContext, "Патент успішно створено", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                if (mNewPatent.createNewPatent()) {
+                    Toast.makeText(mContext, "Патент успішно створено", Toast.LENGTH_SHORT).show();
+                    Objects.requireNonNull(getActivity()).finish();
+
+                }
             }
         });
     }

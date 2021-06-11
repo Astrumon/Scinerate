@@ -139,4 +139,8 @@ public class Book extends ScientWork implements Serializable {
                 ", userLogin=" + userLogin +
                 '}';
     }
+
+    public boolean isValidAuthors() {
+        return super.isValidAuthors(authors);
+    }
 }

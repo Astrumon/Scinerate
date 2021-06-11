@@ -23,6 +23,8 @@ import com.kpi.scineticle.view.ScientificWorkMainActivity;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.BookViewModel;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.DissertationViewModel;
 
+import java.util.Objects;
+
 public class DissertationFragment extends Fragment {
 
     private DissertationFragmentBinding mDissertationFragmentBinding;
@@ -62,9 +64,10 @@ public class DissertationFragment extends Fragment {
         mDissertationFragmentBinding.btnDissertationCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewDissertation.createNewDissertation();
-                Toast.makeText(mContext, "Дисертацію успішно створено", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                if (mNewDissertation.createNewDissertation()) {
+                    Toast.makeText(mContext, "Дисертацію успішно створено", Toast.LENGTH_SHORT).show();
+                    Objects.requireNonNull(getActivity()).finish();
+                }
             }
         });
     }
