@@ -2,6 +2,7 @@ package com.kpi.scineticle.model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
@@ -48,6 +49,7 @@ public class TypeOfWorkIntentGenerator {
                 mIntent.putExtra("login", article.getUserLogin());
                 mIntent.putExtra(ArticleFragment.ID, article.getId());
                 mIntent.putExtra(EditScientificWorkActivity.TYPE_OF_WORK, article.getTypeOfWork());
+                Log.d("INTENT", "getIntent: " + article.getTypeOfWork());
                 return mIntent;
 
             case Data.BOOK:

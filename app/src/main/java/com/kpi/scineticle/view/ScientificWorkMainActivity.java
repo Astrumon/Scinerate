@@ -341,6 +341,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         ReportGenerator reportGenerator = new ReportGenerator();
         reportGenerator.setAllData(adapter.getData());
         intent.putExtra(ReportActivity.REPORT_ALL_DATA,  reportGenerator.generateAll());
+        intent.putExtra("login", login);
         startActivity(intent);
     }
 

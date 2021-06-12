@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -100,6 +101,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(article)) {
                                     Toast.makeText(EditScientificWorkActivity.this, article.getTypeOfWork() + " успішно оновлена", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", article);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
 
@@ -213,6 +217,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(book)) {
                                     Toast.makeText(EditScientificWorkActivity.this, book.getTypeOfWork() + " успішно оновлена", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", book);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
                             }
@@ -258,6 +265,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(bibliographicPointer)) {
                                     Toast.makeText(EditScientificWorkActivity.this, bibliographicPointer.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", bibliographicPointer);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
                             }
@@ -299,6 +309,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(catalog)) {
                                     Toast.makeText(EditScientificWorkActivity.this, catalog.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", catalog);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
                             }
@@ -340,6 +353,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(dissertation)) {
                                     Toast.makeText(EditScientificWorkActivity.this, "Дисертацію успішно оновлено", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", dissertation);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
                             }
@@ -381,6 +397,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(electronicResource)) {
                                     Toast.makeText(EditScientificWorkActivity.this, electronicResource.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", electronicResource);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
                             }
@@ -422,6 +441,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(legisNormDocuments)) {
                                     Toast.makeText(EditScientificWorkActivity.this, legisNormDocuments.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", legisNormDocuments);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
                             }
@@ -463,6 +485,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(patent)) {
                                     Toast.makeText(EditScientificWorkActivity.this, patent.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", patent);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
                             }
@@ -504,6 +529,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(preprint)) {
                                     Toast.makeText(EditScientificWorkActivity.this, preprint.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", preprint);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
                             }
@@ -545,6 +573,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(standart)) {
                                     Toast.makeText(EditScientificWorkActivity.this, standart.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", standart);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
                             }
@@ -586,6 +617,9 @@ public class EditScientificWorkActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (scientificWorkCRUDViewModel.getUserEditViewModel().update(thesis)) {
                                     Toast.makeText(EditScientificWorkActivity.this, thesis.getTypeOfWork() + " успішно оновлений", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, ReportActivity.class);
+                                    intent.putExtra("WORK", thesis);
+                                    setResult(ReportActivity.REQUEST_RESULT_REPORT, intent);
                                     finish();
                                 }
                             }
@@ -616,6 +650,8 @@ public class EditScientificWorkActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
 }
