@@ -129,7 +129,32 @@ public class ElectronicResource extends ScientWork implements Serializable {
                 '}';
     }
     public boolean isValidAuthors() {
-        return super.isValidAuthors(authors);
+        return mTextValidator.validateAuthorsName(authors);
     }
+
+    public boolean isValidName() {
+        return mTextValidator.validateName(name);
+    }
+
+    public boolean isValidPlacePublish() {
+        return mTextValidator.validateStatement(placePublish);
+    }
+
+    public boolean isValidPublish() {
+        return mTextValidator.validateName(publish);
+    }
+
+    public boolean isValidDate() {
+        return mTextValidator.validateDate(date);
+    }
+
+    public boolean isValidUpdateDate() {
+        return mTextValidator.validateYear(updateDate);
+    }
+
+    public boolean isValidURL() {
+        return mTextValidator.validURL(url);
+    }
+
 
 }

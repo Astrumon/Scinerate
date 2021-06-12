@@ -154,6 +154,38 @@ public class Catalog extends ScientWork implements Serializable {
     }
 
     public boolean isValidAuthors() {
-        return super.isValidAuthors(authors);
+        return mTextValidator.validateAuthorsName(authors);
+    }
+
+    public boolean isValidName() {
+        return mTextValidator.validateName(name);
+    }
+
+    public boolean isValidCity() {
+        return mTextValidator.validateCity(city);
+    }
+
+    public boolean isValidPublish() {
+        return mTextValidator.validateStatement(publish);
+    }
+
+    public boolean isValidPlace() {
+        return mTextValidator.validateStatement(place);
+    }
+
+    public boolean isValidYear() {
+        return mTextValidator.validateYear(year);
+    }
+
+    public boolean isValidSheet() {
+        return mTextValidator.validateSheet(sheet);
+    }
+
+    public boolean isValidOrganisation() {
+        return mTextValidator.validateName(organisation);
+    }
+
+    public boolean isValidAbbreviation() {
+        return mTextValidator.validateAbbreviation(abbreviation);
     }
 }

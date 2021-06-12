@@ -142,6 +142,34 @@ public class Preprint extends ScientWork implements Serializable {
     }
 
     public boolean isValidAuthors() {
-        return super.isValidAuthors(authors);
+        return mTextValidator.validateAuthorsName(authors);
+    }
+
+    public boolean isValidName() {
+        return mTextValidator.validateName(name);
+    }
+
+    public boolean isValidCity() {
+        return mTextValidator.validateCity(city);
+    }
+
+    public boolean isValidPlace() {
+        return mTextValidator.validateName(place);
+    }
+
+    public boolean isValidYear() {
+        return mTextValidator.validateYear(year);
+    }
+
+    public boolean isValidSheet() {
+        return mTextValidator.validateSheet(sheet);
+    }
+
+    public boolean isValidOrganisation() {
+        return mTextValidator.validateName(organisation);
+    }
+
+    public boolean isValidAbbreviation() {
+        return mTextValidator.validateAbbreviation(abbreviation);
     }
 }

@@ -129,5 +129,33 @@ public class Standart extends ScientWork implements Serializable {
                 '}';
     }
 
+    public boolean isValidNameOfOrg() {
+        return mTextValidator.validateName(nameOfOrg);
+    }
+
+    public boolean isValidYearPublish() {
+        return mTextValidator.validateYear(yearPublish);
+    }
+
+    public boolean isValidName() {
+        return mTextValidator.validateName(name);
+    }
+
+    public boolean isValidCodeLetter() {
+        return mTextValidator.validCodeLetter(codeLetter);
+    }
+
+    public boolean isValidCodeNumber() {
+        return mTextValidator.validNumberCode(codeNumber);
+    }
+
+    public boolean isValidPublish() {
+        return mTextValidator.validateName(publish);
+    }
+
+    public boolean isValidPlacePublish() {
+        return mTextValidator.validateName(placePublish);
+    }
+
 
 }

@@ -46,8 +46,6 @@ public class Article extends ScientWork implements Serializable {
         return super.getTypeOfWork();
     }
 
-
-
     public String getAuthors() {
         return authors;
     }
@@ -126,6 +124,26 @@ public class Article extends ScientWork implements Serializable {
     }
 
     public boolean isValidAuthors() {
-        return super.isValidAuthors(authors);
+        return mTextValidator.validateAuthorsName(authors);
+    }
+
+    public boolean isValidNameArticle() {
+        return mTextValidator.validateName(nameArticle);
+    }
+
+    public boolean isValidNameJournal() {
+        return mTextValidator.validateName(nameJournal);
+    }
+
+    public boolean isValidDate() {
+        return mTextValidator.validateDate(date);
+    }
+
+    public boolean isValidNumber() {
+        return mTextValidator.validateNumber(number);
+    }
+
+    public boolean isValidSheet() {
+        return mTextValidator.validateSheet(sheets);
     }
 }

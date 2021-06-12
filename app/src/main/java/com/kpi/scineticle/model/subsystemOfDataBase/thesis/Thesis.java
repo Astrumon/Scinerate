@@ -143,7 +143,36 @@ public class Thesis extends ScientWork implements Serializable {
     }
 
     public boolean isValidAuthors() {
-        return super.isValidAuthors(authors);
+        return mTextValidator.validateAuthorsName(authors);
+    }
+
+    public boolean isValidName() {
+        return mTextValidator.validateName(name);
+    }
+
+
+    public boolean isValidDate() {
+        return mTextValidator.validateDate(date);
+    }
+
+    public boolean isValidPlaceConferenece() {
+        return mTextValidator.validateName(placeConference);
+    }
+
+    public boolean isValidNameConference() {
+        return mTextValidator.validateName(namePublish);
+    }
+
+    public boolean isValidPlacePublish() {
+        return mTextValidator.validateName(placePublish);
+    }
+
+    public boolean isValidYear() {
+        return mTextValidator.validateYear(year);
+    }
+
+    public boolean isValidSheet() {
+        return mTextValidator.validateSheet(sheets);
     }
 }
 

@@ -129,6 +129,30 @@ public class Dissertation extends ScientWork implements Serializable {
     }
 
     public boolean isValidAuthors() {
-        return super.isValidAuthors(authors);
+        return mTextValidator.validateAuthorsName(authors);
+    }
+
+    public boolean isValidName() {
+        return mTextValidator.validateName(name);
+    }
+
+    public boolean isValidType() {
+        return mTextValidator.validType(type);
+    }
+
+    public boolean isValidPlace() {
+        return mTextValidator.validateStatement(place);
+    }
+
+    public boolean isValidPublish() {
+        return mTextValidator.validateName(publish);
+    }
+
+    public boolean isValidYear() {
+        return mTextValidator.validateYear(year);
+    }
+
+    public boolean isValidSheet() {
+        return mTextValidator.validateSheet(countOfSheets);
     }
 }

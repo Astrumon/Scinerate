@@ -1,5 +1,7 @@
 package com.kpi.scineticle.model.subsystemOfDataBase.book;
 
+import android.icu.text.TimeZoneFormat;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -141,6 +143,32 @@ public class Book extends ScientWork implements Serializable {
     }
 
     public boolean isValidAuthors() {
-        return super.isValidAuthors(authors);
+        return mTextValidator.validateAuthorsName(authors);
     }
+
+    public boolean isValidName() {
+        return mTextValidator.validateName(name);
+    }
+
+    public boolean isValidStatement() {
+        return mTextValidator.validateStatement(statement);
+    }
+
+    public boolean isValidPlace() {
+        return mTextValidator.validateStatement(place);
+    }
+
+    public boolean isValidYear() {
+        return mTextValidator.validateYear(year);
+    }
+
+    public boolean isValidSheet() {
+        return mTextValidator.validateSheet(countOfSheets);
+    }
+
+    public boolean isValidPublish() {
+        return mTextValidator.validateName(publish);
+    }
+
+
 }

@@ -1,10 +1,7 @@
 package com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
 import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointer;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
@@ -20,10 +17,8 @@ import com.kpi.scineticle.viewmodel.subsystemOutputData.UserOutputInfo;
 
 public class ScientWorkValidation {
     private UserOutputInfo mUserOutputInfo;
-    private Context mContext;
 
     public ScientWorkValidation(Context context) {
-        mContext = context;
         mUserOutputInfo = new UserOutputInfo(context);
     }
 
@@ -33,7 +28,32 @@ public class ScientWorkValidation {
         }
 
         if (!article.isValidAuthors()) {
-            mUserOutputInfo.showError("Невірно ведена інформація про автора");
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора");
+            return false;
+        }
+
+        if (!article.isValidNameArticle()) {
+            mUserOutputInfo.showError("Некоректно ведена назва статті");
+            return false;
+        }
+
+        if(!article.isValidNameJournal()) {
+            mUserOutputInfo.showError("Некоректно веденеа назва журналу");
+            return false;
+        }
+
+        if (!article.isValidDate()) {
+            mUserOutputInfo.showError("Некоректний формат дати");
+            return false;
+        }
+
+        if (!article.isValidNumber()) {
+            mUserOutputInfo.showError("Некоректно ведений номер");
+            return false;
+        }
+
+        if (!article.isValidSheet()) {
+            mUserOutputInfo.showError("Некоректно ведений сторінковий інтервал");
             return false;
         }
 
@@ -47,12 +67,42 @@ public class ScientWorkValidation {
         }
 
         if (!bibliographicPointer.isValidAuthorsPublish()) {
-            mUserOutputInfo.showError("Невірно ведена інформація про автора редакції");
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора редакції");
             return false;
         }
 
         if (!bibliographicPointer.isValidAuthorsRelease()) {
-            mUserOutputInfo.showError("Невірно ведена інформація про автора публікації");
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора публікації");
+            return false;
+        }
+
+        if (!bibliographicPointer.isValidCity()) {
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора публікації");
+            return false;
+        }
+
+        if (!bibliographicPointer.isValidNumberOfRelease()) {
+            mUserOutputInfo.showError("Некоректно ведена інформація про номер випуску");
+            return false;
+        }
+
+        if (!bibliographicPointer.isValidPlace()) {
+            mUserOutputInfo.showError("Некоректно ведена інформація про місце");
+            return false;
+        }
+
+        if (!bibliographicPointer.isValidYear()) {
+            mUserOutputInfo.showError("Некоректно ведений рік");
+            return false;
+        }
+
+        if (!bibliographicPointer.isValidSheet()) {
+            mUserOutputInfo.showError("Некоректно ведений сторінковий інтервал");
+            return false;
+        }
+
+        if (!bibliographicPointer.isValidAbbreviation()) {
+            mUserOutputInfo.showError("Некоректно ведена абревіатура");
             return false;
         }
 
@@ -66,7 +116,37 @@ public class ScientWorkValidation {
         }
 
         if (!book.isValidAuthors()){
-            mUserOutputInfo.showError("Невірно ведена інформація про автора");
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора");
+            return false;
+        }
+
+        if (!book.isValidName()){
+            mUserOutputInfo.showError("Некоректна назва");
+            return false;
+        }
+
+        if (!book.isValidStatement()){
+            mUserOutputInfo.showError("Некоректний тип");
+            return false;
+        }
+
+        if (!book.isValidPlace()){
+            mUserOutputInfo.showError("Некоректна назва місця видавництва");
+            return false;
+        }
+
+        if (!book.isValidPublish()) {
+            mUserOutputInfo.showError("Некоректна назва видавництва");
+            return false;
+        }
+
+        if (!book.isValidYear()){
+            mUserOutputInfo.showError("Некоректний рік");
+            return false;
+        }
+
+        if (!book.isValidSheet()){
+            mUserOutputInfo.showError("Некоректно ведений сторінковий інтервал");
             return false;
         }
 
@@ -80,8 +160,47 @@ public class ScientWorkValidation {
         }
 
         if (!catalog.isValidAuthors()){
-            mUserOutputInfo.showError("Невірно ведена інформація про автора");
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора");
             return false;
+        }
+
+        if (!catalog.isValidName()){
+            mUserOutputInfo.showError("Некоректно ведена назва");
+            return false;
+        }
+
+        if (!catalog.isValidCity()){
+            mUserOutputInfo.showError("Некоректна назва міста");
+            return false;
+        }
+
+        if (!catalog.isValidPublish()){
+            mUserOutputInfo.showError("Некоректна назва видавництва");
+            return false;
+        }
+
+        if (!catalog.isValidPlace()){
+            mUserOutputInfo.showError("Некоректна назва місця публікації");
+            return false;
+        }
+
+        if (!catalog.isValidYear()){
+            mUserOutputInfo.showError("Некоректний рік");
+            return false;
+        }
+
+        if (!catalog.isValidSheet()){
+            mUserOutputInfo.showError("Некоректно ведений сторінковий інтервал");
+            return false;
+        }
+
+        if (!catalog.isValidOrganisation()){
+            mUserOutputInfo.showError("Некоректна назва організації");
+            return false;
+        }
+
+        if (!catalog.isValidAbbreviation()) {
+            mUserOutputInfo.showError("Некоректна аббревіатура");
         }
 
         return true;
@@ -94,7 +213,38 @@ public class ScientWorkValidation {
         }
 
         if (!dissertation.isValidAuthors()){
-            mUserOutputInfo.showError("Невірно ведена інформація про автора");
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора");
+            return false;
+        }
+
+        if (!dissertation.isValidName()){
+            mUserOutputInfo.showError("Некоректно ведена назва");
+
+            return false;
+        }
+
+        if (!dissertation.isValidType()){
+            mUserOutputInfo.showError("Некоректно ведений тип роботи");
+            return false;
+        }
+
+        if (!dissertation.isValidPlace()){
+            mUserOutputInfo.showError("Некоректна назва місця публікації");
+            return false;
+        }
+
+        if (!dissertation.isValidPublish()){
+            mUserOutputInfo.showError("Некоректна назва видавництва");
+            return false;
+        }
+
+        if (!dissertation.isValidYear()){
+            mUserOutputInfo.showError("Некоректний рік");
+            return false;
+        }
+
+        if (!dissertation.isValidSheet()){
+            mUserOutputInfo.showError("Некоректно ведений сторінковий інтервал");
             return false;
         }
 
@@ -108,9 +258,35 @@ public class ScientWorkValidation {
         }
 
         if (!electronicResource.isValidAuthors()){
-            mUserOutputInfo.showError("Невірно ведена інформація про автора");
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора");
             return false;
         }
+
+        if (!electronicResource.isValidName()){
+            mUserOutputInfo.showError("Некоректно ведена назва");
+            return false;
+        }
+
+        if (!electronicResource.isValidPlacePublish()){
+            mUserOutputInfo.showError("Некоректна назва місця публікації");
+            return false;
+        }
+
+        if (!electronicResource.isValidPublish()){
+            mUserOutputInfo.showError("Некоректна назва видавництва");
+            return false;
+        }
+
+        if (!electronicResource.isValidDate()){
+            mUserOutputInfo.showError("Некоректний формат дати");
+            return false;
+        }
+
+        if (!electronicResource.isValidURL()){
+            mUserOutputInfo.showError("Некоректне посилання на сайт");
+            return false;
+        }
+
 
         return true;
     }
@@ -122,7 +298,32 @@ public class ScientWorkValidation {
         }
 
         if (!patent.isValidAuthors()){
-            mUserOutputInfo.showError("Невірно ведена інформація про автора");
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора");
+            return false;
+        }
+
+        if (!patent.isValidNamePatentOwner()) {
+            mUserOutputInfo.showError("Некоректна назва власника патенту");
+            return false;
+        }
+
+        if (!patent.isValidCountry()) {
+            mUserOutputInfo.showError("Некоректна назва країни");
+            return false;
+        }
+
+        if (!patent.isValidNumber()) {
+            mUserOutputInfo.showError("Некоректний номер");
+            return false;
+        }
+
+        if (!patent.isValidDate()) {
+            mUserOutputInfo.showError("Некоректна дата");
+            return false;
+        }
+
+        if (!patent.isValidName()) {
+            mUserOutputInfo.showError("Некоректна назва патенту");
             return false;
         }
 
@@ -136,7 +337,42 @@ public class ScientWorkValidation {
         }
 
         if (!preprint.isValidAuthors()){
-            mUserOutputInfo.showError("Невірно ведена інформація про автора");
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора");
+            return false;
+        }
+
+        if (!preprint.isValidName()) {
+            mUserOutputInfo.showError("Некоректна назва патенту");
+            return false;
+        }
+
+        if (!preprint.isValidCity()){
+            mUserOutputInfo.showError("Некоректна назва міста");
+            return false;
+        }
+
+        if (!preprint.isValidPlace()){
+            mUserOutputInfo.showError("Некоректна назва місця публікації");
+            return false;
+        }
+
+        if (!preprint.isValidYear()){
+            mUserOutputInfo.showError("Некоректний рік");
+            return false;
+        }
+
+        if (!preprint.isValidSheet()){
+            mUserOutputInfo.showError("Некоректно ведений сторінковий інтервал");
+            return false;
+        }
+
+        if (!preprint.isValidOrganisation()){
+            mUserOutputInfo.showError("Некоректна назва організації");
+            return false;
+        }
+
+        if (!preprint.isValidAbbreviation()) {
+            mUserOutputInfo.showError("Некоректно ведена абревіатура");
             return false;
         }
 
@@ -149,7 +385,40 @@ public class ScientWorkValidation {
             return false;
         }
 
+        if (!standart.isValidNameOfOrg()){
+            mUserOutputInfo.showError("Некоректна назва організації");
+            return false;
+        }
 
+        if (!standart.isValidName()) {
+            mUserOutputInfo.showError("Некоректна назва стандарту");
+            return false;
+        }
+
+        if (!standart.isValidYearPublish()){
+            mUserOutputInfo.showError("Некоректний рік публікації");
+            return false;
+        }
+
+        if (!standart.isValidCodeLetter()) {
+            mUserOutputInfo.showError("Некоректний буквенний код");
+            return false;
+        }
+
+        if (!standart.isValidCodeNumber()) {
+            mUserOutputInfo.showError("Некоректний числовий код");
+            return false;
+        }
+
+        if (!standart.isValidPublish()) {
+            mUserOutputInfo.showError("Некоректна назва видавництва");
+            return false;
+        }
+
+        if (!standart.isValidPlacePublish()){
+            mUserOutputInfo.showError("Некоректна назва місця публікації");
+            return false;
+        }
         return true;
     }
 
@@ -159,7 +428,42 @@ public class ScientWorkValidation {
             return  false;
         }
         if (!thesis.isValidAuthors()){
-            mUserOutputInfo.showError("Невірно ведена інформація про автора");
+            mUserOutputInfo.showError("Некоректно ведена інформація про автора");
+            return false;
+        }
+
+        if (!thesis.isValidName()){
+            mUserOutputInfo.showError("Некоректно ведена назва тезису");
+            return false;
+        }
+
+        if (!thesis.isValidNameConference()) {
+            mUserOutputInfo.showError("Некоректна назва конференції");
+            return false;
+        }
+
+        if (!thesis.isValidDate()) {
+            mUserOutputInfo.showError("Некоректний формат дати");
+            return false;
+        }
+
+        if (!thesis.isValidPlaceConferenece()) {
+            mUserOutputInfo.showError("Некоректна назва місця проведення конференції");
+            return false;
+        }
+
+        if (!thesis.isValidPlacePublish()) {
+            mUserOutputInfo.showError("Некоректна назва місця публікації");
+            return false;
+        }
+
+        if (!thesis.isValidYear()) {
+            mUserOutputInfo.showError("Некоректний рік");
+            return false;
+        }
+
+        if (!thesis.isValidSheet()) {
+            mUserOutputInfo.showError("Некоректний сторінковий інтервал");
             return false;
         }
 
@@ -172,6 +476,47 @@ public class ScientWorkValidation {
             mUserOutputInfo.showError("Заповніть всі поля");
             return  false;
         }
+
+        if (!legisNormDocuments.isValidName()){
+            mUserOutputInfo.showError("Некоректно ведена назва");
+            return false;
+        }
+
+        if (!legisNormDocuments.isValidType()) {
+            mUserOutputInfo.showError("Некоректний тип");
+            return false;
+        }
+
+        if (!legisNormDocuments.isValidDateAccess()) {
+            mUserOutputInfo.showError("Некоректний формат дати прийняття документу");
+            return false;
+        }
+
+        if (!legisNormDocuments.isValidDatePublish()) {
+            mUserOutputInfo.showError("Некоректний формат дати публікації документу");
+            return false;
+        }
+
+        if (!legisNormDocuments.isValidNumber()) {
+            mUserOutputInfo.showError("Некоректний номер");
+            return false;
+        }
+
+        if (!legisNormDocuments.isValidNumberOfSerial()) {
+            mUserOutputInfo.showError("Некоректний номер серії");
+            return false;
+        }
+
+        if (!legisNormDocuments.isValidPublish()) {
+            mUserOutputInfo.showError("Некоректна назва видавництва");
+            return false;
+        }
+
+        if (!legisNormDocuments.isValidSheets()) {
+            mUserOutputInfo.showError("Некоректно ведений сторінковий інтервал");
+            return  false;
+        }
+
 
         return true;
 

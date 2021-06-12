@@ -117,6 +117,27 @@ public class Patent extends ScientWork implements Serializable {
     }
 
     public boolean isValidAuthors() {
-        return super.isValidAuthors(authors);
+        return mTextValidator.validateAuthorsName(authors);
     }
+
+    public boolean isValidNamePatentOwner() {
+        return mTextValidator.validateName(namePatentOwner);
+    }
+
+    public boolean isValidName() {
+        return mTextValidator.validateName(name);
+    }
+
+    public boolean isValidCountry() {
+        return mTextValidator.validateCity(country);
+    }
+
+    public boolean isValidNumber() {
+        return mTextValidator.validateNumber(number);
+    }
+
+    public boolean isValidDate() {
+        return mTextValidator.validateDate(date);
+    }
+
 }

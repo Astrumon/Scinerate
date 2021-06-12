@@ -166,10 +166,42 @@ public class BibliographicPointer extends ScientWork implements Serializable {
     }
 
     public boolean isValidAuthorsRelease() {
-        return super.isValidAuthors(authorOfRelease);
+        return mTextValidator.validateAuthorsName(authorOfRelease);
     }
 
     public boolean isValidAuthorsPublish() {
-        return super.isValidAuthors(aouthorsOfPublish);
+        return mTextValidator.validateAuthorsName(aouthorsOfPublish);
     }
+
+    public boolean isValidName() {
+        return mTextValidator.validateName(name);
+    }
+
+    public boolean isValidCity() {
+        return mTextValidator.validateCity(city);
+    }
+
+    public boolean isValidNumberOfRelease(){
+        return mTextValidator.validateNumber(numberOfRelease);
+    }
+
+    public boolean isValidPlace() {
+        return mTextValidator.validateStatement(place);
+    }
+
+    public boolean isValidYear() {
+        return  mTextValidator.validateYear(year);
+    }
+
+    public boolean isValidSheet() {
+        return mTextValidator.validateSheet(sheet);
+    }
+
+    public boolean isValidAbbreviation() {
+        return mTextValidator.validateAbbreviation(abbreviation);
+    }
+
+
+
+
 }

@@ -140,4 +140,37 @@ public class LegisNormDocuments extends ScientWork implements Serializable {
                 ", userLogin=" + userLogin +
                 '}';
     }
+
+    public boolean isValidName() {
+        return mTextValidator.validateName(name);
+    }
+
+    public boolean isValidType() {
+        return mTextValidator.validateName(type);
+    }
+
+    public boolean isValidDateAccess() {
+        return mTextValidator.validateDate(dateAccess);
+    }
+
+    public boolean isValidNumber() {
+        return mTextValidator.validateNumber(number);
+    }
+
+    public boolean isValidDatePublish() {
+        return mTextValidator.validateDate(datePublish);
+    }
+
+    public boolean isValidNumberOfSerial() {
+        return mTextValidator.validateNumber(serial);
+    }
+
+    public boolean isValidPublish() {
+        return mTextValidator.validateName(publish);
+    }
+
+    public boolean isValidSheets() {
+        return mTextValidator.validateSheet(sheets);
+    }
+
 }
