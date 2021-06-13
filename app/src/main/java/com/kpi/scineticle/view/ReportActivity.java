@@ -4,11 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,8 +51,10 @@ import com.kpi.scineticle.view.fragments.PatentsFragment;
 import com.kpi.scineticle.view.fragments.PreprintFragment;
 import com.kpi.scineticle.view.fragments.StandartFragment;
 import com.kpi.scineticle.view.fragments.ThesisFragment;
-import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ArticleViewModel;
-import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ExistingUserViewModel;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 public class ReportActivity extends AppCompatActivity {
 
@@ -63,6 +69,9 @@ public class ReportActivity extends AppCompatActivity {
     private String mType;
     public static int REQUEST_RESULT_REPORT = 0;
     private String login;
+    private ReportTransfer reportTransfer;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -84,8 +93,12 @@ public class ReportActivity extends AppCompatActivity {
         if (getIntent().getStringExtra(REPORT_ALL_DATA) != null) {
             flag = true;
             login = getIntent().getStringExtra("login");
+            reportTransfer = new ReportTransfer();
+            reportTransfer.setMail(login);
             showAllReports();
         }
+
+
     }
 
     private void showAllReports() {
@@ -192,9 +205,7 @@ public class ReportActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         if (flag) {
             menu.add(0, 0, 0, "Скопіювати");
-            TextView textView = (TextView) v;
-            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-            clipboardManager.setText(textView.getText());
+            textView = (TextView) v;
             menu.add(0, 2, 0, "Зберегти на пристрій");
             menu.add(0, 3, 0, "Відправити на пошту");
         } else {
@@ -208,30 +219,38 @@ public class ReportActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
+            case 0:
+                ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                clipboardManager.setText(textView.getText());
+                return true;
             case 1:
-                Toast.makeText(this, "Change", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Змінити", Toast.LENGTH_SHORT).show();
                 Log.d("INTENT", "onContextItemSelected: " + mObject.getTypeOfWork());
                 startActivityForResult(typeOfWorkIntentGenerator.getIntent(mObject), REQUEST_RESULT_REPORT);
                 return true;
             case 2:
-                Toast.makeText(this, "Save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Зберегти на пристрій", Toast.LENGTH_SHORT).show();
+                reportTransfer.setReport(getIntent().getStringExtra(REPORT_ALL_DATA));
+                    if (AuthenticationActivity.permission && reportTransfer.writeToFile()) {
+                        Toast.makeText(mContext, "Файл збережений /Download/data/scienticle/" + login + "_report.txt" , Toast.LENGTH_LONG).show();
+                    } else if(!AuthenticationActivity.permission ){
+                        Toast.makeText(mContext, "Потрібно надати доступ до збереження файлів" , Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mContext, "Виникла помилка при створенні файлу" , Toast.LENGTH_SHORT).show();
+                    }
                 return  true;
             case 3:
-
-                ReportTransfer reportTransfer = new ReportTransfer();
-                reportTransfer.setMail(login);
                 Log.d("LOG", "onContextItemSelected: " + mBundle.getString("login"));
                 reportTransfer.setReport(getIntent().getStringExtra(REPORT_ALL_DATA));
-               if (reportTransfer.send()) {
-                   Toast.makeText(this, "SendSuccess", Toast.LENGTH_SHORT).show();
+               if (reportTransfer.sendToEmail()) {
+                   Toast.makeText(this, "Звіт відправлений на " + login, Toast.LENGTH_SHORT).show();
                }
                 return true;
             default:
                 return false;
         }
-
-
     }
 
     @Override
@@ -243,4 +262,6 @@ public class ReportActivity extends AppCompatActivity {
         ScientWork scientWork = (ScientWork) data.getExtras().get("WORK");
         setTextToTextView(scientWork, mType);
     }
+
+
 }

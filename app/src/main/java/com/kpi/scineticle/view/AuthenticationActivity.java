@@ -2,12 +2,17 @@ package com.kpi.scineticle.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,11 +31,16 @@ public class AuthenticationActivity extends AppCompatActivity {
     public static final int LOGIN_USER = 2;
     private ActivityAuthenticationBinding mBinding;
     private Context mContext;
+    public final static int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL = 100;
+    public static boolean permission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        permision();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
+
+
 
         mContext = this;
         initDataBinding();
@@ -51,6 +61,30 @@ public class AuthenticationActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void permision() {
+        int permissionStatus = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionStatus == PackageManager.PERMISSION_GRANTED) {
+            permission = true;
+        }
+        else {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL);
+            permission = false;
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permission = false;
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                permission = true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL);
+                permission = true;
+            }
+        } else {
+            permission = true;
+        }
     }
 
     private void initDataBinding() {
@@ -95,6 +129,19 @@ public class AuthenticationActivity extends AppCompatActivity {
 
                     }
                 }).create().show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case AuthenticationActivity.MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    permission = true;
+                } else {
+                    permission = false;
+                }
+            }
+        }
     }
 
 }
