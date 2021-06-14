@@ -26,6 +26,8 @@ public class Article extends ScientWork implements Serializable {
 
     private String userLogin;
 
+    private int newest;
+
     public Article() {
         super.setTypeOfWork("Стаття");
     }
@@ -39,6 +41,14 @@ public class Article extends ScientWork implements Serializable {
         this.sheets = sheets;
         super.setTypeOfWork("Стаття");
 
+    }
+
+    public int getNewest() {
+        return newest;
+    }
+
+    public void setNewest(int newest) {
+        this.newest = newest;
     }
 
     @Override
@@ -121,6 +131,7 @@ public class Article extends ScientWork implements Serializable {
                 ", number='" + number + '\'' +
                 ", sheets='" + sheets + '\'' +
                 ", userLogin=" + userLogin +
+                ", newest=" + newest +
                 '}';
     }
 

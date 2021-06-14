@@ -120,7 +120,7 @@ public class ReportGenerator {
 
     public String getArticleReport(Article article) {
         return article.getAuthors()
-                + "."
+                + " "
                 + article.getNameArticle()
                 + "."
                 + article.getNameJournal()
@@ -195,7 +195,7 @@ public class ReportGenerator {
 
     public String getDissertationReport(Dissertation dissertation) {
         return dissertation.getAuthors()
-                + ". "
+                + " "
                 + dissertation.getName()
                 + " ["
                 + dissertation.getType()
@@ -209,7 +209,7 @@ public class ReportGenerator {
 
     public String getElectronicResourceReport(ElectronicResource electronicResource) {
         return electronicResource.getAuthors()
-                + "[Інтернет]"
+                + " [Інтернет]"
                 + electronicResource.getName()
                 + "; [оновлено "
                 + electronicResource.getUpdateDate()

@@ -35,6 +35,8 @@ public class BibliographicPointer extends ScientWork implements Serializable {
 
     private String additionally;
 
+    private int newest;
+
     public BibliographicPointer() {
         super.setTypeOfWork("Бібліографічний покажчик");
     }
@@ -50,6 +52,14 @@ public class BibliographicPointer extends ScientWork implements Serializable {
         this.year = year;
         this.sheet = sheet;
         this.additionally = additionally;
+    }
+
+    public int getNewest() {
+        return newest;
+    }
+
+    public void setNewest(int newest) {
+        this.newest = newest;
     }
 
     public int getId() {

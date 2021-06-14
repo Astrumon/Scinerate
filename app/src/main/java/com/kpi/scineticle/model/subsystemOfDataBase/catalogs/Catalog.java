@@ -33,6 +33,16 @@ public class Catalog extends ScientWork implements Serializable {
 
     private String abbreviation;
 
+    private int newest;
+
+    public int getNewest() {
+        return newest;
+    }
+
+    public void setNewest(int newest) {
+        this.newest = newest;
+    }
+
     public Catalog() {
         super.setTypeOfWork("Каталог");
     }

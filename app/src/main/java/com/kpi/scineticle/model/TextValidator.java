@@ -115,11 +115,11 @@ public class TextValidator {
     }
 
     public boolean validCodeLetter(String letter) {
-        return isNullEmpty(letter) && Pattern.compile("^[A-ZА-ЯЁҐЄІЇ]+[\\s:,.\\-].*$").matcher(letter).matches();
+        return isNullEmpty(letter) && Pattern.compile("^[A-ZА-ЯЁҐЄІЇ]+[\\s:,.\\-[A-ZА-ЯЁҐЄІЇ]]*$").matcher(letter).matches();
     }
 
     public boolean validNumberCode(String number) {
-        return isNullEmpty(number) && Pattern.compile("^[0-9]+[:\\-].*$").matcher(number).matches();
+        return isNullEmpty(number) && Pattern.compile("^[0-9]+[\\s:\\-[0-9]]*$").matcher(number).matches();
     }
     private boolean isNullEmpty(String value) {
         return value != null && !TextUtils.isEmpty(value);

@@ -7,6 +7,8 @@ import com.kpi.scineticle.model.TextValidator;
 
 public abstract class ScientWork {
 
+    public static int count = 0;
+
     public static final String ARTICLE = "Стаття";
     public static final String BIBLIOGRAPHIC_POINTER = "Бібліографічний покажчик";
     public static final String BOOK = "Книга";

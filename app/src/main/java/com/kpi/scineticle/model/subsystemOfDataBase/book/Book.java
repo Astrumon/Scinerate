@@ -41,6 +41,8 @@ public class Book extends ScientWork implements Serializable {
 
     private String userLogin;
 
+    private int newest;
+
     public Book() {
         super.setTypeOfWork("Книга");
     }
@@ -51,6 +53,14 @@ public class Book extends ScientWork implements Serializable {
 
     public void setPublish(String publish) {
         this.publish = publish;
+    }
+
+    public int getNewest() {
+        return newest;
+    }
+
+    public void setNewest(int newest) {
+        this.newest = newest;
     }
 
     public Book(String authors, String name, String statement, String place, String publish, String year, String part, String countOfSheets) {

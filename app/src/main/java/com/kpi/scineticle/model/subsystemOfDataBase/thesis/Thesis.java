@@ -30,6 +30,16 @@ public class Thesis extends ScientWork implements Serializable {
 
     private String loginUser;
 
+    private int newest;
+
+    public int getNewest() {
+        return newest;
+    }
+
+    public void setNewest(int newest) {
+        this.newest = newest;
+    }
+
     public Thesis() {
         super.setTypeOfWork("Тезис");
     }

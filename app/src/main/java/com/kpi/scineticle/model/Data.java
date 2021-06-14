@@ -67,7 +67,7 @@ public class Data implements Serializable{
         List<Data> datas = new ArrayList<>();
         for (Article article : articles) {
             Data data = new Data();
-            data.id = article.getId();
+            data.id = article.getNewest();
             data.typeWork = ScientWork.ARTICLE;
             data.name = article.getNameArticle();
             data.authors = article.getAuthors();
@@ -89,7 +89,7 @@ public class Data implements Serializable{
 
         for (Book book : books) {
             Data data = new Data();
-            data.id = book.getId();
+            data.id = book.getNewest();
             data.typeWork = ScientWork.BOOK;
             data.name = book.getName();
             data.authors = book.getAuthors();
@@ -111,7 +111,7 @@ public class Data implements Serializable{
 
         for (BibliographicPointer bibliographicPointer: bibliographicPointers) {
             Data data = new Data();
-            data.id = bibliographicPointer.getId();
+            data.id = bibliographicPointer.getNewest();
             data.typeWork = ScientWork.BIBLIOGRAPHIC_POINTER;
             data.name = bibliographicPointer.getName();
             data.authors = bibliographicPointer.getAuthorOfRelease();
@@ -133,7 +133,7 @@ public class Data implements Serializable{
 
         for (Catalog catalog: catalogs) {
             Data data = new Data();
-            data.id = catalog.getId();
+            data.id = catalog.getNewest();
             data.year = catalog.getYear();
             data.typeWork = ScientWork.CATALOG;
             data.name = catalog.getName();
@@ -155,7 +155,7 @@ public class Data implements Serializable{
 
         for (Dissertation dissertation: dissertations) {
             Data data = new Data();
-            data.id = dissertation.getId();
+            data.id = dissertation.getNewest();
             data.year = dissertation.getYear();
             data.typeWork = ScientWork.DISSERTATION;
             data.name = dissertation.getName();
@@ -177,7 +177,7 @@ public class Data implements Serializable{
 
         for (ElectronicResource electronicResource: electronicResources) {
             Data data = new Data();
-            data.id = electronicResource.getId();
+            data.id = electronicResource.getNewest();
             data.typeWork = ScientWork.ELECTRONIC_RESOURCE;
             data.name = electronicResource.getName();
             data.authors = electronicResource.getAuthors();
@@ -199,7 +199,7 @@ public class Data implements Serializable{
 
         for (LegisNormDocuments legisNormDocument: legisNormDocumentss) {
             Data data = new Data();
-            data.id = legisNormDocument.getId();
+            data.id = legisNormDocument.getNewest();
             data.typeWork = ScientWork.LEGIS_NORM_DOCUMENTS;
             data.name = legisNormDocument.getName();
             data.date = legisNormDocument.getDatePublish();
@@ -220,7 +220,7 @@ public class Data implements Serializable{
 
         for (Patent patent: patents) {
             Data data = new Data();
-            data.id = patent.getId();
+            data.id = patent.getNewest();
             data.typeWork = ScientWork.PATENT;
             data.name = patent.getName();
             data.date = patent.getDate();
@@ -242,7 +242,7 @@ public class Data implements Serializable{
 
         for (Preprint preprint: preprints) {
             Data data = new Data();
-            data.id = preprint.getId();
+            data.id = preprint.getNewest();
             data.typeWork = ScientWork.PREPRINT;
             data.name = preprint.getName();
             data.year = preprint.getYear();
@@ -264,7 +264,7 @@ public class Data implements Serializable{
 
         for (Standart standart: standarts) {
             Data data = new Data();
-            data.id = standart.getId();
+            data.id = standart.getNewest();
             data.typeWork = ScientWork.STANDART;
             data.name = standart.getName();
             data.year = standart.getYearPublish();
@@ -285,7 +285,7 @@ public class Data implements Serializable{
 
         for (Thesis thesis: theses) {
             Data data = new Data();
-            data.id = thesis.getId();
+            data.id = thesis.getNewest();
             data.typeWork = ScientWork.THESIS;
             data.name = thesis.getName();
             data.year = thesis.getYear();

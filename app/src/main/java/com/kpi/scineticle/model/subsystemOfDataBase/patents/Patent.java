@@ -26,6 +26,16 @@ public class Patent extends ScientWork implements Serializable {
 
     private String userLogin;
 
+    private int newest;
+
+    public int getNewest() {
+        return newest;
+    }
+
+    public void setNewest(int newest) {
+        this.newest = newest;
+    }
+
     public int getId() {
         return id;
     }

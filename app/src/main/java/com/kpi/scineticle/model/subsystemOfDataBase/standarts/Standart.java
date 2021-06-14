@@ -29,6 +29,16 @@ public class Standart extends ScientWork implements Serializable {
 
     private String placePublish;
 
+    private int newest;
+
+    public int getNewest() {
+        return newest;
+    }
+
+    public void setNewest(int newest) {
+        this.newest = newest;
+    }
+
     public Standart() {
         super.setTypeOfWork("Стандарт");
     }

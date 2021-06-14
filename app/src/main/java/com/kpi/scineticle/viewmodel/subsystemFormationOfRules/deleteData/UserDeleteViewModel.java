@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.ArticleRepository;
 import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointer;
@@ -27,6 +28,8 @@ import com.kpi.scineticle.model.subsystemOfDataBase.standarts.StandartRepository
 import com.kpi.scineticle.model.subsystemOfDataBase.thesis.ThesisRepository;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.User;
 import com.kpi.scineticle.model.subsystemOfDataBase.user.UserRepository;
+import com.kpi.scineticle.viewmodel.subsystemFormationOfRules.inputData.UserInputViewModel;
+import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ExistingUserViewModel;
 
 
 public class UserDeleteViewModel extends DeleteViewModel<User> {
@@ -92,6 +95,7 @@ public class UserDeleteViewModel extends DeleteViewModel<User> {
 
 
     public void deleteAllUsers() {
+
         mUserRepository.deleteAllUsers();
     }
 
@@ -140,6 +144,7 @@ public class UserDeleteViewModel extends DeleteViewModel<User> {
     }
 
     public void deleteAllWorks() {
+        ScientWork.count = 0;
         deleteAllArticles();
         deleteAllBooks();
         deleteAllCatalogs();

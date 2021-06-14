@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.ArticleRepository;
 import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointer;
@@ -34,6 +35,7 @@ import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserFinder;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.UserValidation;
 
 public class UserInputViewModel extends InputViewModel<User> {
+
 
     public UserInputViewModel(@NonNull Application application) {
         mUserRepository = new UserRepository(application);
@@ -65,6 +67,7 @@ public class UserInputViewModel extends InputViewModel<User> {
     public boolean insert(Article article) {
         Log.d("VALID", "ArticleDataValid: " +mScientWorkValidation.ArticleDataValid(article));
         if (mScientWorkValidation.ArticleDataValid(article)) {
+            article.setNewest(++ScientWork.count);
             mArticleRepository.insert(article);
             return true;
         }
@@ -74,6 +77,7 @@ public class UserInputViewModel extends InputViewModel<User> {
 
     public boolean insert(BibliographicPointer bibliographicPointer) {
         if (mScientWorkValidation.BibliographicPointerDataValid(bibliographicPointer)) {
+            bibliographicPointer.setNewest(++ScientWork.count);
             mBibliographicRepository.insert(bibliographicPointer);
             return true;
         }
@@ -82,6 +86,7 @@ public class UserInputViewModel extends InputViewModel<User> {
 
     public boolean insert(Patent patent) {
         if(mScientWorkValidation.PatentDataValid(patent)) {
+            patent.setNewest(++ScientWork.count);
             mPatentRepository.insert(patent);
             return true;
         }
@@ -91,6 +96,7 @@ public class UserInputViewModel extends InputViewModel<User> {
 
     public boolean insert(Standart standart) {
         if (mScientWorkValidation.StandartDataValid(standart)){
+            standart.setNewest(++ScientWork.count);
             mStandartRepository.insert(standart);
             return true;
         }
@@ -100,6 +106,7 @@ public class UserInputViewModel extends InputViewModel<User> {
 
     public boolean insert(Preprint preprint) {
         if (mScientWorkValidation.PreprintDataValid(preprint)) {
+            preprint.setNewest(++ScientWork.count);
             mPreprintRepository.insert(preprint);
             return true;
         }
@@ -109,6 +116,7 @@ public class UserInputViewModel extends InputViewModel<User> {
 
     public boolean insert(Catalog catalog) {
        if (mScientWorkValidation.CatalogDataValid(catalog)) {
+           catalog.setNewest(++ScientWork.count);
            mCatalogRepository.insert(catalog);
            return true;
        }
@@ -118,6 +126,7 @@ public class UserInputViewModel extends InputViewModel<User> {
 
     public boolean insert(Thesis thesis) {
         if (mScientWorkValidation.ThesisDataValid(thesis)) {
+            thesis.setNewest(++ScientWork.count);
             mThesisRepository.insert(thesis);
             return true;
         }
@@ -127,6 +136,7 @@ public class UserInputViewModel extends InputViewModel<User> {
 
     public boolean insert(ElectronicResource electronicResource) {
         if (mScientWorkValidation.ElectronicResourceDataValid(electronicResource)) {
+            electronicResource.setNewest(++ScientWork.count);
             mElectronicResourceRepository.insert(electronicResource);
             return true;
         }
@@ -136,6 +146,7 @@ public class UserInputViewModel extends InputViewModel<User> {
 
     public boolean insert(Book book) {
         if (mScientWorkValidation.BookDataValid(book)) {
+            book.setNewest(++ScientWork.count);
             mBookRepository.insert(book);
             return true;
         }
@@ -145,6 +156,7 @@ public class UserInputViewModel extends InputViewModel<User> {
 
     public boolean insert(LegisNormDocuments legisNormDocuments){
        if (mScientWorkValidation.LegisNormDocumentsDataValid(legisNormDocuments)) {
+           legisNormDocuments.setNewest(++ScientWork.count);
            mLegisNormDocumentsRepository.insert(legisNormDocuments);
            return true;
        }
@@ -154,6 +166,7 @@ public class UserInputViewModel extends InputViewModel<User> {
 
     public boolean insert(Dissertation dissertation) {
         if (mScientWorkValidation.DissertationDataValid(dissertation)) {
+            dissertation.setNewest(++ScientWork.count);
             mDissertationRepository.insert(dissertation);
             return true;
         }
