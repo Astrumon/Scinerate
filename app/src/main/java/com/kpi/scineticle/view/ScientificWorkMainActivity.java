@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.kpi.scineticle.R;
 import com.kpi.scineticle.databinding.ActivityScientificWorkBinding;
@@ -48,7 +49,7 @@ import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ScientificWorkCRU
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScientificWorkMainActivity extends AppCompatActivity {
+public class ScientificWorkMainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     public static final int ADD_ARTICLE_REQUEST = 1;
     public static final int SEARCH_WORK_REQUEST = 2;
     public static final int SORT_WORK_REQUEST = 3;
@@ -65,6 +66,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
     private String sortType = "NONE";
     private String searchType = "NONE";
     private String valueBySearch = "NONE";
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,6 +93,9 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         clickItem();
         swipeToDeleteWork();
         adapter = (ScientificWorkAdapter) mBinding.recyclerArticle.getAdapter();
+
+        mSwipeRefreshLayout = findViewById(R.id.refresher);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
 
     }
 
@@ -421,5 +426,22 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         outState.putString(KEY_SEARCH_TYPE, searchType);
         outState.putString(KEY_SEARCH_VALUE, valueBySearch);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRefresh() {
+        searchType = "NONE";
+        setupListScienticView(mBinding.recyclerArticle);
+        mSwipeRefreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+                if (mSwipeRefreshLayout.isRefreshing()) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+            }
+        }, 200);
+
     }
 }
