@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,15 +13,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.kpi.scineticle.R;
+import com.kpi.scineticle.model.WorkSearcher;
 
 public class SearchWorkActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private Context mContext;
     public static final String DATA_FOR_SEARCH = "DATA_FOR_SEARCH";
+    public static final String VALUE_FOR_SEARCH = "VALUE_FOR_SEARCH";
+    private String typeSearch;
+    private Button mButton;
+    private EditText mEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +36,22 @@ public class SearchWorkActivity extends AppCompatActivity implements AdapterView
         mContext = this;
         setContentView(R.layout.activity_search_work);
         setTitle("Пошук");
-        getIntent();
         initSpinner();
+
+        mButton = findViewById(R.id.btn_search);
+        mEditText = findViewById(R.id.edit_text_search);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra(DATA_FOR_SEARCH, typeSearch );
+                intent.putExtra(VALUE_FOR_SEARCH, mEditText.getText().toString());
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
+
     }
 
     @Override
@@ -64,17 +86,29 @@ public class SearchWorkActivity extends AppCompatActivity implements AdapterView
         String text = parent.getItemAtPosition(position).toString();
 
         switch (text) {
+            case "-":
+                typeSearch = "NONE";
+                mEditText.setVisibility(View.INVISIBLE);
+                break;
             case "Автори":
+                mEditText.setVisibility(View.VISIBLE);
                 Toast.makeText(mContext, "AUTHORS", Toast.LENGTH_SHORT).show();
+                typeSearch = WorkSearcher.SEARCH_BY_AUTHORS;
                 break;
             case "Типи робіт":
+                mEditText.setVisibility(View.VISIBLE);
                 Toast.makeText(mContext, "TYPE", Toast.LENGTH_SHORT).show();
+                typeSearch = WorkSearcher.SEARCH_BY_TYPE;
                 break;
             case "Дата публікації":
+                mEditText.setVisibility(View.VISIBLE);
                 Toast.makeText(mContext, "DatePublish", Toast.LENGTH_SHORT).show();
+                typeSearch = WorkSearcher.SEARCH_BY_DATE;
                 break;
             case "Назва роботи":
+                mEditText.setVisibility(View.VISIBLE);
                 Toast.makeText(mContext, "Name", Toast.LENGTH_SHORT).show();
+                typeSearch = WorkSearcher.SEARCH_BY_NAME;
                 break;
         }
     }

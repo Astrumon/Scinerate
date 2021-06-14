@@ -1,10 +1,12 @@
 package com.kpi.scineticle.view;
 
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kpi.scineticle.databinding.ItemArticleWorkBinding;
@@ -19,6 +21,7 @@ import com.kpi.scineticle.databinding.ItemPreprintWorkBinding;
 import com.kpi.scineticle.databinding.ItemStandartWorkBinding;
 import com.kpi.scineticle.databinding.ItemThesisWorkBinding;
 import com.kpi.scineticle.model.Data;
+import com.kpi.scineticle.model.WorkSearcher;
 import com.kpi.scineticle.model.WorkSorter;
 import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
@@ -65,6 +68,24 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
     private List<Thesis> mTheses = new ArrayList<>();
     private List<Data> mData;
     private String typeOfSort;
+    private String typeOfSearch;
+    private String valueBySearch;
+
+    public String getValueBySearch() {
+        return valueBySearch;
+    }
+
+    public void setValueBySearch(String valueBySearch) {
+        this.valueBySearch = valueBySearch;
+    }
+
+    public String getTypeOfSearch() {
+        return typeOfSearch;
+    }
+
+    public void setTypeOfSearch(String typeOfSearch) {
+        this.typeOfSearch = typeOfSearch;
+    }
 
     public String getTypeOfSort() {
         return typeOfSort;
@@ -260,7 +281,7 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
     @Override
     public int getItemCount() {
         sort();
-
+        search();
         return mData.size();
     }
 
@@ -293,6 +314,29 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
                 break;
             case WorkSorter.SORT_BY_TYPE:
                 mData = workSorter.sortByTypeWork(mData);
+                break;
+        }
+    }
+
+    private void search() {
+        WorkSearcher workSearcher = new WorkSearcher();
+
+        switch (typeOfSearch) {
+            case "NONE":
+                break;
+            case WorkSearcher.SEARCH_BY_AUTHORS:
+                mData = workSearcher.searchByAuthors(mData, valueBySearch);
+                break;
+            case WorkSearcher.SEARCH_BY_DATE:
+                mData = workSearcher.searchByDate(mData, valueBySearch);
+                break;
+            case WorkSearcher.SEARCH_BY_NAME:
+                mData = workSearcher.searchByName(mData, valueBySearch);
+                break;
+            case WorkSearcher.SEARCH_BY_TYPE:
+                mData = workSearcher.searchByType(mData, valueBySearch);
+                break;
+            default:
                 break;
         }
     }

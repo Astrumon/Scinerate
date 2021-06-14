@@ -53,6 +53,8 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
     public static final int SEARCH_WORK_REQUEST = 2;
     public static final int SORT_WORK_REQUEST = 3;
     private static final String KEY_SORT_TYPE = "ScientificWorkMainActivity.KEY_SORT_TYPE";
+    private static final String KEY_SEARCH_TYPE = "ScientificWorkMainActivity.KEY_SEARCH_TYPE";
+    private static final String KEY_SEARCH_VALUE = "ScientificWorkMainActivity.KEY_SEARCH_VALUE";
     private ScientificWorkAdapter mScientificWorkAdapter;
     private ScientificWorkCRUDViewModel mScientificWorkCRUDViewModel;
     private ActivityScientificWorkBinding mBinding;
@@ -61,6 +63,8 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
     private TypeOfWorkIntentGenerator mTypeOfWorkIntentGenerator;
     private ScientificWorkAdapter adapter;
     private String sortType = "NONE";
+    private String searchType = "NONE";
+    private String valueBySearch = "NONE";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +74,8 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
 
         if (savedInstanceState != null) {
             sortType = savedInstanceState.getString(KEY_SORT_TYPE);
+            searchType = savedInstanceState.getString(KEY_SEARCH_TYPE);
+            valueBySearch = savedInstanceState.getString(KEY_SEARCH_VALUE);
             Log.d("SORT", "onCreate: " + sortType);
         }
         setLogin();
@@ -287,6 +293,8 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
             }
         });
         mScientificWorkAdapter.setTypeOfSort(sortType);
+        mScientificWorkAdapter.setTypeOfSearch(searchType);
+        mScientificWorkAdapter.setValueBySearch(valueBySearch);
         Log.d("SORT", "setupListScienticView: " + sortType);
         recyclerView.setAdapter(mScientificWorkAdapter);
     }
@@ -332,8 +340,6 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
                 return true;
             case R.id.search:
                 Intent intentSearch = new Intent(mContext, SearchWorkActivity.class);
-                ArrayList<Data> dataForSearch = new ArrayList<>(adapter.getData());
-                intentSearch.putExtra(SearchWorkActivity.DATA_FOR_SEARCH, dataForSearch);
                 startActivityForResult(intentSearch, SEARCH_WORK_REQUEST);
                 return true;
             case R.id.sort:
@@ -388,20 +394,32 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SEARCH_WORK_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                searchType = data.getStringExtra(SearchWorkActivity.DATA_FOR_SEARCH);
+                valueBySearch = data.getStringExtra(SearchWorkActivity.VALUE_FOR_SEARCH);
+                mScientificWorkAdapter.setValueBySearch(valueBySearch);
+                mScientificWorkAdapter.setTypeOfSearch(searchType);
+                setupListScienticView(mBinding.recyclerArticle);
+            }
+
+        }
         if (requestCode == SORT_WORK_REQUEST) {
             if (resultCode == RESULT_OK) {
                 sortType = data.getStringExtra(SortWorkActivity.DATA_FOR_SORT);
                 mScientificWorkAdapter.setTypeOfSort(sortType);
                 setupListScienticView(mBinding.recyclerArticle);
             }
-            Log.d("SORT", "onActivityResult: NOT OK:");
+
         }
-        Log.d("SORT", "onActivityResult: NOT REQ:");
+
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString(KEY_SORT_TYPE, sortType);
+        outState.putString(KEY_SEARCH_TYPE, searchType);
+        outState.putString(KEY_SEARCH_VALUE, valueBySearch);
         super.onSaveInstanceState(outState);
     }
 }

@@ -87,9 +87,8 @@ public class WorkSorter {
         return new ArrayList<>(data);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public ArrayList<Data> sortByDate(List<Data> data) {
-        @SuppressLint("SimpleDateFormat") DateFormat f = new SimpleDateFormat("dd.MM.yyyy");
+      DateFormat f = new SimpleDateFormat("dd.MM.yyyy");
         Comparator<Data> comparator = new Comparator<Data>() {
             @Override
             public int compare(Data o1, Data o2) {
