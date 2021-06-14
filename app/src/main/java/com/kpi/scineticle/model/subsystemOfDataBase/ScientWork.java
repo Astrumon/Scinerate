@@ -24,7 +24,7 @@ public abstract class ScientWork {
         mTextValidator = new TextValidator();
     }
 
-    private String typeOfWork;
+    public String typeOfWork;
 
     public String getTypeOfWork() {
         return typeOfWork;

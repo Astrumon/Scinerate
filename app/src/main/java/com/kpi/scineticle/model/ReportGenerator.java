@@ -71,14 +71,6 @@ public class ReportGenerator {
     }
 
     private String generate(Data work) {
-        if (work.type == Data.ARTICLE) {
-            return getArticleReport(work.article);
-        }
-
-        if (work.type == Data.BOOK) {
-            return getBookReport(work.book);
-        }
-
         switch (work.type) {
             case Data.ARTICLE:
                 return getArticleReport(work.article);

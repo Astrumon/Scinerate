@@ -1,5 +1,8 @@
 package com.kpi.scineticle.model;
 
+import android.util.Log;
+
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
 import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointer;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
@@ -16,7 +19,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Data implements Serializable {
+public class Data implements Serializable{
     public static final int ARTICLE = 1;
     public static final int BOOK = 2;
     public static final int BIBLIOGRAPHIC_POINTER = 3;
@@ -28,6 +31,13 @@ public class Data implements Serializable {
     public static final int PREPRINT = 9;
     public static final int STANDART = 10;
     public static final int THESIS = 11;
+
+    public int id;
+    public String authors;
+    public String date;
+    public String typeWork;
+    public String name;
+    public String year;
 
     public int type;
     public Article article;
@@ -57,6 +67,11 @@ public class Data implements Serializable {
         List<Data> datas = new ArrayList<>();
         for (Article article : articles) {
             Data data = new Data();
+            data.id = article.getId();
+            data.typeWork = ScientWork.ARTICLE;
+            data.name = article.getNameArticle();
+            data.authors = article.getAuthors();
+            data.date = article.getDate();
             data.article = article;
             data.book = null;
             data.bibliographicPointer = null;
@@ -74,6 +89,11 @@ public class Data implements Serializable {
 
         for (Book book : books) {
             Data data = new Data();
+            data.id = book.getId();
+            data.typeWork = ScientWork.BOOK;
+            data.name = book.getName();
+            data.authors = book.getAuthors();
+            data.year = book.getYear();
             data.article = null;
             data.bibliographicPointer = null;
             data.book = book;
@@ -91,6 +111,11 @@ public class Data implements Serializable {
 
         for (BibliographicPointer bibliographicPointer: bibliographicPointers) {
             Data data = new Data();
+            data.id = bibliographicPointer.getId();
+            data.typeWork = ScientWork.BIBLIOGRAPHIC_POINTER;
+            data.name = bibliographicPointer.getName();
+            data.authors = bibliographicPointer.getAuthorOfRelease();
+            data.year = bibliographicPointer.getYear();
             data.article = null;
             data.book = null;
             data.bibliographicPointer = bibliographicPointer;
@@ -108,6 +133,11 @@ public class Data implements Serializable {
 
         for (Catalog catalog: catalogs) {
             Data data = new Data();
+            data.id = catalog.getId();
+            data.year = catalog.getYear();
+            data.typeWork = ScientWork.CATALOG;
+            data.name = catalog.getName();
+            data.authors = catalog.getAuthors();
             data.article = null;
             data.book = null;
             data.bibliographicPointer = null;
@@ -125,6 +155,11 @@ public class Data implements Serializable {
 
         for (Dissertation dissertation: dissertations) {
             Data data = new Data();
+            data.id = dissertation.getId();
+            data.year = dissertation.getYear();
+            data.typeWork = ScientWork.DISSERTATION;
+            data.name = dissertation.getName();
+            data.authors = dissertation.getAuthors();
             data.article = null;
             data.book = null;
             data.bibliographicPointer = null;
@@ -142,6 +177,11 @@ public class Data implements Serializable {
 
         for (ElectronicResource electronicResource: electronicResources) {
             Data data = new Data();
+            data.id = electronicResource.getId();
+            data.typeWork = ScientWork.ELECTRONIC_RESOURCE;
+            data.name = electronicResource.getName();
+            data.authors = electronicResource.getAuthors();
+            data.date = electronicResource.getDate();
             data.article = null;
             data.book = null;
             data.bibliographicPointer = null;
@@ -159,6 +199,10 @@ public class Data implements Serializable {
 
         for (LegisNormDocuments legisNormDocument: legisNormDocumentss) {
             Data data = new Data();
+            data.id = legisNormDocument.getId();
+            data.typeWork = ScientWork.LEGIS_NORM_DOCUMENTS;
+            data.name = legisNormDocument.getName();
+            data.date = legisNormDocument.getDatePublish();
             data.article = null;
             data.book = null;
             data.bibliographicPointer = null;
@@ -176,6 +220,11 @@ public class Data implements Serializable {
 
         for (Patent patent: patents) {
             Data data = new Data();
+            data.id = patent.getId();
+            data.typeWork = ScientWork.PATENT;
+            data.name = patent.getName();
+            data.date = patent.getDate();
+            data.authors = patent.getAuthors();
             data.article = null;
             data.book = null;
             data.bibliographicPointer = null;
@@ -193,6 +242,11 @@ public class Data implements Serializable {
 
         for (Preprint preprint: preprints) {
             Data data = new Data();
+            data.id = preprint.getId();
+            data.typeWork = ScientWork.PREPRINT;
+            data.name = preprint.getName();
+            data.year = preprint.getYear();
+            data.authors = preprint.getAuthors();
             data.article = null;
             data.book = null;
             data.bibliographicPointer = null;
@@ -210,6 +264,10 @@ public class Data implements Serializable {
 
         for (Standart standart: standarts) {
             Data data = new Data();
+            data.id = standart.getId();
+            data.typeWork = ScientWork.STANDART;
+            data.name = standart.getName();
+            data.year = standart.getYearPublish();
             data.article = null;
             data.book = null;
             data.bibliographicPointer = null;
@@ -227,6 +285,12 @@ public class Data implements Serializable {
 
         for (Thesis thesis: theses) {
             Data data = new Data();
+            data.id = thesis.getId();
+            data.typeWork = ScientWork.THESIS;
+            data.name = thesis.getName();
+            data.year = thesis.getYear();
+            data.authors = thesis.getAuthors();
+            data.date = thesis.getDate();
             data.article = null;
             data.book = null;
             data.bibliographicPointer = null;
@@ -292,4 +356,5 @@ public class Data implements Serializable {
 
         return 0;
     }
+
 }

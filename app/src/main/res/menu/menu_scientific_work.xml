@@ -4,12 +4,12 @@
     <item android:id="@+id/deleteAllArticles"
     android:title="Видалити всі записи"
     app:showAsAction="never"/>
-    <item android:id="@+id/sortByName"
-        android:title="Відсортувати за ім'ям"
+    <item android:id="@+id/search"
+        android:title="Пошук"
         app:showAsAction="never"
         />
-    <item android:id="@+id/sortByDate"
-        android:title="Відсортувати за датою"
+    <item android:id="@+id/sort"
+        android:title="Сортування"
         app:showAsAction="never"/>
     <item android:id="@+id/create_reports"
         android:title="Сформувати всі звіти"

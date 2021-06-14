@@ -1,5 +1,6 @@
 package com.kpi.scineticle.view;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -18,6 +19,8 @@ import com.kpi.scineticle.databinding.ItemPreprintWorkBinding;
 import com.kpi.scineticle.databinding.ItemStandartWorkBinding;
 import com.kpi.scineticle.databinding.ItemThesisWorkBinding;
 import com.kpi.scineticle.model.Data;
+import com.kpi.scineticle.model.WorkSorter;
+import com.kpi.scineticle.model.subsystemOfDataBase.ScientWork;
 import com.kpi.scineticle.model.subsystemOfDataBase.article.Article;
 import com.kpi.scineticle.model.subsystemOfDataBase.bibliographic_pointers.BibliographicPointer;
 import com.kpi.scineticle.model.subsystemOfDataBase.book.Book;
@@ -61,6 +64,15 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
     private List<Standart> mStandarts = new ArrayList<>();
     private List<Thesis> mTheses = new ArrayList<>();
     private List<Data> mData;
+    private String typeOfSort;
+
+    public String getTypeOfSort() {
+        return typeOfSort;
+    }
+
+    public void setTypeOfSort(String typeOfSort) {
+        this.typeOfSort = typeOfSort;
+    }
 
     @NonNull
     @Override
@@ -127,10 +139,10 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
 
         switch (holder.getItemViewType()) {
             case Data.ARTICLE:
-               ArticleHolder articleHolder = (ArticleHolder)holder;
-               articleHolder.onBind(getScientWork(position).article);
-               articleHolder.setListener(mListener);
-               break;
+                ArticleHolder articleHolder = (ArticleHolder) holder;
+                articleHolder.onBind(getScientWork(position).article);
+                articleHolder.setListener(mListener);
+                break;
             case Data.BOOK:
                 BookHolder bookHolder = (BookHolder) holder;
                 bookHolder.onBind(getScientWork(position).book);
@@ -188,46 +200,57 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
     @Override
     public int getItemViewType(int position) {
         if (getScientWork(position).article instanceof Article) {
+            getScientWork(position).article.setTypeOfWork(ScientWork.ARTICLE);
             return Data.ARTICLE;
         }
 
         if (getScientWork(position).book instanceof Book) {
+            getScientWork(position).book.setTypeOfWork(ScientWork.BOOK);
             return Data.BOOK;
         }
 
         if (getScientWork(position).bibliographicPointer instanceof BibliographicPointer) {
+            getScientWork(position).bibliographicPointer.setTypeOfWork(ScientWork.BIBLIOGRAPHIC_POINTER);
             return Data.BIBLIOGRAPHIC_POINTER;
         }
 
         if (getScientWork(position).catalog instanceof Catalog) {
+            getScientWork(position).catalog.setTypeOfWork(ScientWork.CATALOG);
             return Data.CATALOG;
         }
 
         if (getScientWork(position).dissertation instanceof Dissertation) {
+            getScientWork(position).dissertation.setTypeOfWork(ScientWork.DISSERTATION);
             return Data.DISSERTATION;
         }
 
         if (getScientWork(position).electronicResource instanceof ElectronicResource) {
+            getScientWork(position).electronicResource.setTypeOfWork(ScientWork.ELECTRONIC_RESOURCE);
             return Data.ELECTRONIC_RESOURCE;
         }
 
         if (getScientWork(position).legisNormDocuments instanceof LegisNormDocuments) {
+            getScientWork(position).legisNormDocuments.setTypeOfWork(ScientWork.LEGIS_NORM_DOCUMENTS);
             return Data.LEGIS_NORM_DOCUMENTS;
         }
 
         if (getScientWork(position).patent instanceof Patent) {
+            getScientWork(position).patent.setTypeOfWork(ScientWork.PATENT);
             return Data.PATENT;
         }
 
         if (getScientWork(position).preprint instanceof Preprint) {
+            getScientWork(position).preprint.setTypeOfWork(ScientWork.PREPRINT);
             return Data.PREPRINT;
         }
 
         if (getScientWork(position).standart instanceof Standart) {
+            getScientWork(position).standart.setTypeOfWork(ScientWork.STANDART);
             return Data.STANDART;
         }
 
         if (getScientWork(position).thesis instanceof Thesis) {
+            getScientWork(position).thesis.setTypeOfWork(ScientWork.THESIS);
             return Data.THESIS;
         }
 
@@ -236,6 +259,13 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
 
     @Override
     public int getItemCount() {
+        sort();
+
+        return mData.size();
+    }
+
+    private void sort() {
+        WorkSorter workSorter = new WorkSorter();
         mData = Data.merge(mListArticle,
                 mListBook,
                 mListBibliographicPointers,
@@ -248,7 +278,23 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
                 mStandarts,
                 mTheses);
 
-        return mData.size();
+        switch (typeOfSort) {
+            case "NONE":
+                mData = workSorter.sortByNew(mData);
+                break;
+            case WorkSorter.SORT_BY_AUTHORS:
+                mData = workSorter.sortByAuthorsName(mData);
+            break;
+            case WorkSorter.SORT_BY_DATE:
+                mData = workSorter.sortByDate(mData);
+                break;
+            case WorkSorter.SORT_BY_NAME:
+                mData = workSorter.sortByName(mData);
+                break;
+            case WorkSorter.SORT_BY_TYPE:
+                mData = workSorter.sortByTypeWork(mData);
+                break;
+        }
     }
 
     public void setArticles(List<Article> list) {
@@ -311,12 +357,18 @@ public class ScientificWorkAdapter extends RecyclerView.Adapter<BaseViewHolder> 
         return mData;
     }
 
+    public void setData(List<Data> data) {
+        mData = data;
+        notifyDataSetChanged();
+    }
+
     public Data getScientWork(int position) {
         return mData.get(position);
     }
 
     public interface OnItemClickListener<T> {
         void onItemClick(T t);
+
         void onLongItemClick(T t);
 
     }

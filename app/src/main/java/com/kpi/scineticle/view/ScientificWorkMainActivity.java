@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,16 +45,22 @@ import com.kpi.scineticle.model.subsystemOfDataBase.thesis.Thesis;
 import com.kpi.scineticle.viewmodel.subsystemOfMakingDecisions.Alert;
 import com.kpi.scineticle.viewmodel.subsystemUser.existingUser.ScientificWorkCRUDViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScientificWorkMainActivity extends AppCompatActivity {
     public static final int ADD_ARTICLE_REQUEST = 1;
+    public static final int SEARCH_WORK_REQUEST = 2;
+    public static final int SORT_WORK_REQUEST = 3;
+    private static final String KEY_SORT_TYPE = "ScientificWorkMainActivity.KEY_SORT_TYPE";
     private ScientificWorkAdapter mScientificWorkAdapter;
     private ScientificWorkCRUDViewModel mScientificWorkCRUDViewModel;
     private ActivityScientificWorkBinding mBinding;
     private Context mContext;
     private String login;
     private TypeOfWorkIntentGenerator mTypeOfWorkIntentGenerator;
+    private ScientificWorkAdapter adapter;
+    private String sortType = "NONE";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +68,10 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         setContentView(R.layout.activity_scientific_work);
 
+        if (savedInstanceState != null) {
+            sortType = savedInstanceState.getString(KEY_SORT_TYPE);
+            Log.d("SORT", "onCreate: " + sortType);
+        }
         setLogin();
         setTitle(login);
 
@@ -73,6 +84,8 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         clickToAddWork();
         clickItem();
         swipeToDeleteWork();
+        adapter = (ScientificWorkAdapter) mBinding.recyclerArticle.getAdapter();
+
     }
 
     private void clickItem() {
@@ -196,6 +209,7 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        Log.d("SORT", "false ");
         mScientificWorkCRUDViewModel.getAllTestWorks().observe(this, new Observer<List<Book>>() {
             @Override
             public void onChanged(List<Book> books) {
@@ -272,7 +286,8 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
                 mScientificWorkAdapter.setTheses(theses);
             }
         });
-
+        mScientificWorkAdapter.setTypeOfSort(sortType);
+        Log.d("SORT", "setupListScienticView: " + sortType);
         recyclerView.setAdapter(mScientificWorkAdapter);
     }
 
@@ -315,13 +330,16 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
 
 
                 return true;
-            case R.id.sortByName:
-                //TODO sort by name article
-                Toast.makeText(this, "All arcticles sorted by name", Toast.LENGTH_SHORT).show();
+            case R.id.search:
+                Intent intentSearch = new Intent(mContext, SearchWorkActivity.class);
+                ArrayList<Data> dataForSearch = new ArrayList<>(adapter.getData());
+                intentSearch.putExtra(SearchWorkActivity.DATA_FOR_SEARCH, dataForSearch);
+                startActivityForResult(intentSearch, SEARCH_WORK_REQUEST);
                 return true;
-            case R.id.sortByDate:
-                //TODO sort by date article
-                Toast.makeText(this, "All articles sorted by date", Toast.LENGTH_SHORT).show();
+            case R.id.sort:
+                Intent intentSort = new Intent(mContext, SortWorkActivity.class);
+                startActivityForResult(intentSort, SORT_WORK_REQUEST);
+                return true;
             case R.id.create_reports:
                 showAllReports();
                 return true;
@@ -336,11 +354,10 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void showAllReports() {
-        ScientificWorkAdapter adapter = (ScientificWorkAdapter) mBinding.recyclerArticle.getAdapter();
         Intent intent = new Intent(mContext, ReportActivity.class);
         ReportGenerator reportGenerator = new ReportGenerator();
         reportGenerator.setAllData(adapter.getData());
-        intent.putExtra(ReportActivity.REPORT_ALL_DATA,  reportGenerator.generateAll());
+        intent.putExtra(ReportActivity.REPORT_ALL_DATA, reportGenerator.generateAll());
         intent.putExtra("login", login);
         startActivity(intent);
     }
@@ -366,5 +383,25 @@ public class ScientificWorkMainActivity extends AppCompatActivity {
 
                     }
                 }).create().show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SORT_WORK_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                sortType = data.getStringExtra(SortWorkActivity.DATA_FOR_SORT);
+                mScientificWorkAdapter.setTypeOfSort(sortType);
+                setupListScienticView(mBinding.recyclerArticle);
+            }
+            Log.d("SORT", "onActivityResult: NOT OK:");
+        }
+        Log.d("SORT", "onActivityResult: NOT REQ:");
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putString(KEY_SORT_TYPE, sortType);
+        super.onSaveInstanceState(outState);
     }
 }

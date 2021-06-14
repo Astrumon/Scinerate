@@ -113,6 +113,7 @@ public class Article extends ScientWork implements Serializable {
     @Override
     public String toString() {
         return "Article{" +
+                "type= " + super.typeOfWork +
                 ", authors='" + authors + '\'' +
                 ", nameArticle='" + nameArticle + '\'' +
                 ", nameJournal='" + nameJournal + '\'' +

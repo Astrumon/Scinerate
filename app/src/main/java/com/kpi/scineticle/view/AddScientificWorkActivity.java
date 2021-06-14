@@ -53,7 +53,10 @@ public class AddScientificWorkActivity extends AppCompatActivity implements Adap
 
         initFragments();
         setArgumentsToFragments();
+        initSpinner();
+    }
 
+    private void initSpinner() {
         Spinner spinner = findViewById(R.id.spinner_article);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter
                 .createFromResource(this, R.array.articles, android.R.layout.simple_spinner_item);

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="searcher"
+            type="com.kpi.scineticle.viewmodel.subsystemUser.existingUser.WorkSearcherViewModel" />
+    </data>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".view.SearchWorkActivity">
+
+    <Spinner
+        android:layout_margin="20dp"
+        android:id="@+id/spinner_searcher"
+        android:minWidth="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_text_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{searcher.search}"
+        android:hint="Введіть інформацію для пошуку"
+        android:layout_margin="25dp"
+        />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Здійснити пошук"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        />
+
+
+</LinearLayout>
+</layout>

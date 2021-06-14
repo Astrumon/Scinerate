@@ -75,4 +75,13 @@
         <item>@string/catalog</item>
         <item>@string/bibliographic_pointer</item>
     </string-array>
+
+    <string-array name="searcher">
+        <item>-</item>
+        <item>Автори</item>
+        <item>Типи робіт</item>
+        <item>Назва роботи</item>
+        <item>Дата публікації</item>
+
+    </string-array>
 </resources>
